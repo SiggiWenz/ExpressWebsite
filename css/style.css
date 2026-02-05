@@ -1482,3 +1482,767 @@ section {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* ================================
+   Page Header Styles (for subpages)
+   ================================ */
+.page-header {
+    padding: calc(72px + var(--spacing-3xl)) 0 var(--spacing-3xl);
+    background: linear-gradient(135deg, var(--color-white) 0%, var(--imc-orange-subtle) 100%);
+    text-align: center;
+}
+
+.page-header h1 {
+    margin-bottom: var(--spacing-md);
+}
+
+.page-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-gray-600);
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+/* Active Navigation State */
+.nav-menu a.active {
+    color: var(--imc-orange);
+}
+
+/* ================================
+   Features Page Styles
+   ================================ */
+.features-main {
+    background: var(--color-gray-100);
+}
+
+.feature-details {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-gray-200);
+}
+
+.feature-details li {
+    padding: var(--spacing-xs) 0;
+    padding-left: 1.25rem;
+    position: relative;
+    font-size: 0.875rem;
+    color: var(--color-gray-600);
+}
+
+.feature-details li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.75rem;
+    width: 6px;
+    height: 6px;
+    background: var(--imc-orange);
+    border-radius: 50%;
+}
+
+.features-additional {
+    background: var(--color-white);
+}
+
+.features-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xl);
+}
+
+.feature-list-item {
+    display: flex;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background: var(--color-gray-100);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-normal);
+}
+
+.feature-list-item:hover {
+    background: var(--color-white);
+    box-shadow: var(--shadow-lg);
+}
+
+.feature-list-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--imc-orange-subtle);
+    border-radius: var(--radius-md);
+}
+
+.feature-list-icon svg {
+    width: 24px;
+    height: 24px;
+    color: var(--imc-orange);
+}
+
+.feature-list-content h4 {
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-black);
+}
+
+.feature-list-content p {
+    color: var(--color-gray-600);
+    font-size: 0.9375rem;
+}
+
+/* ================================
+   Vorteile/Benefits Page Styles
+   ================================ */
+.usp-section {
+    background: var(--color-white);
+}
+
+.usp-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xl);
+}
+
+.usp-card {
+    background: var(--color-gray-100);
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-gray-200);
+    transition: all var(--transition-normal);
+}
+
+.usp-card:hover {
+    border-color: var(--imc-orange);
+    box-shadow: var(--shadow-lg);
+}
+
+.usp-number {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--imc-orange);
+    line-height: 1;
+    margin-bottom: var(--spacing-md);
+}
+
+.usp-card h3 {
+    margin-bottom: var(--spacing-md);
+}
+
+.usp-card p {
+    color: var(--color-gray-600);
+    margin-bottom: var(--spacing-lg);
+}
+
+.usp-stats {
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-sm);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-gray-300);
+}
+
+.usp-stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--imc-orange);
+}
+
+.usp-stat-label {
+    font-size: 0.875rem;
+    color: var(--color-gray-600);
+}
+
+.benefits-detail {
+    background: var(--color-gray-100);
+}
+
+.benefits-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xl);
+}
+
+.benefit-detail-card {
+    background: var(--color-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-gray-200);
+}
+
+.benefit-icon-large {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-success);
+    border-radius: 50%;
+    margin-bottom: var(--spacing-lg);
+}
+
+.benefit-icon-large svg {
+    width: 28px;
+    height: 28px;
+    color: var(--color-white);
+}
+
+.benefit-detail-card h3 {
+    margin-bottom: var(--spacing-md);
+}
+
+.benefit-detail-card > p {
+    color: var(--color-gray-600);
+    margin-bottom: var(--spacing-lg);
+}
+
+.benefit-detail-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.benefit-detail-list li {
+    padding-left: 1.5rem;
+    position: relative;
+    font-size: 0.9375rem;
+    color: var(--color-gray-700);
+}
+
+.benefit-detail-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 8px;
+    height: 8px;
+    background: var(--imc-orange);
+    border-radius: 50%;
+}
+
+/* ROI Section */
+.roi-section {
+    background: var(--color-white);
+}
+
+.roi-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3xl);
+    align-items: center;
+}
+
+.roi-text h2 {
+    margin-bottom: var(--spacing-md);
+}
+
+.roi-text > p {
+    color: var(--color-gray-600);
+    margin-bottom: var(--spacing-xl);
+}
+
+.roi-highlights {
+    display: flex;
+    gap: var(--spacing-2xl);
+}
+
+.roi-highlight {
+    display: flex;
+    flex-direction: column;
+}
+
+.roi-highlight-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--imc-orange);
+}
+
+.roi-highlight-label {
+    font-size: 0.875rem;
+    color: var(--color-gray-600);
+}
+
+/* Comparison Section */
+.comparison-section {
+    background: var(--color-gray-100);
+}
+
+.comparison-table {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.comparison-header,
+.comparison-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+}
+
+.comparison-cell {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.header-label {
+    background: var(--color-gray-100);
+}
+
+.header-traditional {
+    background: var(--color-gray-200);
+    font-weight: 600;
+    text-align: center;
+}
+
+.header-express {
+    background: var(--imc-orange);
+    color: var(--color-white);
+    font-weight: 600;
+    text-align: center;
+}
+
+.row-label {
+    font-weight: 500;
+    color: var(--color-black);
+}
+
+.traditional {
+    text-align: center;
+    color: var(--color-gray-600);
+}
+
+.express {
+    text-align: center;
+}
+
+.highlight-cell {
+    background: var(--imc-orange-subtle);
+    color: var(--imc-orange);
+    font-weight: 600;
+}
+
+/* ================================
+   Referenzen Page Styles
+   ================================ */
+.trusted-by-page {
+    background: var(--color-white);
+    padding: var(--spacing-2xl) 0;
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.testimonials-page {
+    background: var(--color-gray-100);
+}
+
+.testimonials-page .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 0;
+}
+
+.case-studies-page {
+    background: var(--color-white);
+}
+
+.case-study-card-large {
+    background: var(--color-gray-100);
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-gray-200);
+    margin-bottom: var(--spacing-xl);
+}
+
+.case-study-card-large:last-child {
+    margin-bottom: 0;
+}
+
+.case-study-card-large .case-study-header {
+    margin-bottom: var(--spacing-lg);
+}
+
+.case-study-challenge,
+.case-study-solution {
+    margin-bottom: var(--spacing-lg);
+}
+
+.case-study-challenge h4,
+.case-study-solution h4 {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--imc-orange);
+    margin-bottom: var(--spacing-sm);
+}
+
+.case-study-challenge p,
+.case-study-solution p {
+    color: var(--color-gray-700);
+}
+
+.case-study-card-large .case-study-stats {
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-gray-300);
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.case-study-card-large .case-study-stats .case-stat {
+    flex: 1;
+}
+
+/* Results Section */
+.results-section {
+    background: linear-gradient(135deg, var(--color-black) 0%, var(--color-gray-900) 100%);
+    color: var(--color-white);
+}
+
+.results-section .section-header h2,
+.results-section .section-header p {
+    color: var(--color-white);
+}
+
+.results-section .section-header p {
+    opacity: 0.8;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-xl);
+}
+
+.result-card {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.result-value {
+    display: block;
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--imc-orange);
+    line-height: 1;
+    margin-bottom: var(--spacing-sm);
+}
+
+.result-label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-white);
+    margin-bottom: var(--spacing-xs);
+}
+
+.result-card p {
+    font-size: 0.875rem;
+    color: var(--color-gray-400);
+}
+
+/* ================================
+   Preise Page Styles
+   ================================ */
+.pricing-page {
+    background: var(--color-gray-100);
+}
+
+.pricing-comparison {
+    background: var(--color-white);
+}
+
+.comparison-table-full {
+    overflow-x: auto;
+}
+
+.comparison-table-full table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.comparison-table-full th,
+.comparison-table-full td {
+    padding: var(--spacing-md) var(--spacing-lg);
+    text-align: left;
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.comparison-table-full th {
+    background: var(--color-gray-100);
+    font-weight: 600;
+    color: var(--color-black);
+}
+
+.comparison-table-full th.highlighted {
+    background: var(--imc-orange);
+    color: var(--color-white);
+}
+
+.comparison-table-full td.highlighted {
+    background: var(--imc-orange-subtle);
+}
+
+.category-row td {
+    background: var(--color-gray-100);
+    font-weight: 600;
+    color: var(--color-black);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* FAQ Section */
+.faq-section {
+    background: var(--color-gray-100);
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xl);
+}
+
+.faq-item {
+    background: var(--color-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-gray-200);
+}
+
+.faq-item h4 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-black);
+}
+
+.faq-item p {
+    color: var(--color-gray-600);
+    font-size: 0.9375rem;
+}
+
+/* ================================
+   Kontakt Page Styles
+   ================================ */
+.contact-page {
+    background: var(--color-white);
+}
+
+.contact-page .contact-grid {
+    gap: var(--spacing-3xl);
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.contact-method {
+    display: flex;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background: var(--color-gray-100);
+    border-radius: var(--radius-lg);
+}
+
+.contact-method-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--imc-orange);
+    border-radius: var(--radius-md);
+}
+
+.contact-method-icon svg {
+    width: 24px;
+    height: 24px;
+    color: var(--color-white);
+}
+
+.contact-method-content h4 {
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-black);
+}
+
+.contact-method-content a {
+    display: block;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+}
+
+.contact-method-content p,
+.contact-method-content address {
+    font-size: 0.875rem;
+    color: var(--color-gray-600);
+    font-style: normal;
+}
+
+.contact-quick-actions h3 {
+    margin-bottom: var(--spacing-md);
+}
+
+.quick-action-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.contact-form-wrapper h3 {
+    margin-bottom: var(--spacing-sm);
+}
+
+.contact-form-wrapper > p {
+    color: var(--color-gray-600);
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Support Section */
+.support-section {
+    background: var(--color-gray-100);
+}
+
+.support-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-xl);
+}
+
+.support-card {
+    background: var(--color-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    border: 1px solid var(--color-gray-200);
+    transition: all var(--transition-normal);
+}
+
+.support-card:hover {
+    border-color: var(--imc-orange);
+    box-shadow: var(--shadow-lg);
+}
+
+.support-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--imc-orange-subtle);
+    border-radius: 50%;
+    margin: 0 auto var(--spacing-md);
+}
+
+.support-icon svg {
+    width: 28px;
+    height: 28px;
+    color: var(--imc-orange);
+}
+
+.support-card h4 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-black);
+}
+
+.support-card p {
+    color: var(--color-gray-600);
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.support-card a {
+    font-weight: 600;
+}
+
+/* ================================
+   Responsive Design for New Pages
+   ================================ */
+@media (max-width: 1024px) {
+    .features-list {
+        grid-template-columns: 1fr;
+    }
+
+    .usp-grid,
+    .benefits-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .roi-content {
+        grid-template-columns: 1fr;
+    }
+
+    .results-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .support-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .testimonials-page .testimonials-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .comparison-table {
+        font-size: 0.875rem;
+    }
+
+    .comparison-cell {
+        padding: var(--spacing-md);
+    }
+
+    .results-grid {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .support-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-action-buttons {
+        flex-direction: column;
+    }
+
+    .roi-highlights {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header {
+        padding: calc(72px + var(--spacing-2xl)) 0 var(--spacing-2xl);
+    }
+
+    .usp-card {
+        padding: var(--spacing-xl);
+    }
+
+    .usp-number {
+        font-size: 2rem;
+    }
+
+    .usp-stat-value {
+        font-size: 1.5rem;
+    }
+}
