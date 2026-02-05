@@ -1043,7 +1043,10 @@ section {
    CTA Section
    ================================ */
 .cta-section {
-    background: linear-gradient(135deg, var(--imc-orange) 0%, var(--imc-orange-dark) 100%);
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.95) 0%, rgba(229, 90, 43, 0.95) 100%),
+                url('../main-background-imc-express.jpg');
+    background-size: cover;
+    background-position: center;
     color: var(--color-white);
     text-align: center;
 }
@@ -1484,6 +1487,34 @@ section {
 }
 
 /* ================================
+   Rotating Headline Animation
+   ================================ */
+#rotating-headline {
+    display: inline-block;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.headline-fade-out {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.headline-fade-in {
+    animation: headlineFadeIn 0.5s ease forwards;
+}
+
+@keyframes headlineFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================================
    Page Header Styles (for subpages)
    ================================ */
 .page-header {
@@ -1512,7 +1543,11 @@ section {
    Features Page Styles
    ================================ */
 .features-main {
-    background: var(--color-gray-100);
+    background: linear-gradient(135deg, rgba(244, 244, 248, 0.95) 0%, rgba(255, 244, 240, 0.95) 100%),
+                url('../main-background-imc-express.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .feature-details {

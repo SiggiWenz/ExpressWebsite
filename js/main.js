@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initFormHandling();
     initSmoothScroll();
     initROIAnimation();
+    initRotatingHeadline();
 });
 
 /**
@@ -356,4 +357,49 @@ function initLazyLoading() {
     });
 
     images.forEach(img => imageObserver.observe(img));
+}
+
+/**
+ * Rotating Headline Animation
+ * Shows 5 different headlines that rotate with a timer
+ */
+function initRotatingHeadline() {
+    const headlineElement = document.getElementById('rotating-headline');
+
+    if (!headlineElement) return;
+
+    const headlines = [
+        'KI-gestützte Automatisierung',
+        'Intelligente Content-Erstellung',
+        'E-Learning auf Knopfdruck',
+        'Automatisierte Kurserstellung',
+        'Smart Learning Design'
+    ];
+
+    let currentIndex = 0;
+
+    // Set initial headline randomly on page load
+    currentIndex = Math.floor(Math.random() * headlines.length);
+    headlineElement.textContent = headlines[currentIndex];
+    headlineElement.classList.add('headline-animate');
+
+    // Rotate headlines every 4 seconds
+    setInterval(function() {
+        // Fade out
+        headlineElement.classList.add('headline-fade-out');
+
+        setTimeout(function() {
+            // Change text
+            currentIndex = (currentIndex + 1) % headlines.length;
+            headlineElement.textContent = headlines[currentIndex];
+
+            // Fade in
+            headlineElement.classList.remove('headline-fade-out');
+            headlineElement.classList.add('headline-fade-in');
+
+            setTimeout(function() {
+                headlineElement.classList.remove('headline-fade-in');
+            }, 500);
+        }, 500);
+    }, 4000);
 }
