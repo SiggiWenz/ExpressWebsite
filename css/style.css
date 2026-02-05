@@ -237,10 +237,15 @@ h4 {
 
 .logo {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     font-size: 1.5rem;
     font-weight: 800;
     color: var(--color-black);
+}
+
+.logo-img {
+    height: 36px;
+    width: auto;
 }
 
 .logo:hover {
