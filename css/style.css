@@ -791,6 +791,8 @@ section {
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
     border: 1px solid var(--color-gray-200);
+    display: flex;
+    flex-direction: column;
 }
 
 .testimonial-quote {
@@ -809,6 +811,7 @@ section {
     color: var(--color-gray-700);
     line-height: 1.7;
     margin-bottom: var(--spacing-lg);
+    flex: 1;
 }
 
 .testimonial-author {
@@ -820,6 +823,7 @@ section {
 .author-avatar {
     width: 48px;
     height: 48px;
+    min-width: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -827,6 +831,12 @@ section {
     color: var(--color-white);
     font-weight: 700;
     border-radius: 50%;
+}
+
+.author-avatar svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
 }
 
 .author-info {
