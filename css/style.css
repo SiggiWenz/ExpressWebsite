@@ -1951,6 +1951,18 @@ a.case-study-card-link:hover {
     font-weight: 600;
 }
 
+.check-yes {
+    color: #22c55e;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.check-no {
+    color: #ef4444;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
 /* ================================
    Referenzen Page Styles
    ================================ */
