@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initSmoothScroll();
     initROIAnimation();
     initRotatingHeadline();
+    initAccordion();
 });
 
 /**
@@ -62,7 +63,7 @@ function initNavigation() {
  */
 function initScrollAnimations() {
     const animatedElements = document.querySelectorAll(
-        '.feature-card, .testimonial-card, .case-study-card, .pricing-card, .benefit-item, .step-card, .xbib-benefit-card, .xbib-screenshot-card, .airis-feature-card, .airis-robot-card'
+        '.feature-card, .testimonial-card, .case-study-card, .pricing-card, .benefit-item, .step-card, .xbib-benefit-card, .xbib-accordion-item, .airis-feature-card, .airis-robot-card'
     );
 
     const observerOptions = {
@@ -521,4 +522,39 @@ function initRotatingHeadline() {
             }, 500);
         }, 500);
     }, 4000);
+}
+
+/**
+ * Accordion for X-Bibliothek Themenbereiche
+ */
+function initAccordion() {
+    var headers = document.querySelectorAll('.xbib-accordion-header');
+
+    headers.forEach(function(header) {
+        header.addEventListener('click', function() {
+            var item = this.parentElement;
+            var body = item.querySelector('.xbib-accordion-body');
+            var isOpen = item.classList.contains('active');
+
+            // Close all other accordion items
+            document.querySelectorAll('.xbib-accordion-item.active').forEach(function(openItem) {
+                if (openItem !== item) {
+                    openItem.classList.remove('active');
+                    openItem.querySelector('.xbib-accordion-header').setAttribute('aria-expanded', 'false');
+                    openItem.querySelector('.xbib-accordion-body').style.maxHeight = null;
+                }
+            });
+
+            // Toggle current item
+            if (isOpen) {
+                item.classList.remove('active');
+                this.setAttribute('aria-expanded', 'false');
+                body.style.maxHeight = null;
+            } else {
+                item.classList.add('active');
+                this.setAttribute('aria-expanded', 'true');
+                body.style.maxHeight = body.scrollHeight + 'px';
+            }
+        });
+    });
 }
