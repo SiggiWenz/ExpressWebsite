@@ -3285,7 +3285,10 @@ a.case-study-card-link:hover {
    ================================ */
 .xbib-hero {
     padding: calc(72px + var(--spacing-4xl)) 0 var(--spacing-3xl);
-    background: url('../imc-express-background-extended-Detail02.jpg') center center / cover no-repeat;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(26, 26, 46, 0.75) 50%, rgba(30, 41, 59, 0.85) 100%),
+                url('../main-background-imc-express.jpg');
+    background-size: cover;
+    background-position: center;
     color: var(--color-white);
     text-align: center;
     position: relative;
@@ -3295,11 +3298,12 @@ a.case-study-card-link:hover {
 .xbib-hero::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.45);
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%);
 }
 
 .xbib-hero .container {
