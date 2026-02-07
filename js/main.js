@@ -412,8 +412,7 @@ function initRotatingHeadline() {
     if (!headlineElement) return;
 
     const headlines = [
-        'KI-gestützte Automatisierung',
-        'Intelligente Content-Erstellung',
+        'KI-Automatisierung',
         'E-Learning auf Knopfdruck',
         'Automatisierte Kurserstellung',
         'Smart Learning Design'
