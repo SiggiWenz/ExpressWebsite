@@ -3170,3 +3170,806 @@ a.case-study-card-link:hover {
     height: 100%;
     border: none;
 }
+
+/* ================================
+   Navigation Dropdown
+   ================================ */
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.nav-dropdown-toggle .dropdown-chevron {
+    width: 14px;
+    height: 14px;
+    transition: transform var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.nav-dropdown:hover .dropdown-chevron,
+.nav-dropdown.open .dropdown-chevron {
+    transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-sm) 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-fast), visibility var(--transition-fast), transform var(--transition-fast);
+    transform: translateX(-50%) translateY(8px);
+    z-index: 1001;
+    list-style: none;
+    margin-top: 8px;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown.open .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown-menu li {
+    list-style: none;
+}
+
+.nav-dropdown-menu a {
+    display: block;
+    padding: 0.625rem 1.25rem;
+    color: var(--color-gray-700);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    white-space: nowrap;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.nav-dropdown-menu a:hover {
+    background-color: var(--imc-orange-subtle);
+    color: var(--imc-orange);
+}
+
+.nav-dropdown-menu a.active {
+    color: var(--imc-orange);
+}
+
+/* Mobile dropdown */
+@media (max-width: 768px) {
+    .nav-dropdown-menu {
+        position: static;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        background: var(--color-gray-100);
+        border-radius: var(--radius-md);
+        opacity: 1;
+        visibility: visible;
+        padding: var(--spacing-xs) 0;
+        margin-top: var(--spacing-xs);
+        min-width: 0;
+        display: none;
+    }
+
+    .nav-dropdown.open .nav-dropdown-menu {
+        display: block;
+        transform: none;
+    }
+
+    .nav-dropdown-menu a {
+        padding: 0.5rem 1.25rem;
+        font-size: 0.875rem;
+    }
+
+    .nav-dropdown-toggle .dropdown-chevron {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+/* ================================
+   X-Bibliothek / Kurs Vorlagen Page
+   ================================ */
+.xbib-hero {
+    padding: calc(72px + var(--spacing-4xl)) 0 var(--spacing-3xl);
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d2d5e 50%, #3d1a4e 100%);
+    color: var(--color-white);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.xbib-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%);
+    animation: xbib-glow 8s ease-in-out infinite alternate;
+}
+
+@keyframes xbib-glow {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-5%, 5%); }
+}
+
+.xbib-hero .container {
+    position: relative;
+    z-index: 1;
+}
+
+.xbib-hero h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-white);
+}
+
+.xbib-hero .page-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 700px;
+    margin: 0 auto var(--spacing-xl);
+}
+
+.xbib-stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-3xl);
+    margin-top: var(--spacing-2xl);
+    flex-wrap: wrap;
+}
+
+.xbib-stat {
+    text-align: center;
+}
+
+.xbib-stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--imc-orange);
+}
+
+.xbib-stat-label {
+    display: block;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: var(--spacing-xs);
+}
+
+/* What is X-Bibliothek */
+.xbib-intro {
+    padding: var(--spacing-4xl) 0;
+}
+
+.xbib-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3xl);
+    align-items: center;
+}
+
+.xbib-intro-text h2 {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-black);
+}
+
+.xbib-intro-text p {
+    font-size: 1.1rem;
+    color: var(--color-gray-600);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+}
+
+.xbib-intro-visual {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(135deg, #1a1a2e, #2d2d5e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform var(--transition-normal);
+}
+
+.xbib-intro-visual:hover {
+    transform: scale(1.02);
+}
+
+.xbib-intro-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.xbib-play-btn {
+    position: absolute;
+    width: 72px;
+    height: 72px;
+    background: var(--imc-orange);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+    transition: transform var(--transition-fast);
+}
+
+.xbib-intro-visual:hover .xbib-play-btn {
+    transform: scale(1.1);
+}
+
+.xbib-play-btn svg {
+    width: 28px;
+    height: 28px;
+    fill: white;
+    margin-left: 3px;
+}
+
+/* Benefits Grid */
+.xbib-benefits {
+    padding: var(--spacing-4xl) 0;
+    background-color: var(--color-gray-100);
+}
+
+.xbib-benefits .section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+}
+
+.xbib-benefits .section-header h2 {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--color-black);
+    margin-bottom: var(--spacing-md);
+}
+
+.xbib-benefits .section-header p {
+    font-size: 1.1rem;
+    color: var(--color-gray-600);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.xbib-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xl);
+}
+
+.xbib-benefit-card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    border: 1px solid var(--color-gray-200);
+}
+
+.xbib-benefit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.xbib-benefit-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto var(--spacing-lg);
+    background: var(--imc-orange-subtle);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.xbib-benefit-icon svg {
+    width: 28px;
+    height: 28px;
+    stroke: var(--imc-orange);
+}
+
+.xbib-benefit-card h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: var(--spacing-sm);
+}
+
+.xbib-benefit-card p {
+    font-size: 0.9375rem;
+    color: var(--color-gray-600);
+    line-height: 1.6;
+}
+
+/* Example Course Section */
+.xbib-example {
+    padding: var(--spacing-4xl) 0;
+}
+
+.xbib-example .section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+}
+
+.xbib-example .section-header h2 {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--color-black);
+    margin-bottom: var(--spacing-md);
+}
+
+.xbib-example .section-header p {
+    font-size: 1.1rem;
+    color: var(--color-gray-600);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.xbib-example-card {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--color-gray-200);
+    cursor: pointer;
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.xbib-example-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.xbib-example-image {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.xbib-example-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.xbib-example-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.xbib-example-card:hover .xbib-example-overlay {
+    opacity: 1;
+}
+
+.xbib-example-play {
+    width: 64px;
+    height: 64px;
+    background: var(--imc-orange);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+}
+
+.xbib-example-play svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+    margin-left: 2px;
+}
+
+.xbib-example-info {
+    padding: var(--spacing-xl);
+}
+
+.xbib-example-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--imc-orange-subtle);
+    color: var(--imc-orange);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    border-radius: var(--radius-2xl);
+    margin-bottom: var(--spacing-sm);
+}
+
+.xbib-example-info h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: var(--spacing-sm);
+}
+
+.xbib-example-info p {
+    color: var(--color-gray-600);
+    line-height: 1.6;
+}
+
+.xbib-example-meta {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-gray-200);
+}
+
+.xbib-example-meta span {
+    font-size: 0.8125rem;
+    color: var(--color-gray-500);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.xbib-example-meta svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--color-gray-500);
+}
+
+/* Screenshots Grid */
+.xbib-screenshots {
+    padding: var(--spacing-4xl) 0;
+    background-color: var(--color-gray-100);
+}
+
+.xbib-screenshots .section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+}
+
+.xbib-screenshots .section-header h2 {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--color-black);
+    margin-bottom: var(--spacing-md);
+}
+
+.xbib-screenshots .section-header p {
+    font-size: 1.1rem;
+    color: var(--color-gray-600);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.xbib-screenshots-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xl);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.xbib-screenshot-card {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    background: var(--color-white);
+}
+
+.xbib-screenshot-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+}
+
+.xbib-screenshot-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.xbib-screenshot-card .screenshot-caption {
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 0.875rem;
+    color: var(--color-gray-600);
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Course Overlay (reuses collaboration overlay pattern) */
+.course-overlay-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.course-overlay-backdrop.active {
+    opacity: 1;
+}
+
+.course-overlay {
+    position: relative;
+    width: 90vw;
+    max-width: 1100px;
+    height: 85vh;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.course-overlay-backdrop.active .course-overlay {
+    transform: scale(1);
+}
+
+.course-overlay-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.course-overlay-close:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.course-overlay iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Responsive X-Bibliothek */
+@media (max-width: 1024px) {
+    .xbib-benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .xbib-intro-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+
+    .xbib-benefits-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin: 0 auto;
+    }
+
+    .xbib-stats {
+        gap: var(--spacing-xl);
+    }
+
+    .xbib-screenshots-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+    }
+
+    .xbib-example-meta {
+        flex-wrap: wrap;
+    }
+}
+
+/* ================================
+   Airis (KI) Page
+   ================================ */
+.airis-hero {
+    padding: calc(72px + var(--spacing-4xl)) 0 var(--spacing-3xl);
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1a1a2e 100%);
+    color: var(--color-white);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.airis-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 107, 53, 0.12) 0%, transparent 60%);
+}
+
+.airis-hero .container {
+    position: relative;
+    z-index: 1;
+}
+
+.airis-hero h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-white);
+}
+
+.airis-hero .page-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 700px;
+    margin: 0 auto var(--spacing-xl);
+}
+
+.airis-features {
+    padding: var(--spacing-4xl) 0;
+}
+
+.airis-features .section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+}
+
+.airis-features .section-header h2 {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--color-black);
+    margin-bottom: var(--spacing-md);
+}
+
+.airis-features .section-header p {
+    font-size: 1.1rem;
+    color: var(--color-gray-600);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.airis-features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xl);
+}
+
+.airis-feature-card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-gray-200);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.airis-feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.airis-feature-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: var(--spacing-lg);
+    background: var(--imc-orange-subtle);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.airis-feature-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--imc-orange);
+}
+
+.airis-feature-card h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: var(--spacing-sm);
+}
+
+.airis-feature-card p {
+    font-size: 0.9375rem;
+    color: var(--color-gray-600);
+    line-height: 1.6;
+}
+
+.airis-robot-section {
+    padding: var(--spacing-4xl) 0;
+    background: var(--color-gray-100);
+    text-align: center;
+}
+
+.airis-robot-section h2 {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--color-black);
+    margin-bottom: var(--spacing-md);
+}
+
+.airis-robot-section > .container > p {
+    font-size: 1.1rem;
+    color: var(--color-gray-600);
+    max-width: 700px;
+    margin: 0 auto var(--spacing-2xl);
+}
+
+.airis-robot-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xl);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.airis-robot-card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-gray-200);
+}
+
+.airis-robot-card img {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--spacing-md);
+}
+
+.airis-robot-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: var(--spacing-xs);
+}
+
+.airis-robot-card p {
+    font-size: 0.875rem;
+    color: var(--color-gray-600);
+}
+
+@media (max-width: 768px) {
+    .airis-features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .airis-robot-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+    }
+}
