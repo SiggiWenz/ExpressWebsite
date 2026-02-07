@@ -1581,6 +1581,7 @@ a.case-study-card-link:hover {
    ================================ */
 #rotating-headline {
     display: inline-block;
+    white-space: nowrap;
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
