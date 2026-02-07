@@ -445,7 +445,7 @@ function openCourseOverlay() {
     backdrop.innerHTML =
         '<div class="course-overlay">' +
             '<button class="course-overlay-close" aria-label="Schlie\u00dfen">&times;</button>' +
-            '<iframe src="https://app.imc-express.cloud/static/ots/6aea6843-c5e7-5d10-b2a9-ead84df2571f/" title="EU AI-Act Basistraining"></iframe>' +
+            '<iframe src="https://app.imc-express.cloud/static/imc/cbb1b514-ad04-529f-ad52-eb0e0f47649b/" title="EU AI-Act Basistraining"></iframe>' +
         '</div>';
 
     document.body.appendChild(backdrop);
