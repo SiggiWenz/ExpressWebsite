@@ -2072,6 +2072,96 @@ a.case-study-card-link:hover {
 /* ================================
    Preise Page Styles
    ================================ */
+
+/* Translation Highlight Section */
+.translation-highlight {
+    background: linear-gradient(135deg, var(--color-black) 0%, var(--color-gray-900) 100%);
+    color: var(--color-white);
+}
+
+.translation-highlight .section-badge {
+    background: rgba(255, 107, 53, 0.2);
+}
+
+.translation-highlight h2 {
+    color: var(--color-white);
+}
+
+.translation-highlight-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3xl);
+    align-items: center;
+}
+
+.translation-highlight-lead {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--color-gray-300);
+    margin-bottom: var(--spacing-md);
+}
+
+.translation-highlight-lead strong {
+    color: var(--imc-orange);
+    font-weight: 600;
+}
+
+.translation-highlight-detail {
+    color: var(--color-gray-400);
+    line-height: 1.7;
+}
+
+.translation-highlight-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.translation-feature-card {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: flex-start;
+    padding: var(--spacing-lg);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background var(--transition-normal);
+}
+
+.translation-feature-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.translation-feature-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 107, 53, 0.15);
+    border-radius: var(--radius-md);
+    color: var(--imc-orange);
+}
+
+.translation-feature-card h4 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-xs);
+}
+
+.translation-feature-card p {
+    color: var(--color-gray-400);
+    font-size: 0.9375rem;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .translation-highlight-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-2xl);
+    }
+}
+
 .pricing-page {
     background: var(--color-gray-100);
 }
