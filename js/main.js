@@ -6,6 +6,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all modules
     initNavigation();
+    initDropdownNav();
     initScrollAnimations();
     initFormHandling();
     initSmoothScroll();
@@ -61,7 +62,7 @@ function initNavigation() {
  */
 function initScrollAnimations() {
     const animatedElements = document.querySelectorAll(
-        '.feature-card, .testimonial-card, .case-study-card, .pricing-card, .benefit-item, .step-card'
+        '.feature-card, .testimonial-card, .case-study-card, .pricing-card, .benefit-item, .step-card, .xbib-benefit-card, .xbib-screenshot-card, .airis-feature-card, .airis-robot-card'
     );
 
     const observerOptions = {
@@ -387,6 +388,81 @@ function openCollaborationOverlay() {
     }
 
     backdrop.querySelector('.collaboration-overlay-close').addEventListener('click', closeOverlay);
+
+    backdrop.addEventListener('click', function(e) {
+        if (e.target === backdrop) {
+            closeOverlay();
+        }
+    });
+
+    document.addEventListener('keydown', function onEsc(e) {
+        if (e.key === 'Escape') {
+            closeOverlay();
+            document.removeEventListener('keydown', onEsc);
+        }
+    });
+}
+
+/**
+ * Dropdown Navigation for Features menu
+ */
+function initDropdownNav() {
+    var dropdowns = document.querySelectorAll('.nav-dropdown');
+
+    dropdowns.forEach(function(dropdown) {
+        var toggle = dropdown.querySelector('.nav-dropdown-toggle');
+
+        // On mobile: toggle dropdown on click
+        if (toggle) {
+            toggle.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('open');
+                }
+            });
+        }
+    });
+
+    // Close dropdowns when clicking outside on mobile
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+            dropdowns.forEach(function(dropdown) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('open');
+                }
+            });
+        }
+    });
+}
+
+/**
+ * Course Overlay for X-Bibliothek examples
+ */
+function openCourseOverlay() {
+    var backdrop = document.createElement('div');
+    backdrop.className = 'course-overlay-backdrop';
+    backdrop.innerHTML =
+        '<div class="course-overlay">' +
+            '<button class="course-overlay-close" aria-label="Schlie\u00dfen">&times;</button>' +
+            '<iframe src="https://app.imc-express.cloud/static/ots/6aea6843-c5e7-5d10-b2a9-ead84df2571f/" title="EU AI-Act Basistraining"></iframe>' +
+        '</div>';
+
+    document.body.appendChild(backdrop);
+    document.body.style.overflow = 'hidden';
+
+    // Trigger reflow then activate for animation
+    backdrop.offsetHeight;
+    backdrop.classList.add('active');
+
+    function closeOverlay() {
+        backdrop.classList.remove('active');
+        setTimeout(function() {
+            backdrop.remove();
+            document.body.style.overflow = '';
+        }, 300);
+    }
+
+    backdrop.querySelector('.course-overlay-close').addEventListener('click', closeOverlay);
 
     backdrop.addEventListener('click', function(e) {
         if (e.target === backdrop) {
