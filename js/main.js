@@ -360,6 +360,49 @@ function initLazyLoading() {
 }
 
 /**
+ * Collaboration Overlay
+ */
+function openCollaborationOverlay() {
+    var backdrop = document.createElement('div');
+    backdrop.className = 'collaboration-overlay-backdrop';
+    backdrop.innerHTML =
+        '<div class="collaboration-overlay">' +
+            '<button class="collaboration-overlay-close" aria-label="Schließen">&times;</button>' +
+            '<iframe src="https://app.imc-express.cloud/static/imc/5a3d1552-06d2-5e9d-a42b-b3a2022e7e07/?edition=en" title="imc Express Zusammenarbeiten"></iframe>' +
+        '</div>';
+
+    document.body.appendChild(backdrop);
+    document.body.style.overflow = 'hidden';
+
+    // Trigger reflow then activate for animation
+    backdrop.offsetHeight;
+    backdrop.classList.add('active');
+
+    function closeOverlay() {
+        backdrop.classList.remove('active');
+        setTimeout(function() {
+            backdrop.remove();
+            document.body.style.overflow = '';
+        }, 300);
+    }
+
+    backdrop.querySelector('.collaboration-overlay-close').addEventListener('click', closeOverlay);
+
+    backdrop.addEventListener('click', function(e) {
+        if (e.target === backdrop) {
+            closeOverlay();
+        }
+    });
+
+    document.addEventListener('keydown', function onEsc(e) {
+        if (e.key === 'Escape') {
+            closeOverlay();
+            document.removeEventListener('keydown', onEsc);
+        }
+    });
+}
+
+/**
  * Rotating Headline Animation
  * Shows 5 different headlines that rotate with a timer
  */
