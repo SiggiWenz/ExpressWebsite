@@ -854,6 +854,59 @@ section {
     color: var(--color-gray-600);
 }
 
+/* Testimonial Stats Bar */
+.testimonial-stats-bar {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm) 0;
+    border-bottom: 2px solid var(--imc-orange-subtle);
+}
+
+.testimonial-stat {
+    font-size: 0.8125rem;
+    color: var(--color-gray-600);
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+}
+
+.testimonial-stat strong {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--imc-orange);
+}
+
+/* Case Study Card Links */
+a.case-study-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+    cursor: pointer;
+}
+
+a.case-study-card-link::after {
+    content: "\2192";
+    position: absolute;
+    bottom: var(--spacing-lg);
+    right: var(--spacing-lg);
+    font-size: 1.25rem;
+    color: var(--imc-orange);
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all var(--transition-normal);
+}
+
+a.case-study-card-link:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+a.case-study-card-link:hover {
+    border-color: var(--imc-orange);
+}
+
 /* Case Studies */
 .case-studies h3 {
     text-align: center;
@@ -901,26 +954,45 @@ section {
 
 .case-study-stats {
     display: flex;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-md);
     margin-bottom: var(--spacing-md);
-    padding-bottom: var(--spacing-md);
-    border-bottom: 1px solid var(--color-gray-200);
+    padding: var(--spacing-md);
+    background: var(--color-gray-100);
+    border-radius: var(--radius-md);
+    justify-content: space-between;
 }
 
 .case-stat {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    position: relative;
+}
+
+.case-stat:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: calc(var(--spacing-md) / -2);
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-gray-300);
 }
 
 .case-stat-value {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--imc-orange);
+    line-height: 1.2;
 }
 
 .case-stat-label {
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     color: var(--color-gray-600);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
 }
 
 .case-study-card p {
@@ -1375,6 +1447,14 @@ section {
         max-width: 480px;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .testimonial-stats-bar {
+        flex-wrap: wrap;
+    }
+
+    a.case-study-card-link::after {
+        opacity: 1;
     }
 
     .pricing-card.featured {
