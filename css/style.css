@@ -3545,7 +3545,7 @@ a.case-study-card-link:hover {
 .xbib-example-image {
     position: relative;
     aspect-ratio: 16 / 9;
-    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+    background: #1a1a2e;
     display: flex;
     align-items: center;
     justify-content: center;
