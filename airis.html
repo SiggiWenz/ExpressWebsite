@@ -60,6 +60,19 @@
         </div>
     </header>
 
+    <!-- Iris Adoption Chart -->
+    <section class="iris-adoption-section" style="padding: 4rem 0 2rem;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Kunden die Iris (KI) in imc Express nutzen<span class="highlight">_</span></h2>
+                <p>Immer mehr Kunden setzen auf die KI-Unterst&uuml;tzung von Iris</p>
+            </div>
+            <div style="max-width: 700px; margin: 0 auto;">
+                <div id="iris-adoption-chart"></div>
+            </div>
+        </div>
+    </section>
+
     <!-- Airis Comparison Table -->
     <section class="comparison-section">
         <div class="container">
@@ -285,6 +298,81 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var options = {
+                series: [{
+                    name: 'Iris-Nutzung',
+                    data: [65.7, 75, 82]
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 400,
+                    toolbar: { show: false },
+                    fontFamily: 'Inter, sans-serif'
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadius: 8,
+                        columnWidth: '50%',
+                        dataLabels: { position: 'top' }
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    formatter: function (val) { return val + '%'; },
+                    offsetY: -24,
+                    style: {
+                        fontSize: '15px',
+                        fontWeight: 700,
+                        colors: ['#1A1A2E']
+                    }
+                },
+                xaxis: {
+                    categories: ['2023', '2024', '2025'],
+                    labels: {
+                        style: {
+                            fontSize: '14px',
+                            fontWeight: 600,
+                            colors: ['#3D3D5C', '#3D3D5C', '#3D3D5C']
+                        }
+                    }
+                },
+                yaxis: {
+                    min: 0,
+                    max: 100,
+                    labels: {
+                        formatter: function (val) { return val + '%'; },
+                        style: { fontSize: '13px', colors: ['#6B6B8D'] }
+                    }
+                },
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shade: 'light',
+                        type: 'vertical',
+                        shadeIntensity: 0.3,
+                        gradientToColors: ['#FF8A5C'],
+                        stops: [0, 100]
+                    }
+                },
+                colors: ['#FF6B35'],
+                grid: {
+                    borderColor: '#E8E8EF',
+                    strokeDashArray: 4
+                },
+                tooltip: {
+                    y: {
+                        formatter: function (val) { return val + '%'; }
+                    }
+                }
+            };
+
+            var chart = new ApexCharts(document.querySelector('#iris-adoption-chart'), options);
+            chart.render();
+        });
+    </script>
 </body>
 </html>
