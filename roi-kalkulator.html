@@ -590,7 +590,7 @@
 
                         <!-- KI Toggle -->
                         <div class="roi-toggle-group">
-                            <label>Ich möchte KI-Funktionalität nutzen</label>
+                            <label>Ich möchte Airis PRO (KI Modul) nutzen</label>
                             <div class="roi-toggle">
                                 <input type="checkbox" id="roi-ai" checked>
                                 <span class="roi-toggle-slider"></span>
@@ -669,10 +669,10 @@
                         <!-- Time Tab -->
                         <div id="roi-tab-time" class="roi-tab-content" style="display:none;">
                             <div class="roi-savings-display">
-                                <div class="roi-big-number" id="roi-total-time-savings">0 h</div>
-                                <div class="roi-big-label">Gesamte Zeitersparnis</div>
-                                <div class="roi-medium-number" id="roi-per-training-time-savings">0 h</div>
-                                <div class="roi-medium-label">Zeitersparnis pro Training</div>
+                                <div class="roi-big-number" id="roi-total-time-savings">0 Tage</div>
+                                <div class="roi-big-label">Gesamtersparnis</div>
+                                <div class="roi-medium-number" id="roi-per-training-time-savings">0 Stunden</div>
+                                <div class="roi-medium-label">Ersparnis pro Training</div>
                             </div>
 
                             <table class="roi-table">
@@ -685,27 +685,33 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Produktionszeit gesamt</td>
+                                        <td>Kennenlernen des Tools</td>
+                                        <td id="roi-express-time-learn">0 h</td>
+                                        <td id="roi-trad-time-learn">0 h</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Produktionszeit für Inhalte</td>
                                         <td id="roi-express-time-prod">0 h</td>
                                         <td id="roi-trad-time-prod">0 h</td>
                                     </tr>
                                     <tr>
-                                        <td>Übersetzungszeit gesamt</td>
+                                        <td>Aufwand für die Übersetzung</td>
                                         <td id="roi-express-time-trans">0 h</td>
                                         <td id="roi-trad-time-trans">0 h</td>
                                     </tr>
                                     <tr class="roi-table-total">
-                                        <td>Gesamtzeit</td>
+                                        <td>Gesamtproduktionszeit</td>
                                         <td id="roi-express-time-total">0 h</td>
                                         <td id="roi-trad-time-total">0 h</td>
                                     </tr>
                                     <tr class="roi-table-highlight">
-                                        <td>Zeit pro E-Learning-Inhalt</td>
+                                        <td>Produktionszeit pro Inhalt</td>
                                         <td id="roi-express-time-per">0 h</td>
                                         <td id="roi-trad-time-per">0 h</td>
                                     </tr>
                                 </tbody>
                             </table>
+                            <p id="roi-time-footnote" style="display:none; font-size:0.8rem; color:var(--color-gray-500); margin-top:0.75rem; line-height:1.5;">(*) Nicht in der Gesamtsumme enthalten. Diese Zahl ist ein Näherungswert, da sie von zu vielen Faktoren abhängt.</p>
                         </div>
 
                         <!-- Share -->
@@ -809,17 +815,22 @@
         'use strict';
 
         /* ── Constants ── */
-        var EXPRESS_HOURS_AI     = 15.3;
-        var EXPRESS_HOURS_NO_AI  = 20;
-        var TRAD_HOURS           = 27;
+        // Time model per training (hours)
+        var EXPRESS_LEARNING_HOURS    = 0.7;
+        var EXPRESS_PRODUCTION_HOURS  = 18;
+        var TRAD_LEARNING_HOURS      = 24;
+        var TRAD_PRODUCTION_HOURS    = 30;
+        var TRAD_TRANSLATION_HOURS_PER_LANG = 3.8;  // per language, excluded from total
 
+        // Airis PRO savings
+        var AIRIS_SAVINGS_FACTOR = 0.385;  // 38.5% time savings
+
+        // Cost model
         var EXPRESS_SW_PER_AUTHOR_AI    = 5500;
         var EXPRESS_SW_PER_AUTHOR_NO_AI = 4500;
         var TRAD_SW_NO_TOOL  = 2000;
         var TRAD_SW_WITH_TOOL = 6000;
-
-        var TRAD_TRANSLATION_COST_PER  = 900;   // € per training per language
-        var TRAD_TRANSLATION_HOURS_PER = 10;     // h per training per language
+        var TRAD_TRANSLATION_COST_PER = 900;  // € per training per language
 
         /* ── DOM refs ── */
         var els = {
@@ -842,6 +853,18 @@
             if (v === 0) return '0 h';
             var rounded = Math.round(v * 10) / 10;
             return rounded.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 1 }) + ' h';
+        }
+
+        function fmtDays(v) {
+            if (v === 0) return '0 Tage';
+            var rounded = Math.round(v * 10) / 10;
+            return rounded.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 1 }) + ' Tage';
+        }
+
+        function fmtStunden(v) {
+            if (v === 0) return '0 Stunden';
+            var rounded = Math.round(v * 10) / 10;
+            return rounded.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 1 }) + ' Stunden';
         }
 
         /* ── Slider fill ── */
@@ -906,37 +929,38 @@
             var aiEnabled    = els.ai.checked;
             var hasTool      = els.tool.value === 'ja';
 
-            var expressHours = aiEnabled ? EXPRESS_HOURS_AI : EXPRESS_HOURS_NO_AI;
+            // Airis PRO: 38.5% time reduction on imc Express values
+            var timeFactor = aiEnabled ? (1 - AIRIS_SAVINGS_FACTOR) : 1;
+
+            /* ── Time per training ── */
+            var expressLearnPer  = EXPRESS_LEARNING_HOURS * timeFactor;
+            var expressProdPer   = EXPRESS_PRODUCTION_HOURS * timeFactor;
+            var expressTransPer  = 0;
+            var expressTotalPer  = expressLearnPer + expressProdPer;
+
+            var tradLearnPer  = TRAD_LEARNING_HOURS;
+            var tradProdPer   = TRAD_PRODUCTION_HOURS;
+            var tradTransPer  = translations * TRAD_TRANSLATION_HOURS_PER_LANG;
+            var tradTotalPer  = tradLearnPer + tradProdPer;  // translation excluded from total
+
+            var timeSavingsPerTraining = tradTotalPer - expressTotalPer;
+            var timeSavingsDays        = timeSavingsPerTraining / 8;
 
             /* ── Cost ── */
             var expressSoftware    = authors * (aiEnabled ? EXPRESS_SW_PER_AUTHOR_AI : EXPRESS_SW_PER_AUTHOR_NO_AI);
-            var expressProduction  = trainings * expressHours * hourlyRate;
+            var expressProduction  = trainings * expressTotalPer * hourlyRate;
             var expressTranslation = 0;
             var expressTotal       = expressSoftware + expressProduction + expressTranslation;
             var expressPerTraining = expressTotal / trainings;
 
             var tradSoftware    = hasTool ? TRAD_SW_WITH_TOOL : TRAD_SW_NO_TOOL;
-            var tradProduction  = trainings * TRAD_HOURS * hourlyRate;
+            var tradProduction  = trainings * tradTotalPer * hourlyRate;
             var tradTranslation = trainings * translations * TRAD_TRANSLATION_COST_PER;
             var tradTotal       = tradSoftware + tradProduction + tradTranslation;
             var tradPerTraining = tradTotal / trainings;
 
             var totalSavings      = tradTotal - expressTotal;
             var savingsPerTraining = totalSavings / trainings;
-
-            /* ── Time ── */
-            var expressTimeProd  = trainings * expressHours;
-            var expressTimeTrans = 0;
-            var expressTimeTotal = expressTimeProd + expressTimeTrans;
-            var expressTimePer   = expressTimeTotal / trainings;
-
-            var tradTimeProd  = trainings * TRAD_HOURS;
-            var tradTimeTrans = trainings * translations * TRAD_TRANSLATION_HOURS_PER;
-            var tradTimeTotal = tradTimeProd + tradTimeTrans;
-            var tradTimePer   = tradTimeTotal / trainings;
-
-            var timeSavingsTotal = tradTimeTotal - expressTimeTotal;
-            var timeSavingsPerT  = timeSavingsTotal / trainings;
 
             /* ── Update DOM – Cost tab ── */
             q('#roi-total-savings').textContent        = fmtEuro(Math.max(0, totalSavings));
@@ -955,18 +979,26 @@
             q('#roi-trad-per').textContent           = fmtEuro(tradPerTraining);
 
             /* ── Update DOM – Time tab ── */
-            q('#roi-total-time-savings').textContent       = fmtHours(Math.max(0, timeSavingsTotal));
-            q('#roi-per-training-time-savings').textContent = fmtHours(Math.max(0, timeSavingsPerT));
+            q('#roi-total-time-savings').textContent       = fmtDays(Math.max(0, timeSavingsDays));
+            q('#roi-per-training-time-savings').textContent = fmtStunden(Math.max(0, timeSavingsPerTraining));
 
-            q('#roi-express-time-prod').textContent  = fmtHours(expressTimeProd);
-            q('#roi-express-time-trans').textContent  = fmtHours(expressTimeTrans);
-            q('#roi-express-time-total').textContent  = fmtHours(expressTimeTotal);
-            q('#roi-express-time-per').textContent    = fmtHours(expressTimePer);
+            q('#roi-express-time-learn').textContent = fmtHours(expressLearnPer);
+            q('#roi-express-time-prod').textContent  = fmtHours(expressProdPer);
+            q('#roi-express-time-trans').textContent  = fmtHours(expressTransPer);
+            q('#roi-express-time-total').textContent  = fmtHours(expressTotalPer);
+            q('#roi-express-time-per').textContent    = fmtHours(expressTotalPer);
 
-            q('#roi-trad-time-prod').textContent  = fmtHours(tradTimeProd);
-            q('#roi-trad-time-trans').textContent  = fmtHours(tradTimeTrans);
-            q('#roi-trad-time-total').textContent  = fmtHours(tradTimeTotal);
-            q('#roi-trad-time-per').textContent    = fmtHours(tradTimePer);
+            q('#roi-trad-time-learn').textContent = fmtHours(tradLearnPer);
+            q('#roi-trad-time-prod').textContent  = fmtHours(tradProdPer);
+            if (translations > 0) {
+                q('#roi-trad-time-trans').textContent = fmtHours(tradTransPer) + ' excl.*';
+                q('#roi-time-footnote').style.display = '';
+            } else {
+                q('#roi-trad-time-trans').textContent = fmtHours(0);
+                q('#roi-time-footnote').style.display = 'none';
+            }
+            q('#roi-trad-time-total').textContent = fmtHours(tradTotalPer);
+            q('#roi-trad-time-per').textContent   = fmtHours(tradTotalPer);
         }
 
         /* ── Copy link ── */
