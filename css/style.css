@@ -1121,6 +1121,14 @@ a.case-study-card-link:hover {
     width: 100%;
 }
 
+.pricing-footnote {
+    margin-top: var(--spacing-xl);
+    font-size: 0.8125rem;
+    color: var(--color-gray-600);
+    line-height: 1.6;
+    max-width: 900px;
+}
+
 /* ================================
    CTA Section
    ================================ */
