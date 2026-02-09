@@ -156,11 +156,10 @@
     </nav>
 
     <!-- Page Header -->
-    <header class="page-header">
+    <header class="page-header" style="padding-bottom: 2rem;">
         <div class="container">
             <span class="section-badge">Referenzen</span>
             <h1>Warum Unternehmen imc Express wählen<span class="highlight">_</span></h1>
-            <p class="page-subtitle">Daten und Fakten aus 13 Case Studies zeigen, wie Unternehmen verschiedenster Branchen und Größen mit imc Express ihre E-Learning-Erstellung transformieren.</p>
         </div>
     </header>
 
@@ -172,46 +171,6 @@
                 imc Express hat sich branchenübergreifend als führendes Autorentool für schnelle, professionelle E-Learning-Erstellung etabliert.
                 Die folgenden Analysen basieren auf realen Kundendaten aus unseren veröffentlichten Case Studies.
             </p>
-
-            <div class="kpi-grid">
-                <div class="kpi-card">
-                    <span class="kpi-value">13</span>
-                    <span class="kpi-label">Case Studies</span>
-                    <p class="kpi-desc">Dokumentierte Erfolgsgeschichten</p>
-                </div>
-                <div class="kpi-card">
-                    <span class="kpi-value">10+</span>
-                    <span class="kpi-label">Branchen</span>
-                    <p class="kpi-desc">Von Transport bis Non-Profit</p>
-                </div>
-                <div class="kpi-card">
-                    <span class="kpi-value">100.000+</span>
-                    <span class="kpi-label">Erreichte Lernende</span>
-                    <p class="kpi-desc">Über alle Kunden hinweg</p>
-                </div>
-                <div class="kpi-card">
-                    <span class="kpi-value">50+</span>
-                    <span class="kpi-label">Länder</span>
-                    <p class="kpi-desc">Internationaler Einsatz</p>
-                </div>
-            </div>
-
-            <hr class="section-divider">
-
-            <!-- Charts Section: Content Production -->
-            <div class="section-header">
-                <h2>Erstellte Lerninhalte je Kunde<span class="highlight">_</span></h2>
-                <p>So viele Lerninhalte haben unsere Kunden mit imc Express erstellt</p>
-            </div>
-            <div class="charts-grid">
-                <div class="chart-card full-width">
-                    <h3>Anzahl erstellter Lerninhalte</h3>
-                    <p class="chart-subtitle">Dokumentierte Lerninhalte aus den Case Studies (Module, Kurse, Learning Nuggets)</p>
-                    <div id="chart-content-count"></div>
-                </div>
-            </div>
-
-            <hr class="section-divider">
 
             <!-- Charts Section: Why imc Express -->
             <div class="section-header">
@@ -233,6 +192,21 @@
 
             <hr class="section-divider">
 
+            <!-- Charts Section: Content Production -->
+            <div class="section-header">
+                <h2>Erstellte Lerninhalte je Kunde<span class="highlight">_</span></h2>
+                <p>So viele Lerninhalte haben unsere Kunden mit imc Express erstellt</p>
+            </div>
+            <div class="charts-grid">
+                <div class="chart-card full-width">
+                    <h3>Anzahl erstellter Lerninhalte</h3>
+                    <p class="chart-subtitle">Dokumentierte Lerninhalte aus den Case Studies (Module, Kurse, Learning Nuggets)</p>
+                    <div id="chart-content-count"></div>
+                </div>
+            </div>
+
+            <hr class="section-divider">
+
             <!-- Charts Section: How they use it -->
             <div class="section-header">
                 <h2>Einsatzarten & Branchen<span class="highlight">_</span></h2>
@@ -240,13 +214,13 @@
             </div>
             <div class="charts-grid">
                 <div class="chart-card">
-                    <h3>Einsatzarten</h3>
-                    <p class="chart-subtitle">Für welche Trainingstypen wird imc Express genutzt?</p>
+                    <h3>Trainingstypen</h3>
+                    <p class="chart-subtitle">Die verschiedenen Arten von Trainings, die mit imc Express erstellt werden</p>
                     <div id="chart-use-cases"></div>
                 </div>
                 <div class="chart-card">
-                    <h3>Branchenverteilung</h3>
-                    <p class="chart-subtitle">In welchen Branchen setzen Kunden imc Express ein?</p>
+                    <h3>Branchen</h3>
+                    <p class="chart-subtitle">Die verschiedenen Industrien, in denen imc Express eingesetzt wird</p>
                     <div id="chart-industries"></div>
                 </div>
             </div>
@@ -510,9 +484,9 @@
         };
         new ApexCharts(document.querySelector('#chart-time-savings'), timeSavingsOptions).render();
 
-        // Chart 4: Use cases (donut)
+        // Chart 4: Use cases (donut) - Training types without numbers
         var useCaseOptions = {
-            series: [4, 3, 2, 2, 1, 1],
+            series: [1, 1, 1, 1, 1, 1],
             chart: {
                 type: 'donut',
                 height: 380,
@@ -530,31 +504,36 @@
             plotOptions: {
                 pie: {
                     donut: {
-                        size: '55%',
+                        size: '45%',
                         labels: {
                             show: true,
                             name: { show: true, fontSize: '14px', fontWeight: 600 },
-                            value: { show: true, fontSize: '20px', fontWeight: 700, formatter: function(val) { return val + ' Kunden'; } },
-                            total: { show: true, label: 'Gesamt', fontSize: '14px', formatter: function(w) { return w.globals.seriesTotals.reduce(function(a, b) { return a + b; }, 0) + ' Kunden'; } }
+                            value: { show: false },
+                            total: { show: false }
                         }
                     }
                 }
             },
-            dataLabels: { enabled: false },
+            dataLabels: {
+                enabled: true,
+                formatter: function(val, opts) { return opts.w.config.labels[opts.seriesIndex]; },
+                style: { fontSize: '12px', fontWeight: 500 },
+                dropShadow: { enabled: false }
+            },
             legend: {
                 position: 'bottom',
                 fontSize: '13px',
                 markers: { width: 12, height: 12, radius: 4 }
             },
             tooltip: {
-                y: { formatter: function(val) { return val + ' Kunden'; } }
+                y: { formatter: function(val, opts) { return opts.w.config.labels[opts.seriesIndex]; } }
             }
         };
         new ApexCharts(document.querySelector('#chart-use-cases'), useCaseOptions).render();
 
-        // Chart 5: Industries (pie)
+        // Chart 5: Industries (pie) - Industry types without numbers
         var industryOptions = {
-            series: [2, 2, 2, 1, 1, 1, 1, 1, 1, 1],
+            series: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
             chart: {
                 type: 'pie',
                 height: 380,
@@ -575,6 +554,7 @@
             colors: ['#FF6B35', '#2563EB', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899', '#06B6D4', '#84CC16', '#E55A2B', '#FF8A5C'],
             dataLabels: {
                 enabled: true,
+                formatter: function(val, opts) { return opts.w.config.labels[opts.seriesIndex]; },
                 style: { fontSize: '11px', fontWeight: 500 },
                 dropShadow: { enabled: false }
             },
@@ -584,7 +564,7 @@
                 markers: { width: 12, height: 12, radius: 4 }
             },
             tooltip: {
-                y: { formatter: function(val) { return val + ' Kunden'; } }
+                y: { formatter: function(val, opts) { return opts.w.config.labels[opts.seriesIndex]; } }
             }
         };
         new ApexCharts(document.querySelector('#chart-industries'), industryOptions).render();
