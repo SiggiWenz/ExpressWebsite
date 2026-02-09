@@ -10,6 +10,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        @media (max-width: 768px) {
+            .iris-adoption-section .container > div[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -63,12 +70,21 @@
     <!-- Iris Adoption Chart -->
     <section class="iris-adoption-section" style="padding: 4rem 0 2rem;">
         <div class="container">
-            <div class="section-header">
-                <h2>Kunden die Airis (KI) in imc Express nutzen<span class="highlight">_</span></h2>
-                <p>Immer mehr Kunden setzen auf die KI-Unterst&uuml;tzung von Airis</p>
-            </div>
-            <div style="max-width: 700px; margin: 0 auto;">
-                <div id="iris-adoption-chart"></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start;">
+                <div>
+                    <div class="section-header">
+                        <h2>Nutzung von Airis<span class="highlight">_</span></h2>
+                        <p>Immer mehr Kunden setzen auf die KI-Unterst&uuml;tzung von Airis</p>
+                    </div>
+                    <div id="iris-adoption-chart"></div>
+                </div>
+                <div>
+                    <div class="section-header">
+                        <h2>Wie wird die KI genutzt<span class="highlight">_</span></h2>
+                        <p>Verteilung der KI-Nutzung nach Einsatzbereich</p>
+                    </div>
+                    <div id="ai-usage-pie-chart"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -372,6 +388,54 @@
 
             var chart = new ApexCharts(document.querySelector('#iris-adoption-chart'), options);
             chart.render();
+
+            // Pie Chart: Wie wird die KI genutzt
+            var pieOptions = {
+                series: [81.2, 11.7, 7.1],
+                chart: {
+                    type: 'pie',
+                    height: 400,
+                    fontFamily: 'Inter, sans-serif'
+                },
+                labels: ['Airis (KI) Content Creation', 'KI Vertonung', 'KI Übersetzung'],
+                colors: ['#FF6B35', '#2563EB', '#16A34A'],
+                legend: {
+                    position: 'bottom',
+                    fontSize: '14px',
+                    fontWeight: 500,
+                    labels: {
+                        colors: ['#3D3D5C']
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    formatter: function (val) { return val.toFixed(1) + '%'; },
+                    style: {
+                        fontSize: '14px',
+                        fontWeight: 700
+                    },
+                    dropShadow: { enabled: false }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function (val) { return val + '%'; }
+                    }
+                },
+                stroke: {
+                    width: 2,
+                    colors: ['#fff']
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: { height: 300 },
+                        legend: { fontSize: '12px' }
+                    }
+                }]
+            };
+
+            var pieChart = new ApexCharts(document.querySelector('#ai-usage-pie-chart'), pieOptions);
+            pieChart.render();
         });
     </script>
 </body>
