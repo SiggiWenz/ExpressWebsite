@@ -11,58 +11,484 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* ── Calculator Section ── */
         .roi-calculator-section {
             padding: var(--spacing-2xl) 0 var(--spacing-4xl);
         }
-        .roi-calculator-wrapper {
-            position: relative;
-            width: 100%;
+
+        .roi-calculator {
             max-width: 1200px;
             margin: 0 auto;
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            box-shadow: var(--shadow-xl);
-            background: var(--color-white);
         }
-        .roi-calculator-wrapper iframe {
-            display: block;
+
+        .roi-calc-heading {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .roi-calc-heading h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--color-black);
+            margin-bottom: 0.75rem;
+        }
+
+        .roi-calc-heading p {
+            font-size: 1.05rem;
+            color: var(--color-gray-600);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .roi-calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        /* ── Left Column: Inputs ── */
+        .roi-calc-inputs {
+            padding: var(--spacing-lg) 0;
+        }
+
+        .roi-input-group {
+            margin-bottom: 2.25rem;
+        }
+
+        .roi-input-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .roi-input-header label {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--color-black);
+            line-height: 1.3;
+            flex: 1;
+            margin-right: 1rem;
+        }
+
+        .roi-value-box {
+            width: 72px;
+            text-align: center;
+            border: 1px solid var(--color-gray-300);
+            border-radius: var(--radius-md);
+            padding: 8px 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            color: var(--color-black);
+            background: var(--color-gray-100);
+            outline: none;
+            transition: border-color var(--transition-fast);
+            -moz-appearance: textfield;
+        }
+
+        .roi-value-box::-webkit-outer-spin-button,
+        .roi-value-box::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .roi-value-box:focus {
+            border-color: var(--imc-orange);
+        }
+
+        /* ── Range Slider ── */
+        .roi-slider {
+            -webkit-appearance: none;
+            appearance: none;
             width: 100%;
-            height: 900px;
-            border: none;
+            height: 6px;
+            border-radius: 3px;
+            outline: none;
+            cursor: pointer;
+            --fill: 0%;
+            background: linear-gradient(
+                to right,
+                var(--imc-orange) 0%,
+                var(--imc-orange) var(--fill),
+                var(--color-gray-200) var(--fill),
+                var(--color-gray-200) 100%
+            );
         }
-        @media (max-width: 768px) {
-            .roi-calculator-wrapper iframe {
-                height: 1200px;
-            }
+
+        .roi-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--imc-orange);
+            border: 3px solid var(--color-white);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform var(--transition-fast);
         }
-        .roi-loading {
+
+        .roi-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+
+        .roi-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--imc-orange);
+            border: 3px solid var(--color-white);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .roi-slider::-moz-range-track {
+            height: 6px;
+            border-radius: 3px;
+            background: var(--color-gray-200);
+        }
+
+        .roi-slider::-moz-range-progress {
+            height: 6px;
+            border-radius: 3px;
+            background: var(--imc-orange);
+        }
+
+        .roi-slider-range {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--color-gray-400);
+            margin-top: 6px;
+        }
+
+        .roi-input-desc {
+            font-size: 0.85rem;
+            color: var(--color-gray-500);
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        /* ── Toggle Switch ── */
+        .roi-toggle-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.25rem;
+        }
+
+        .roi-toggle-group label {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--color-black);
+        }
+
+        .roi-toggle {
+            position: relative;
+            width: 52px;
+            height: 28px;
+            flex-shrink: 0;
+        }
+
+        .roi-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .roi-toggle-slider {
+            position: absolute;
+            inset: 0;
+            background: var(--color-gray-300);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: background var(--transition-fast);
+        }
+
+        .roi-toggle-slider::before {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            left: 3px;
+            bottom: 3px;
+            background: var(--color-white);
+            border-radius: 50%;
+            transition: transform var(--transition-fast);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+        }
+
+        .roi-toggle input:checked + .roi-toggle-slider {
+            background: var(--imc-orange);
+        }
+
+        .roi-toggle input:checked + .roi-toggle-slider::before {
+            transform: translateX(24px);
+        }
+
+        /* ── Dropdown ── */
+        .roi-select-group {
+            margin-bottom: 2rem;
+        }
+
+        .roi-select-group > label {
+            display: block;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--color-black);
+            margin-bottom: 0.75rem;
+        }
+
+        .roi-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--color-gray-300);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--color-black);
+            background: var(--color-white);
+            cursor: pointer;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            transition: border-color var(--transition-fast);
+        }
+
+        .roi-select:focus {
+            border-color: var(--imc-orange);
+        }
+
+        .roi-select-desc {
+            font-size: 0.85rem;
+            color: var(--color-gray-500);
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        /* ── Right Column: Results Card ── */
+        .roi-calc-results {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 100px;
+        }
+
+        /* ── Tabs ── */
+        .roi-tabs {
             display: flex;
             align-items: center;
-            justify-content: center;
-            height: 400px;
-            color: var(--color-gray-500);
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--color-gray-200);
+            margin-bottom: 2rem;
+        }
+
+        .roi-tab {
+            padding: 0 0.5rem 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--color-gray-400);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all var(--transition-fast);
+            background: none;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .roi-tab:hover {
+            color: var(--color-gray-600);
+        }
+
+        .roi-tab.active {
+            color: var(--color-black);
+            border-bottom-color: var(--color-black);
+        }
+
+        .roi-tab-divider {
+            color: var(--color-gray-300);
+            padding-bottom: 12px;
             font-size: 1.1rem;
         }
-        .roi-loading .spinner {
-            width: 24px;
-            height: 24px;
-            border: 3px solid var(--color-gray-200);
-            border-top-color: var(--imc-orange);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin-right: 12px;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        .roi-fallback {
+
+        /* ── Savings Display ── */
+        .roi-savings-display {
             text-align: center;
-            padding: var(--spacing-2xl);
-            display: none;
+            padding: 1rem 0 1.5rem;
         }
-        .roi-fallback p {
-            margin-bottom: var(--spacing-md);
+
+        .roi-big-number {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: var(--color-black);
+            line-height: 1.1;
+        }
+
+        .roi-big-label {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-top: 0.25rem;
+        }
+
+        .roi-medium-number {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--color-gray-500);
+            margin-top: 1.25rem;
+            line-height: 1.1;
+        }
+
+        .roi-medium-label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--color-gray-500);
+            margin-top: 0.25rem;
+        }
+
+        /* ── Comparison Table ── */
+        .roi-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .roi-table thead th {
+            text-align: right;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--color-gray-500);
+            padding: 8px 0 12px;
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .roi-table thead th:first-child {
+            text-align: left;
+        }
+
+        .roi-table tbody td {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--color-gray-100);
+            color: var(--color-black);
+        }
+
+        .roi-table tbody td:first-child {
+            text-align: left;
             color: var(--color-gray-600);
+            padding-right: 1rem;
+        }
+
+        .roi-table tbody td:nth-child(2),
+        .roi-table tbody td:nth-child(3) {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+        }
+
+        .roi-table tbody tr.roi-table-total td {
+            font-weight: 700;
+            color: var(--color-black);
+            border-bottom: 2px solid var(--color-gray-200);
+        }
+
+        .roi-table tbody tr.roi-table-highlight td {
+            font-weight: 700;
+            color: var(--color-black);
+            border-bottom: none;
+            padding-top: 16px;
+        }
+
+        /* ── Share Section ── */
+        .roi-share {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--color-gray-200);
+        }
+
+        .roi-share-label {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--color-black);
+        }
+
+        .roi-share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 20px;
+            background: var(--imc-orange);
+            color: var(--color-white);
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: background var(--transition-fast);
+        }
+
+        .roi-share-btn:hover {
+            background: var(--imc-orange-dark);
+        }
+
+        .roi-share-btn.copied {
+            background: var(--color-success);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 960px) {
+            .roi-calc-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .roi-calc-results {
+                position: static;
+            }
+
+            .roi-calc-heading h2 {
+                font-size: 2rem;
+            }
+
+            .roi-big-number {
+                font-size: 2.5rem;
+            }
+
+            .roi-medium-number {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .roi-calc-heading h2 {
+                font-size: 1.5rem;
+            }
+
+            .roi-calc-results {
+                padding: 1.25rem;
+            }
+
+            .roi-table {
+                font-size: 0.8rem;
+            }
+
+            .roi-big-number {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -104,31 +530,194 @@
     <header class="page-header">
         <div class="container">
             <span class="section-badge">ROI Kalkulator</span>
-            <h1>Einsparungen berechnen<span class="highlight">_</span></h1>
-            <p class="page-subtitle">Ermitteln Sie, wie viel Zeit und Kosten Sie mit imc Express bei der E-Learning-Erstellung einsparen können.</p>
+            <h1>Einsparpotential imc Express<span class="highlight">_</span></h1>
+            <p class="page-subtitle">Sehen Sie, wie viel Zeit und Geld Sie mit imc Express sparen können. Die Berechnung basiert auf einem durchschnittlichen Lerninhalt mit einer Dauer von 20 Minuten.</p>
         </div>
     </header>
 
     <!-- ROI Calculator Section -->
     <section class="roi-calculator-section">
         <div class="container">
-            <div class="roi-calculator-wrapper" id="roi-wrapper">
-                <div class="roi-loading" id="roi-loading">
-                    <div class="spinner"></div>
-                    Kalkulator wird geladen...
-                </div>
-                <iframe
-                    id="roi-iframe"
-                    src="https://campaign.imc-express.cloud/?em=drno&lng=de&activeTab=cost"
-                    title="imc Express ROI Kalkulator"
-                    allow="clipboard-write"
-                    loading="lazy"
-                    style="display:none;"
-                    onload="document.getElementById('roi-loading').style.display='none'; this.style.display='block';"
-                ></iframe>
-                <div class="roi-fallback" id="roi-fallback">
-                    <p>Der Kalkulator konnte nicht geladen werden. Bitte öffnen Sie ihn direkt:</p>
-                    <a href="https://campaign.imc-express.cloud/?em=drno&lng=de&activeTab=cost" target="_blank" rel="noopener" class="btn btn-primary">ROI Kalkulator öffnen</a>
+            <div class="roi-calculator">
+                <div class="roi-calc-grid">
+
+                    <!-- ── Left Column: Inputs ── -->
+                    <div class="roi-calc-inputs">
+
+                        <!-- Trainings -->
+                        <div class="roi-input-group">
+                            <div class="roi-input-header">
+                                <label for="roi-trainings">Anzahl der jährlich zu produzierenden Trainings</label>
+                                <input type="number" id="roi-trainings-val" class="roi-value-box" value="10" min="1" max="200">
+                            </div>
+                            <input type="range" id="roi-trainings" class="roi-slider" min="1" max="200" value="10">
+                            <div class="roi-slider-range"><span>1</span><span>200</span></div>
+                            <p class="roi-input-desc">Anzahl der jährlich zu produzierenden Trainings</p>
+                        </div>
+
+                        <!-- Autoren -->
+                        <div class="roi-input-group">
+                            <div class="roi-input-header">
+                                <label for="roi-autoren">Anzahl Ihrer Autoren</label>
+                                <input type="number" id="roi-autoren-val" class="roi-value-box" value="2" min="1" max="35">
+                            </div>
+                            <input type="range" id="roi-autoren" class="roi-slider" min="1" max="35" value="2">
+                            <div class="roi-slider-range"><span>1</span><span>35</span></div>
+                            <p class="roi-input-desc">Wieviel Personen erstellen bei Ihnen jährlich mindestens einen Inhalt (Lerninhalt, Information aus verschiedenen Bereichen wie z.B. Produktmanagement, Vertrieb oder Compliance)</p>
+                        </div>
+
+                        <!-- Stundensatz -->
+                        <div class="roi-input-group">
+                            <div class="roi-input-header">
+                                <label for="roi-stundensatz">Ihr Stundensatz</label>
+                                <input type="number" id="roi-stundensatz-val" class="roi-value-box" value="100" min="50" max="150">
+                            </div>
+                            <input type="range" id="roi-stundensatz" class="roi-slider" min="50" max="150" value="100">
+                            <div class="roi-slider-range"><span>50</span><span>150</span></div>
+                            <p class="roi-input-desc">Wie hoch ist der durchschnittliche Stundensatz intern bei Ihnen? Falls Sie den internen Kostensatz nicht kennen, empfehlen wir mit EUR 100 pro Stunde zu planen.</p>
+                        </div>
+
+                        <!-- Übersetzungen -->
+                        <div class="roi-input-group">
+                            <div class="roi-input-header">
+                                <label for="roi-translations">Übersetzungen</label>
+                                <input type="number" id="roi-translations-val" class="roi-value-box" value="1" min="0" max="35">
+                            </div>
+                            <input type="range" id="roi-translations" class="roi-slider" min="0" max="35" value="1">
+                            <div class="roi-slider-range"><span>0</span><span>35</span></div>
+                            <p class="roi-input-desc">In wie viele Sprachen sollen die Inhalte übersetzt und vertont werden?</p>
+                        </div>
+
+                        <!-- KI Toggle -->
+                        <div class="roi-toggle-group">
+                            <label>Ich möchte KI-Funktionalität nutzen</label>
+                            <div class="roi-toggle">
+                                <input type="checkbox" id="roi-ai" checked>
+                                <span class="roi-toggle-slider"></span>
+                            </div>
+                        </div>
+
+                        <!-- Autorentool Dropdown -->
+                        <div class="roi-select-group">
+                            <label for="roi-tool">Nutzen Sie derzeit ein Autorentool?</label>
+                            <select id="roi-tool" class="roi-select">
+                                <option value="nein">Nein</option>
+                                <option value="ja">Ja</option>
+                            </select>
+                            <p class="roi-select-desc">Diese Informationen sind wichtig, um Ihnen den bestmöglichen Vergleich anbieten zu können.</p>
+                        </div>
+
+                    </div>
+
+                    <!-- ── Right Column: Results ── -->
+                    <div class="roi-calc-results">
+
+                        <!-- Tabs -->
+                        <div class="roi-tabs">
+                            <button class="roi-tab active" data-tab="cost">Kosteneinsparungen</button>
+                            <span class="roi-tab-divider">/</span>
+                            <button class="roi-tab" data-tab="time">Zeiteinsparungen</button>
+                        </div>
+
+                        <!-- Cost Tab -->
+                        <div id="roi-tab-cost" class="roi-tab-content">
+                            <div class="roi-savings-display">
+                                <div class="roi-big-number" id="roi-total-savings">0 €</div>
+                                <div class="roi-big-label">Gesamtersparnis</div>
+                                <div class="roi-medium-number" id="roi-per-training-savings">0 €</div>
+                                <div class="roi-medium-label">Ersparnis pro Training</div>
+                            </div>
+
+                            <table class="roi-table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>imc Express</th>
+                                        <th>&oslash; Autorentool</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Investition Autorensoftware</td>
+                                        <td id="roi-express-software">0 €</td>
+                                        <td id="roi-trad-software">0 €</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Interne Produktionskosten</td>
+                                        <td id="roi-express-production">0 €</td>
+                                        <td id="roi-trad-production">0 €</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kosten für Übersetzungen</td>
+                                        <td id="roi-express-translation">0 €</td>
+                                        <td id="roi-trad-translation">0 €</td>
+                                    </tr>
+                                    <tr class="roi-table-total">
+                                        <td>Gesamtinvestition</td>
+                                        <td id="roi-express-total">0 €</td>
+                                        <td id="roi-trad-total">0 €</td>
+                                    </tr>
+                                    <tr class="roi-table-highlight">
+                                        <td>Kosten für einen E-Learning-Inhalt</td>
+                                        <td id="roi-express-per">0 €</td>
+                                        <td id="roi-trad-per">0 €</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Time Tab -->
+                        <div id="roi-tab-time" class="roi-tab-content" style="display:none;">
+                            <div class="roi-savings-display">
+                                <div class="roi-big-number" id="roi-total-time-savings">0 h</div>
+                                <div class="roi-big-label">Gesamte Zeitersparnis</div>
+                                <div class="roi-medium-number" id="roi-per-training-time-savings">0 h</div>
+                                <div class="roi-medium-label">Zeitersparnis pro Training</div>
+                            </div>
+
+                            <table class="roi-table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>imc Express</th>
+                                        <th>&oslash; Autorentool</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Produktionszeit gesamt</td>
+                                        <td id="roi-express-time-prod">0 h</td>
+                                        <td id="roi-trad-time-prod">0 h</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Übersetzungszeit gesamt</td>
+                                        <td id="roi-express-time-trans">0 h</td>
+                                        <td id="roi-trad-time-trans">0 h</td>
+                                    </tr>
+                                    <tr class="roi-table-total">
+                                        <td>Gesamtzeit</td>
+                                        <td id="roi-express-time-total">0 h</td>
+                                        <td id="roi-trad-time-total">0 h</td>
+                                    </tr>
+                                    <tr class="roi-table-highlight">
+                                        <td>Zeit pro E-Learning-Inhalt</td>
+                                        <td id="roi-express-time-per">0 h</td>
+                                        <td id="roi-trad-time-per">0 h</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Share -->
+                        <div class="roi-share">
+                            <span class="roi-share-label">Teile das Ergebnis</span>
+                            <button class="roi-share-btn" id="roi-copy-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                                Link kopieren
+                            </button>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -216,15 +805,214 @@
 
     <script src="js/main.js"></script>
     <script>
-        // Fallback: if iframe fails to load after 10 seconds, show direct link
-        setTimeout(function() {
-            var iframe = document.getElementById('roi-iframe');
-            var loading = document.getElementById('roi-loading');
-            if (loading.style.display !== 'none') {
-                loading.style.display = 'none';
-                document.getElementById('roi-fallback').style.display = 'block';
+    (function () {
+        'use strict';
+
+        /* ── Constants ── */
+        var EXPRESS_HOURS_AI     = 15.3;
+        var EXPRESS_HOURS_NO_AI  = 20;
+        var TRAD_HOURS           = 27;
+
+        var EXPRESS_SW_PER_AUTHOR_AI    = 5500;
+        var EXPRESS_SW_PER_AUTHOR_NO_AI = 4500;
+        var TRAD_SW_NO_TOOL  = 2000;
+        var TRAD_SW_WITH_TOOL = 6000;
+
+        var TRAD_TRANSLATION_COST_PER  = 900;   // € per training per language
+        var TRAD_TRANSLATION_HOURS_PER = 10;     // h per training per language
+
+        /* ── DOM refs ── */
+        var els = {
+            trainings:    { slider: q('#roi-trainings'),    box: q('#roi-trainings-val') },
+            autoren:      { slider: q('#roi-autoren'),      box: q('#roi-autoren-val') },
+            stundensatz:  { slider: q('#roi-stundensatz'),  box: q('#roi-stundensatz-val') },
+            translations: { slider: q('#roi-translations'), box: q('#roi-translations-val') },
+            ai:     q('#roi-ai'),
+            tool:   q('#roi-tool')
+        };
+
+        function q(sel) { return document.querySelector(sel); }
+
+        /* ── Number formatting (German) ── */
+        function fmtEuro(v) {
+            return Math.round(v).toLocaleString('de-DE') + ' \u20AC';
+        }
+
+        function fmtHours(v) {
+            if (v === 0) return '0 h';
+            var rounded = Math.round(v * 10) / 10;
+            return rounded.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 1 }) + ' h';
+        }
+
+        /* ── Slider fill ── */
+        function updateSliderFill(slider) {
+            var min = parseFloat(slider.min);
+            var max = parseFloat(slider.max);
+            var val = parseFloat(slider.value);
+            var pct = ((val - min) / (max - min)) * 100;
+            slider.style.setProperty('--fill', pct + '%');
+        }
+
+        /* ── Sync slider ↔ input box ── */
+        function bindPair(pair) {
+            var slider = pair.slider;
+            var box    = pair.box;
+
+            function fromSlider() {
+                box.value = slider.value;
+                updateSliderFill(slider);
+                calculate();
             }
-        }, 10000);
+
+            function fromBox() {
+                var v = parseInt(box.value, 10);
+                var min = parseInt(slider.min, 10);
+                var max = parseInt(slider.max, 10);
+                if (isNaN(v)) return;
+                if (v < min) v = min;
+                if (v > max) v = max;
+                box.value = v;
+                slider.value = v;
+                updateSliderFill(slider);
+                calculate();
+            }
+
+            slider.addEventListener('input', fromSlider);
+            box.addEventListener('change', fromBox);
+            box.addEventListener('keyup', function (e) { if (e.key === 'Enter') fromBox(); });
+
+            // init fill
+            updateSliderFill(slider);
+        }
+
+        /* ── Tabs ── */
+        var tabs = document.querySelectorAll('.roi-tab');
+        tabs.forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                tabs.forEach(function (t) { t.classList.remove('active'); });
+                tab.classList.add('active');
+                var target = tab.getAttribute('data-tab');
+                q('#roi-tab-cost').style.display = target === 'cost' ? '' : 'none';
+                q('#roi-tab-time').style.display = target === 'time' ? '' : 'none';
+            });
+        });
+
+        /* ── Calculation ── */
+        function calculate() {
+            var trainings    = parseInt(els.trainings.slider.value, 10) || 1;
+            var authors      = parseInt(els.autoren.slider.value, 10) || 1;
+            var hourlyRate   = parseInt(els.stundensatz.slider.value, 10) || 100;
+            var translations = parseInt(els.translations.slider.value, 10) || 0;
+            var aiEnabled    = els.ai.checked;
+            var hasTool      = els.tool.value === 'ja';
+
+            var expressHours = aiEnabled ? EXPRESS_HOURS_AI : EXPRESS_HOURS_NO_AI;
+
+            /* ── Cost ── */
+            var expressSoftware    = authors * (aiEnabled ? EXPRESS_SW_PER_AUTHOR_AI : EXPRESS_SW_PER_AUTHOR_NO_AI);
+            var expressProduction  = trainings * expressHours * hourlyRate;
+            var expressTranslation = 0;
+            var expressTotal       = expressSoftware + expressProduction + expressTranslation;
+            var expressPerTraining = expressTotal / trainings;
+
+            var tradSoftware    = hasTool ? TRAD_SW_WITH_TOOL : TRAD_SW_NO_TOOL;
+            var tradProduction  = trainings * TRAD_HOURS * hourlyRate;
+            var tradTranslation = trainings * translations * TRAD_TRANSLATION_COST_PER;
+            var tradTotal       = tradSoftware + tradProduction + tradTranslation;
+            var tradPerTraining = tradTotal / trainings;
+
+            var totalSavings      = tradTotal - expressTotal;
+            var savingsPerTraining = totalSavings / trainings;
+
+            /* ── Time ── */
+            var expressTimeProd  = trainings * expressHours;
+            var expressTimeTrans = 0;
+            var expressTimeTotal = expressTimeProd + expressTimeTrans;
+            var expressTimePer   = expressTimeTotal / trainings;
+
+            var tradTimeProd  = trainings * TRAD_HOURS;
+            var tradTimeTrans = trainings * translations * TRAD_TRANSLATION_HOURS_PER;
+            var tradTimeTotal = tradTimeProd + tradTimeTrans;
+            var tradTimePer   = tradTimeTotal / trainings;
+
+            var timeSavingsTotal = tradTimeTotal - expressTimeTotal;
+            var timeSavingsPerT  = timeSavingsTotal / trainings;
+
+            /* ── Update DOM – Cost tab ── */
+            q('#roi-total-savings').textContent        = fmtEuro(Math.max(0, totalSavings));
+            q('#roi-per-training-savings').textContent  = fmtEuro(Math.max(0, savingsPerTraining));
+
+            q('#roi-express-software').textContent    = fmtEuro(expressSoftware);
+            q('#roi-express-production').textContent   = fmtEuro(expressProduction);
+            q('#roi-express-translation').textContent   = fmtEuro(expressTranslation);
+            q('#roi-express-total').textContent         = fmtEuro(expressTotal);
+            q('#roi-express-per').textContent           = fmtEuro(expressPerTraining);
+
+            q('#roi-trad-software').textContent    = fmtEuro(tradSoftware);
+            q('#roi-trad-production').textContent   = fmtEuro(tradProduction);
+            q('#roi-trad-translation').textContent   = fmtEuro(tradTranslation);
+            q('#roi-trad-total').textContent         = fmtEuro(tradTotal);
+            q('#roi-trad-per').textContent           = fmtEuro(tradPerTraining);
+
+            /* ── Update DOM – Time tab ── */
+            q('#roi-total-time-savings').textContent       = fmtHours(Math.max(0, timeSavingsTotal));
+            q('#roi-per-training-time-savings').textContent = fmtHours(Math.max(0, timeSavingsPerT));
+
+            q('#roi-express-time-prod').textContent  = fmtHours(expressTimeProd);
+            q('#roi-express-time-trans').textContent  = fmtHours(expressTimeTrans);
+            q('#roi-express-time-total').textContent  = fmtHours(expressTimeTotal);
+            q('#roi-express-time-per').textContent    = fmtHours(expressTimePer);
+
+            q('#roi-trad-time-prod').textContent  = fmtHours(tradTimeProd);
+            q('#roi-trad-time-trans').textContent  = fmtHours(tradTimeTrans);
+            q('#roi-trad-time-total').textContent  = fmtHours(tradTimeTotal);
+            q('#roi-trad-time-per').textContent    = fmtHours(tradTimePer);
+        }
+
+        /* ── Copy link ── */
+        q('#roi-copy-btn').addEventListener('click', function () {
+            var params = new URLSearchParams();
+            params.set('trainings', els.trainings.slider.value);
+            params.set('autoren', els.autoren.slider.value);
+            params.set('stundensatz', els.stundensatz.slider.value);
+            params.set('uebersetzungen', els.translations.slider.value);
+            params.set('ki', els.ai.checked ? '1' : '0');
+            params.set('tool', els.tool.value);
+
+            var url = window.location.origin + window.location.pathname + '?' + params.toString();
+            navigator.clipboard.writeText(url).then(function () {
+                var btn = q('#roi-copy-btn');
+                btn.classList.add('copied');
+                btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Kopiert!';
+                setTimeout(function () {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Link kopieren';
+                }, 2000);
+            });
+        });
+
+        /* ── Load from URL params ── */
+        function loadFromURL() {
+            var params = new URLSearchParams(window.location.search);
+            if (params.has('trainings'))     { els.trainings.slider.value = params.get('trainings');       els.trainings.box.value = params.get('trainings'); }
+            if (params.has('autoren'))        { els.autoren.slider.value = params.get('autoren');           els.autoren.box.value = params.get('autoren'); }
+            if (params.has('stundensatz'))    { els.stundensatz.slider.value = params.get('stundensatz');   els.stundensatz.box.value = params.get('stundensatz'); }
+            if (params.has('uebersetzungen')){ els.translations.slider.value = params.get('uebersetzungen'); els.translations.box.value = params.get('uebersetzungen'); }
+            if (params.has('ki'))            { els.ai.checked = params.get('ki') === '1'; }
+            if (params.has('tool'))          { els.tool.value = params.get('tool'); }
+        }
+
+        /* ── Init ── */
+        loadFromURL();
+        bindPair(els.trainings);
+        bindPair(els.autoren);
+        bindPair(els.stundensatz);
+        bindPair(els.translations);
+        els.ai.addEventListener('change', calculate);
+        els.tool.addEventListener('change', calculate);
+        calculate();
+
+    })();
     </script>
 </body>
 </html>
