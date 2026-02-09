@@ -484,31 +484,30 @@
         };
         new ApexCharts(document.querySelector('#chart-time-savings'), timeSavingsOptions).render();
 
-        // Chart 4: Use cases (donut) - Training types without numbers
+        // Chart 4: Use cases (donut) - Training types with % weighting
         var useCaseOptions = {
-            series: [1, 1, 1, 1, 1, 1],
+            series: [41, 24, 16, 13, 6],
             chart: {
                 type: 'donut',
                 height: 380,
                 fontFamily: 'Inter, sans-serif'
             },
             labels: [
-                'Fachtraining & Schulung',
-                'Compliance & Sicherheit',
-                'Onboarding',
-                'Digitale Transformation',
+                'Fachtraining und Schulung',
+                'Compliance und Sicherheit',
                 'Vertriebstraining',
-                'Inklusive Bildung'
+                'Sonstige Inhalte',
+                'Onboarding'
             ],
-            colors: categoryPalette,
+            colors: ['#FF6B35', '#2563EB', '#10B981', '#8B5CF6', '#F59E0B'],
             plotOptions: {
                 pie: {
                     donut: {
-                        size: '45%',
+                        size: '50%',
                         labels: {
                             show: true,
                             name: { show: true, fontSize: '14px', fontWeight: 600 },
-                            value: { show: false },
+                            value: { show: true, fontSize: '18px', fontWeight: 700, formatter: function(val) { return val + ' %'; } },
                             total: { show: false }
                         }
                     }
@@ -516,8 +515,8 @@
             },
             dataLabels: {
                 enabled: true,
-                formatter: function(val, opts) { return opts.w.config.labels[opts.seriesIndex]; },
-                style: { fontSize: '12px', fontWeight: 500 },
+                formatter: function(val) { return val.toFixed(0) + ' %'; },
+                style: { fontSize: '12px', fontWeight: 600 },
                 dropShadow: { enabled: false }
             },
             legend: {
@@ -526,35 +525,37 @@
                 markers: { width: 12, height: 12, radius: 4 }
             },
             tooltip: {
-                y: { formatter: function(val, opts) { return opts.w.config.labels[opts.seriesIndex]; } }
+                y: { formatter: function(val) { return val + ' %'; } }
             }
         };
         new ApexCharts(document.querySelector('#chart-use-cases'), useCaseOptions).render();
 
-        // Chart 5: Industries (pie) - Industry types without numbers
+        // Chart 5: Industries (pie) - alphabetical with % distribution
         var industryOptions = {
-            series: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            series: [3, 10, 13, 4.2, 6.5, 6, 11.5, 12, 6, 10.8, 12.2, 4.8],
             chart: {
                 type: 'pie',
-                height: 380,
+                height: 420,
                 fontFamily: 'Inter, sans-serif'
             },
             labels: [
-                'Industrie & Technik',
-                'Bildung & Non-Profit',
-                'Transport & Logistik',
-                'Versicherungen',
+                'Automobilindustrie',
+                'Bildung und Training',
+                'Finanzen und Versicherungen',
+                'IT',
+                'Krankenanstalten und Pflege',
                 'Konsumgüter',
-                'Bauwesen',
-                'Gastronomie',
-                'Entsorgung',
-                'E-Learning',
-                'Sport & Events'
+                'Metall- und Rohstoffindustrie',
+                'Öffentlicher Bereich',
+                'Pharmaindustrie',
+                'Produktionsbetriebe',
+                'Sonstige Branchen',
+                'Verkehr und Logistik'
             ],
-            colors: ['#FF6B35', '#2563EB', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899', '#06B6D4', '#84CC16', '#E55A2B', '#FF8A5C'],
+            colors: ['#FF6B35', '#2563EB', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899', '#06B6D4', '#84CC16', '#E55A2B', '#FF8A5C', '#9CA3AF', '#14B8A6'],
             dataLabels: {
                 enabled: true,
-                formatter: function(val, opts) { return opts.w.config.labels[opts.seriesIndex]; },
+                formatter: function(val) { return val.toFixed(1).replace('.0', '') + ' %'; },
                 style: { fontSize: '11px', fontWeight: 500 },
                 dropShadow: { enabled: false }
             },
@@ -564,7 +565,7 @@
                 markers: { width: 12, height: 12, radius: 4 }
             },
             tooltip: {
-                y: { formatter: function(val, opts) { return opts.w.config.labels[opts.seriesIndex]; } }
+                y: { formatter: function(val) { return val + ' %'; } }
             }
         };
         new ApexCharts(document.querySelector('#chart-industries'), industryOptions).render();
