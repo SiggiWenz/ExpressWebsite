@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="imc Express Referenzen Überblick - Warum sich Unternehmen für imc Express entscheiden und wie sie es einsetzen. Daten und Fakten aus unseren Case Studies.">
+    <meta name="keywords" content="E-Learning, Referenzen, Überblick, Kennzahlen, Case Studies, imc Express">
+    <title>Überblick | imc Express - Warum Unternehmen imc Express wählen</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .chart-card {
+            background: var(--color-white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--color-gray-200);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .chart-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+        .chart-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 0.5rem;
+        }
+        .chart-card .chart-subtitle {
+            font-size: 0.9rem;
+            color: var(--color-gray-600);
+            margin-bottom: 1.5rem;
+        }
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+        }
+        .kpi-card {
+            background: linear-gradient(135deg, var(--imc-orange-subtle), var(--color-white));
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 107, 53, 0.15);
+            transition: transform 0.3s ease;
+        }
+        .kpi-card:hover {
+            transform: translateY(-4px);
+        }
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--imc-orange);
+            display: block;
+            line-height: 1.2;
+        }
+        .kpi-label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-top: 0.5rem;
+            display: block;
+        }
+        .kpi-desc {
+            font-size: 0.85rem;
+            color: var(--color-gray-600);
+            margin-top: 0.25rem;
+        }
+        .intro-text {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--color-gray-700);
+        }
+        .section-divider {
+            margin: 4rem 0;
+            border: none;
+            border-top: 1px solid var(--color-gray-200);
+        }
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .kpi-value {
+                font-size: 2rem;
+            }
+            .chart-card {
+                padding: 1.25rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="imc-express-logo-horizontal-main-logo.svg" alt="imc Express" class="logo-img">
+            </a>
+            <button class="nav-toggle" aria-label="Navigation umschalten">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li class="nav-dropdown">
+                    <a href="features.html" class="nav-dropdown-toggle">Features <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="airis.html">Airis (KI)</a></li>
+                        <li><a href="kurs-vorlagen.html">Kurs Vorlagen</a></li>
+                    </ul>
+                </li>
+                <li><a href="vorteile.html">Vorteile</a></li>
+                <li class="nav-dropdown">
+                    <a href="referenzen.html" class="nav-dropdown-toggle active">Referenzen <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="referenzen-ueberblick.html">Überblick</a></li>
+                        <li><a href="referenzen.html">Referenzen</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="preise.html" class="nav-dropdown-toggle">Preise <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="preise.html">Preise</a></li>
+                        <li><a href="roi-kalkulator.html">ROI Kalkulator</a></li>
+                    </ul>
+                </li>
+                <li><a href="kontakt.html" class="btn btn-nav">Demo anfragen</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <span class="section-badge">Referenzen</span>
+            <h1>Warum Unternehmen imc Express wählen<span class="highlight">_</span></h1>
+            <p class="page-subtitle">Daten und Fakten aus 13 Case Studies zeigen, wie Unternehmen verschiedenster Branchen und Größen mit imc Express ihre E-Learning-Erstellung transformieren.</p>
+        </div>
+    </header>
+
+    <!-- KPI Overview -->
+    <section class="section">
+        <div class="container">
+            <p class="intro-text">
+                Von Start-ups bis zu Konzernen mit über 50.000 Mitarbeitenden, von Maschinenbau bis Bildung &ndash;
+                imc Express hat sich branchenübergreifend als führendes Autorentool für schnelle, professionelle E-Learning-Erstellung etabliert.
+                Die folgenden Analysen basieren auf realen Kundendaten aus unseren veröffentlichten Case Studies.
+            </p>
+
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <span class="kpi-value">13</span>
+                    <span class="kpi-label">Case Studies</span>
+                    <p class="kpi-desc">Dokumentierte Erfolgsgeschichten</p>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-value">10+</span>
+                    <span class="kpi-label">Branchen</span>
+                    <p class="kpi-desc">Von Transport bis Non-Profit</p>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-value">100.000+</span>
+                    <span class="kpi-label">Erreichte Lernende</span>
+                    <p class="kpi-desc">Über alle Kunden hinweg</p>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-value">50+</span>
+                    <span class="kpi-label">Länder</span>
+                    <p class="kpi-desc">Internationaler Einsatz</p>
+                </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- Charts Section: Content Production -->
+            <div class="section-header">
+                <h2>Erstellte Lerninhalte je Kunde<span class="highlight">_</span></h2>
+                <p>So viele Lerninhalte haben unsere Kunden mit imc Express erstellt</p>
+            </div>
+            <div class="charts-grid">
+                <div class="chart-card full-width">
+                    <h3>Anzahl erstellter Lerninhalte</h3>
+                    <p class="chart-subtitle">Dokumentierte Lerninhalte aus den Case Studies (Module, Kurse, Learning Nuggets)</p>
+                    <div id="chart-content-count"></div>
+                </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- Charts Section: Why imc Express -->
+            <div class="section-header">
+                <h2>Gründe für imc Express<span class="highlight">_</span></h2>
+                <p>Die wichtigsten Kaufgründe und Herausforderungen, die Unternehmen zu imc Express geführt haben</p>
+            </div>
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3>Top-Kaufgründe</h3>
+                    <p class="chart-subtitle">Wie häufig werden diese Gründe in Case Studies genannt?</p>
+                    <div id="chart-reasons"></div>
+                </div>
+                <div class="chart-card">
+                    <h3>Zeitersparnis im Vergleich</h3>
+                    <p class="chart-subtitle">Gemessene Zeitersparnis bei der Content-Erstellung</p>
+                    <div id="chart-time-savings"></div>
+                </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- Charts Section: How they use it -->
+            <div class="section-header">
+                <h2>Einsatzarten & Branchen<span class="highlight">_</span></h2>
+                <p>Wie und wo imc Express eingesetzt wird</p>
+            </div>
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3>Einsatzarten</h3>
+                    <p class="chart-subtitle">Für welche Trainingstypen wird imc Express genutzt?</p>
+                    <div id="chart-use-cases"></div>
+                </div>
+                <div class="chart-card">
+                    <h3>Branchenverteilung</h3>
+                    <p class="chart-subtitle">In welchen Branchen setzen Kunden imc Express ein?</p>
+                    <div id="chart-industries"></div>
+                </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- Charts Section: Scale & Reach -->
+            <div class="section-header">
+                <h2>Skalierung & Reichweite<span class="highlight">_</span></h2>
+                <p>imc Express skaliert von kleinen Teams bis zu Großkonzernen</p>
+            </div>
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3>Unternehmensgröße der Kunden</h3>
+                    <p class="chart-subtitle">Anzahl Mitarbeitende der dokumentierten Kunden</p>
+                    <div id="chart-company-size"></div>
+                </div>
+                <div class="chart-card">
+                    <h3>Internationale Reichweite</h3>
+                    <p class="chart-subtitle">Anzahl Länder, in denen Kunden imc Express einsetzen</p>
+                    <div id="chart-countries"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Überzeugt? Werden Sie Teil der Erfolgsgeschichte<span class="highlight">_</span></h2>
+                <p>Erfahren Sie in einer persönlichen Demo, wie imc Express auch Ihr Unternehmen transformieren kann.</p>
+                <div class="cta-buttons">
+                    <a href="kontakt.html" class="btn btn-primary btn-large">Kostenlose Demo buchen</a>
+                    <a href="referenzen.html" class="btn btn-secondary btn-large">Alle Referenzen ansehen</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <img src="imc-express-logo-horizontal-white.svg" alt="imc Express" class="logo-img footer-logo-img">
+                    </a>
+                    <p>E-Learning automatisiert erstellen: 90% KI-Automatisierung, 100% Kontrolle. 80+ Sprachen, keine Spezialisten nötig.</p>
+                    <div class="footer-social">
+                        <a href="https://linkedin.com/company/imc-ag" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <a href="https://twitter.com/ilovimc" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                        <a href="https://youtube.com/imcag" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Produkt</h4>
+                    <ul>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="preise.html">Preise</a></li>
+                        <li><a href="#">Integrationen</a></li>
+                        <li><a href="#">Updates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Ressourcen</h4>
+                    <ul>
+                        <li><a href="#">Dokumentation</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Webinare</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Unternehmen</h4>
+                    <ul>
+                        <li><a href="https://www.imc-ag.com">Über IMC</a></li>
+                        <li><a href="#">Karriere</a></li>
+                        <li><a href="#">Partner</a></li>
+                        <li><a href="kontakt.html">Kontakt</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 IMC AG. Alle Rechte vorbehalten.</p>
+                <div class="footer-legal">
+                    <a href="#">Impressum</a>
+                    <a href="#">Datenschutz</a>
+                    <a href="#">AGB</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var orangePalette = ['#FF6B35', '#FF8A5C', '#FFB088', '#E55A2B', '#CC4A1E', '#FF9E6D', '#FFD0B5', '#B33D14'];
+        var categoryPalette = ['#FF6B35', '#2563EB', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899', '#06B6D4', '#84CC16'];
+
+        // Chart 1: Learning contents per customer (horizontal bar)
+        var contentOptions = {
+            series: [{
+                name: 'Lerninhalte',
+                data: [200, 140, 125, 100, 100, 60, 50]
+            }],
+            chart: {
+                type: 'bar',
+                height: 400,
+                fontFamily: 'Inter, sans-serif',
+                toolbar: { show: false }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                    barHeight: '60%',
+                    borderRadius: 6,
+                    distributed: true
+                }
+            },
+            colors: ['#FF6B35', '#FF8A5C', '#E55A2B', '#FFB088', '#2563EB', '#10B981', '#8B5CF6'],
+            dataLabels: {
+                enabled: true,
+                formatter: function(val) { return val + '+'; },
+                style: { fontSize: '13px', fontWeight: 600 }
+            },
+            xaxis: {
+                categories: [
+                    'Lindner Group',
+                    'Arbeit und Leben',
+                    'WashTec AG',
+                    'Melitta Gruppe',
+                    'DB Fernverkehr',
+                    'aprendio',
+                    'mybreev'
+                ],
+                title: { text: 'Anzahl Lerninhalte', style: { fontSize: '12px', fontWeight: 600 } }
+            },
+            yaxis: {
+                labels: { style: { fontSize: '13px' } }
+            },
+            tooltip: {
+                y: {
+                    formatter: function(val, opts) {
+                        var notes = [
+                            '200+ Inhalte in 18 Monaten',
+                            '140 Learning Nuggets in 5 Monaten',
+                            '125+ neue Lerninhalte',
+                            '~100 E-Learnings pro Jahr',
+                            '100+ Module pro Entwickler',
+                            '60+ Inhalte pro Monat',
+                            '50+ Sprachversionen'
+                        ];
+                        return notes[opts.dataPointIndex];
+                    }
+                }
+            },
+            legend: { show: false }
+        };
+        new ApexCharts(document.querySelector('#chart-content-count'), contentOptions).render();
+
+        // Chart 2: Top reasons for choosing imc Express (bar)
+        var reasonsOptions = {
+            series: [{
+                name: 'Nennungen',
+                data: [10, 8, 8, 6, 5, 5, 4]
+            }],
+            chart: {
+                type: 'bar',
+                height: 380,
+                fontFamily: 'Inter, sans-serif',
+                toolbar: { show: false }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                    barHeight: '55%',
+                    borderRadius: 6,
+                    distributed: true
+                }
+            },
+            colors: ['#FF6B35', '#E55A2B', '#FF8A5C', '#2563EB', '#10B981', '#F59E0B', '#8B5CF6'],
+            dataLabels: {
+                enabled: true,
+                formatter: function(val) { return val + ' Kunden'; },
+                style: { fontSize: '12px', fontWeight: 600 }
+            },
+            xaxis: {
+                categories: [
+                    'Zeitersparnis',
+                    'Einfache Bedienung',
+                    'Mehrsprachigkeit',
+                    'Skalierbarkeit',
+                    'Kosteneffizienz',
+                    'Dezentrale Erstellung',
+                    'Compliance'
+                ],
+                title: { text: 'Anzahl Nennungen in Case Studies', style: { fontSize: '12px', fontWeight: 600 } }
+            },
+            yaxis: {
+                labels: { style: { fontSize: '12px' } }
+            },
+            tooltip: {
+                y: { formatter: function(val) { return val + ' von 13 Kunden'; } }
+            },
+            legend: { show: false }
+        };
+        new ApexCharts(document.querySelector('#chart-reasons'), reasonsOptions).render();
+
+        // Chart 3: Time savings comparison (bar)
+        var timeSavingsOptions = {
+            series: [{
+                name: 'Zeitersparnis',
+                data: [80, 50, 50, 40]
+            }],
+            chart: {
+                type: 'bar',
+                height: 380,
+                fontFamily: 'Inter, sans-serif',
+                toolbar: { show: false }
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 8,
+                    columnWidth: '55%',
+                    distributed: true
+                }
+            },
+            colors: ['#FF6B35', '#FF8A5C', '#E55A2B', '#FFB088'],
+            dataLabels: {
+                enabled: true,
+                formatter: function(val) { return val + '%'; },
+                offsetY: -20,
+                style: { fontSize: '14px', fontWeight: 700, colors: ['#1A1A2E'] }
+            },
+            xaxis: {
+                categories: ['WashTec', 'Halton', 'aprendio', 'Lindner'],
+                labels: { style: { fontSize: '13px', fontWeight: 500 } }
+            },
+            yaxis: {
+                max: 100,
+                title: { text: 'Zeitersparnis in %', style: { fontSize: '12px', fontWeight: 600 } },
+                labels: { formatter: function(val) { return val + '%'; } }
+            },
+            tooltip: {
+                y: { formatter: function(val) { return val + '% Zeitersparnis'; } }
+            },
+            legend: { show: false }
+        };
+        new ApexCharts(document.querySelector('#chart-time-savings'), timeSavingsOptions).render();
+
+        // Chart 4: Use cases (donut)
+        var useCaseOptions = {
+            series: [4, 3, 2, 2, 1, 1],
+            chart: {
+                type: 'donut',
+                height: 380,
+                fontFamily: 'Inter, sans-serif'
+            },
+            labels: [
+                'Fachtraining & Schulung',
+                'Compliance & Sicherheit',
+                'Onboarding',
+                'Digitale Transformation',
+                'Vertriebstraining',
+                'Inklusive Bildung'
+            ],
+            colors: categoryPalette,
+            plotOptions: {
+                pie: {
+                    donut: {
+                        size: '55%',
+                        labels: {
+                            show: true,
+                            name: { show: true, fontSize: '14px', fontWeight: 600 },
+                            value: { show: true, fontSize: '20px', fontWeight: 700, formatter: function(val) { return val + ' Kunden'; } },
+                            total: { show: true, label: 'Gesamt', fontSize: '14px', formatter: function(w) { return w.globals.seriesTotals.reduce(function(a, b) { return a + b; }, 0) + ' Kunden'; } }
+                        }
+                    }
+                }
+            },
+            dataLabels: { enabled: false },
+            legend: {
+                position: 'bottom',
+                fontSize: '13px',
+                markers: { width: 12, height: 12, radius: 4 }
+            },
+            tooltip: {
+                y: { formatter: function(val) { return val + ' Kunden'; } }
+            }
+        };
+        new ApexCharts(document.querySelector('#chart-use-cases'), useCaseOptions).render();
+
+        // Chart 5: Industries (pie)
+        var industryOptions = {
+            series: [2, 2, 2, 1, 1, 1, 1, 1, 1, 1],
+            chart: {
+                type: 'pie',
+                height: 380,
+                fontFamily: 'Inter, sans-serif'
+            },
+            labels: [
+                'Industrie & Technik',
+                'Bildung & Non-Profit',
+                'Transport & Logistik',
+                'Versicherungen',
+                'Konsumgüter',
+                'Bauwesen',
+                'Gastronomie',
+                'Entsorgung',
+                'E-Learning',
+                'Sport & Events'
+            ],
+            colors: ['#FF6B35', '#2563EB', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899', '#06B6D4', '#84CC16', '#E55A2B', '#FF8A5C'],
+            dataLabels: {
+                enabled: true,
+                style: { fontSize: '11px', fontWeight: 500 },
+                dropShadow: { enabled: false }
+            },
+            legend: {
+                position: 'bottom',
+                fontSize: '12px',
+                markers: { width: 12, height: 12, radius: 4 }
+            },
+            tooltip: {
+                y: { formatter: function(val) { return val + ' Kunden'; } }
+            }
+        };
+        new ApexCharts(document.querySelector('#chart-industries'), industryOptions).render();
+
+        // Chart 6: Company size (bar)
+        var companySizeOptions = {
+            series: [{
+                name: 'Mitarbeitende',
+                data: [50000, 21000, 19000, 7500, 6000, 3600, 2000, 1900, 1700]
+            }],
+            chart: {
+                type: 'bar',
+                height: 400,
+                fontFamily: 'Inter, sans-serif',
+                toolbar: { show: false }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                    barHeight: '60%',
+                    borderRadius: 6,
+                    distributed: true
+                }
+            },
+            colors: ['#FF6B35', '#E55A2B', '#FF8A5C', '#2563EB', '#10B981', '#F59E0B', '#8B5CF6', '#06B6D4', '#EC4899'],
+            dataLabels: {
+                enabled: true,
+                formatter: function(val) { return val >= 1000 ? (val / 1000).toFixed(val % 1000 === 0 ? 0 : 1) + 'k' : val; },
+                style: { fontSize: '12px', fontWeight: 600 }
+            },
+            xaxis: {
+                categories: [
+                    'Commonwealth Games',
+                    'UNIQA',
+                    'DB Fernverkehr',
+                    'Lindner Group',
+                    'Melitta Gruppe',
+                    'Saubermacher',
+                    'DoN Group',
+                    'Halton Group',
+                    'WashTec'
+                ],
+                title: { text: 'Anzahl Mitarbeitende', style: { fontSize: '12px', fontWeight: 600 } },
+                labels: { formatter: function(val) { return val >= 1000 ? (val / 1000).toFixed(0) + 'k' : val; } }
+            },
+            yaxis: {
+                labels: { style: { fontSize: '12px' } }
+            },
+            tooltip: {
+                y: { formatter: function(val) { return val.toLocaleString('de-DE') + ' Mitarbeitende'; } }
+            },
+            legend: { show: false }
+        };
+        new ApexCharts(document.querySelector('#chart-company-size'), companySizeOptions).render();
+
+        // Chart 7: International reach (bar)
+        var countriesOptions = {
+            series: [{
+                name: 'Länder',
+                data: [35, 20, 18, 18, 8, 5]
+            }],
+            chart: {
+                type: 'bar',
+                height: 400,
+                fontFamily: 'Inter, sans-serif',
+                toolbar: { show: false }
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 8,
+                    columnWidth: '55%',
+                    distributed: true
+                }
+            },
+            colors: ['#FF6B35', '#E55A2B', '#FF8A5C', '#2563EB', '#10B981', '#F59E0B'],
+            dataLabels: {
+                enabled: true,
+                formatter: function(val) { return val + '+'; },
+                offsetY: -20,
+                style: { fontSize: '14px', fontWeight: 700, colors: ['#1A1A2E'] }
+            },
+            xaxis: {
+                categories: ['Halton', 'Lindner', 'UNIQA', 'Melitta', 'Saubermacher', 'DB Fernverkehr'],
+                labels: { style: { fontSize: '12px', fontWeight: 500 } }
+            },
+            yaxis: {
+                title: { text: 'Anzahl Länder', style: { fontSize: '12px', fontWeight: 600 } }
+            },
+            tooltip: {
+                y: { formatter: function(val) { return val + '+ Länder'; } }
+            },
+            legend: { show: false }
+        };
+        new ApexCharts(document.querySelector('#chart-countries'), countriesOptions).render();
+    });
+    </script>
+</body>
+</html>
