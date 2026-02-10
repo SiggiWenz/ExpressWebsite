@@ -4050,3 +4050,155 @@ a.case-study-card-link:hover {
         max-width: 400px;
     }
 }
+
+/* ================================
+   Erste Schritte (Getting Started) Page
+   ================================ */
+.getting-started-section {
+    padding: var(--spacing-4xl) 0;
+}
+
+/* Step block */
+.gs-step {
+    padding: var(--spacing-xl) 0;
+}
+
+/* Step header with number + title */
+.gs-step-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.gs-step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    background: linear-gradient(135deg, var(--imc-orange), var(--imc-orange-dark));
+    color: var(--color-white);
+    font-size: 1.5rem;
+    font-weight: 800;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
+}
+
+.gs-step-header h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-black);
+    margin: 0;
+}
+
+/* Step content (single column steps 2-7) */
+.gs-step-content {
+    max-width: 900px;
+}
+
+.gs-step-content p {
+    font-size: 1.1rem;
+    color: var(--color-gray-600);
+    line-height: 1.8;
+}
+
+/* Step 1: Two-column layout */
+.gs-step-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+}
+
+.gs-step-column {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    border: 1px solid var(--color-gray-200);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.gs-step-column:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.gs-step-column p {
+    font-size: 1rem;
+    color: var(--color-gray-600);
+    line-height: 1.7;
+}
+
+.gs-step-column-badge {
+    display: inline-block;
+    padding: 0.3rem 0.9rem;
+    background: var(--imc-orange-subtle);
+    color: var(--imc-orange);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    border-radius: var(--radius-2xl);
+    margin-bottom: var(--spacing-lg);
+}
+
+.gs-step-column-badge--ai {
+    background: rgba(37, 99, 235, 0.1);
+    color: #2563EB;
+}
+
+/* Image placeholder */
+.gs-step-image-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, var(--color-gray-100), var(--color-gray-200));
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    border: 2px dashed var(--color-gray-300);
+}
+
+.gs-step-image-placeholder svg {
+    width: 48px;
+    height: 48px;
+    stroke: var(--color-gray-400);
+}
+
+.gs-step-image-placeholder span {
+    font-size: 0.875rem;
+    color: var(--color-gray-400);
+    font-weight: 500;
+}
+
+/* Divider between steps */
+.gs-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-gray-300), transparent);
+    margin: var(--spacing-lg) 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .gs-step-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .gs-step-header {
+        gap: var(--spacing-md);
+    }
+
+    .gs-step-number {
+        width: 52px;
+        height: 52px;
+        min-width: 52px;
+        font-size: 1.25rem;
+    }
+
+    .gs-step-content p {
+        font-size: 1rem;
+    }
+}
