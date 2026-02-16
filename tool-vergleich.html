@@ -809,6 +809,20 @@
         </div>
     </section>
 
+    <!-- PDF Export -->
+    <section class="pdf-export-section">
+        <div class="container">
+            <button id="pdf-export-btn" class="btn btn-secondary btn-large pdf-export-btn" onclick="exportPDF()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                PDF Export
+            </button>
+        </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
@@ -890,5 +904,44 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+    <script>
+        function exportPDF() {
+            var btn = document.getElementById('pdf-export-btn');
+            var originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<svg class="pdf-spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-dasharray="31.4 31.4"/></svg> PDF wird erstellt\u2026';
+
+            var exportSection = document.querySelector('.pdf-export-section');
+            var ctaSection = document.querySelector('.cta-section');
+            var footer = document.querySelector('.footer');
+            exportSection.style.display = 'none';
+            ctaSection.style.display = 'none';
+            footer.style.display = 'none';
+
+            var opt = {
+                margin: [10, 10, 10, 10],
+                filename: 'imc-Express-Tool-Vergleich.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            };
+
+            html2pdf().set(opt).from(document.body).save().then(function() {
+                exportSection.style.display = '';
+                ctaSection.style.display = '';
+                footer.style.display = '';
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }).catch(function() {
+                exportSection.style.display = '';
+                ctaSection.style.display = '';
+                footer.style.display = '';
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            });
+        }
+    </script>
 </body>
 </html>
