@@ -919,28 +919,45 @@
             ctaSection.style.display = 'none';
             footer.style.display = 'none';
 
+            // Temporarily remove overflow clipping so html2canvas captures full width
+            var style = document.createElement('style');
+            style.id = 'pdf-export-overrides';
+            style.textContent =
+                '.tv-table-wrapper { overflow: visible !important; }' +
+                '.tv-summary-card { overflow: visible !important; }' +
+                '.container { max-width: none !important; }' +
+                'body { overflow: visible !important; }';
+            document.head.appendChild(style);
+
+            // Measure full content width after overflow is removed
+            var contentWidth = Math.max(document.body.scrollWidth, document.documentElement.scrollWidth);
+
             var opt = {
-                margin: [10, 10, 10, 10],
+                margin: [10, 5, 10, 5],
                 filename: 'imc-Express-Tool-Vergleich.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                html2canvas: {
+                    scale: 2,
+                    useCORS: true,
+                    scrollY: 0,
+                    width: contentWidth,
+                    windowWidth: contentWidth
+                },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' },
                 pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
             };
 
-            html2pdf().set(opt).from(document.body).save().then(function() {
+            function restoreUI() {
+                var s = document.getElementById('pdf-export-overrides');
+                if (s) s.remove();
                 exportSection.style.display = '';
                 ctaSection.style.display = '';
                 footer.style.display = '';
                 btn.disabled = false;
                 btn.innerHTML = originalText;
-            }).catch(function() {
-                exportSection.style.display = '';
-                ctaSection.style.display = '';
-                footer.style.display = '';
-                btn.disabled = false;
-                btn.innerHTML = originalText;
-            });
+            }
+
+            html2pdf().set(opt).from(document.body).save().then(restoreUI).catch(restoreUI);
         }
     </script>
 </body>
