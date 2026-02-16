@@ -923,7 +923,10 @@
             var style = document.createElement('style');
             style.id = 'pdf-export-overrides';
             style.textContent =
+                'html { font-size: 80% !important; }' +
                 '.tv-table-wrapper { overflow: visible !important; }' +
+                '.tv-table { min-width: 0 !important; }' +
+                '.tv-col-label { min-width: 0 !important; }' +
                 '.tv-summary-card { overflow: visible !important; }' +
                 '.container { margin-left: auto !important; margin-right: auto !important; }' +
                 'body { overflow: visible !important; }' +
