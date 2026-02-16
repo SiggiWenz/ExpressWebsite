@@ -3105,6 +3105,23 @@ a.case-study-card-link:hover {
         padding-top: 0.5cm;
         border-top: 1px solid #ccc;
     }
+
+    /* Tool-Vergleich: scale down 20% for print to prevent right-side cutoff */
+    html {
+        font-size: 80% !important;
+    }
+    .tv-table {
+        min-width: 0 !important;
+    }
+    .tv-col-label {
+        min-width: 0 !important;
+    }
+    .tv-table-wrapper {
+        overflow: visible !important;
+    }
+    .pdf-export-section {
+        display: none !important;
+    }
 }
 
 /* ========================================
