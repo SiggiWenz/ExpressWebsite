@@ -919,32 +919,29 @@
             ctaSection.style.display = 'none';
             footer.style.display = 'none';
 
-            // Temporarily remove overflow clipping so html2canvas captures full width
+            // Temporarily remove overflow clipping and add page-break rules for PDF
             var style = document.createElement('style');
             style.id = 'pdf-export-overrides';
             style.textContent =
                 '.tv-table-wrapper { overflow: visible !important; }' +
                 '.tv-summary-card { overflow: visible !important; }' +
-                '.container { max-width: none !important; }' +
-                'body { overflow: visible !important; }';
+                '.container { margin-left: auto !important; margin-right: auto !important; }' +
+                'body { overflow: visible !important; }' +
+                '.tv-section { page-break-before: always; }' +
+                '.tv-table tr { page-break-inside: avoid; }';
             document.head.appendChild(style);
 
-            // Measure full content width after overflow is removed
-            var contentWidth = Math.max(document.body.scrollWidth, document.documentElement.scrollWidth);
-
             var opt = {
-                margin: [10, 5, 10, 5],
+                margin: [10, 10, 10, 10],
                 filename: 'imc-Express-Tool-Vergleich.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: {
                     scale: 2,
                     useCORS: true,
-                    scrollY: 0,
-                    width: contentWidth,
-                    windowWidth: contentWidth
+                    scrollY: 0
                 },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' },
-                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+                pagebreak: { mode: ['css', 'legacy'], before: '.tv-section' }
             };
 
             function restoreUI() {
