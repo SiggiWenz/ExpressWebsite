@@ -1,0 +1,2256 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIROLER Wohnhausversicherung – Interaktives Training</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* ============================================
+           TIROLER Design System + Material Design
+           ============================================ */
+        :root {
+            --tiroler-green: #006835;
+            --tiroler-green-dark: #004d28;
+            --tiroler-green-light: #00894a;
+            --tiroler-green-subtle: #e8f5ec;
+            --tiroler-green-50: #f0faf3;
+            --tiroler-accent: #8BC34A;
+            --tiroler-accent-dark: #689F38;
+            --tiroler-warm: #f9f6f1;
+            --tiroler-warm-dark: #f0ebe3;
+
+            --md-surface: #ffffff;
+            --md-on-surface: #1c1b1f;
+            --md-surface-variant: #f5f5f5;
+            --md-outline: #79747e;
+            --md-outline-variant: #cac4d0;
+            --md-error: #b3261e;
+            --md-success: #2e7d32;
+            --md-warning: #ed6c02;
+            --md-info: #0288d1;
+
+            --md-elevation-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            --md-elevation-2: 0 3px 6px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.12);
+            --md-elevation-3: 0 10px 20px rgba(0,0,0,0.15), 0 3px 6px rgba(0,0,0,0.10);
+            --md-elevation-4: 0 15px 25px rgba(0,0,0,0.15), 0 5px 10px rgba(0,0,0,0.05);
+
+            --font-body: 'Roboto', sans-serif;
+            --font-heading: 'Roboto Slab', serif;
+
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 28px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--md-on-surface);
+            background: var(--tiroler-warm);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ============================================
+           Material Design Utilities
+           ============================================ */
+        .material-icons {
+            font-size: inherit;
+            vertical-align: middle;
+        }
+
+        .sr-only {
+            position: absolute; width: 1px; height: 1px;
+            padding: 0; margin: -1px; overflow: hidden;
+            clip: rect(0,0,0,0); border: 0;
+        }
+
+        /* Ripple effect */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        .ripple::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            width: 100px; height: 100px;
+            margin-top: -50px; margin-left: -50px;
+            top: 50%; left: 50%;
+            transform: scale(0);
+            opacity: 1;
+            pointer-events: none;
+        }
+        .ripple:active::after {
+            animation: ripple-anim 0.4s ease-out;
+        }
+        @keyframes ripple-anim {
+            to { transform: scale(4); opacity: 0; }
+        }
+
+        /* ============================================
+           Top App Bar
+           ============================================ */
+        .app-bar {
+            background: var(--tiroler-green);
+            color: #fff;
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--md-elevation-2);
+        }
+        .app-bar__title {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+        }
+        .app-bar__subtitle {
+            font-size: 0.8rem;
+            opacity: 0.85;
+            margin-left: 12px;
+            font-weight: 300;
+        }
+        .app-bar__back {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 16px;
+            font-size: 1.5rem;
+            transition: opacity 0.2s;
+        }
+        .app-bar__back:hover { opacity: 0.8; }
+
+        /* ============================================
+           Progress Bar (Material)
+           ============================================ */
+        .progress-container {
+            background: var(--tiroler-green-dark);
+            height: 4px;
+            position: sticky;
+            top: 64px;
+            z-index: 99;
+        }
+        .progress-bar {
+            height: 100%;
+            background: var(--tiroler-accent);
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0%;
+        }
+
+        /* ============================================
+           Layout
+           ============================================ */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ============================================
+           Sections (Training Steps)
+           ============================================ */
+        .training-section {
+            display: none;
+            animation: fadeSlideIn 0.5s ease;
+        }
+        .training-section.active {
+            display: block;
+        }
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================================
+           Hero / Welcome Section
+           ============================================ */
+        .hero-banner {
+            background: linear-gradient(135deg, var(--tiroler-green) 0%, var(--tiroler-green-dark) 100%);
+            color: #fff;
+            padding: 80px 24px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -5%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+        }
+        .hero-banner h1 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-banner p {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            max-width: 650px;
+            margin: 0 auto 32px;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 8px 20px;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-mountains {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 80px;
+            z-index: 1;
+        }
+        .hero-mountains svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ============================================
+           Material Cards
+           ============================================ */
+        .md-card {
+            background: var(--md-surface);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--md-elevation-1);
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .md-card:hover {
+            box-shadow: var(--md-elevation-2);
+        }
+        .md-card--elevated {
+            box-shadow: var(--md-elevation-2);
+        }
+        .md-card--elevated:hover {
+            box-shadow: var(--md-elevation-3);
+            transform: translateY(-2px);
+        }
+        .md-card--outlined {
+            box-shadow: none;
+            border: 1px solid var(--md-outline-variant);
+        }
+        .md-card__header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .md-card__icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .md-card__icon--green {
+            background: var(--tiroler-green-subtle);
+            color: var(--tiroler-green);
+        }
+        .md-card__icon--accent {
+            background: #f1f8e9;
+            color: var(--tiroler-accent-dark);
+        }
+        .md-card__icon--warning {
+            background: #fff3e0;
+            color: var(--md-warning);
+        }
+        .md-card__icon--info {
+            background: #e1f5fe;
+            color: var(--md-info);
+        }
+        .md-card__title {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--md-on-surface);
+        }
+        .md-card__subtitle {
+            font-size: 0.85rem;
+            color: var(--md-outline);
+            margin-top: 2px;
+        }
+
+        /* ============================================
+           Story Narration (Client Story)
+           ============================================ */
+        .story-box {
+            background: linear-gradient(135deg, var(--tiroler-green-50), var(--tiroler-green-subtle));
+            border-left: 4px solid var(--tiroler-green);
+            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+            padding: 24px 28px;
+            margin: 32px 0;
+            position: relative;
+        }
+        .story-box::before {
+            content: 'format_quote';
+            font-family: 'Material Icons';
+            font-size: 2rem;
+            color: var(--tiroler-green);
+            opacity: 0.3;
+            position: absolute;
+            top: 12px;
+            right: 16px;
+        }
+        .story-box__speaker {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .story-box__avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .story-box__avatar--client {
+            background: var(--tiroler-green);
+        }
+        .story-box__avatar--advisor {
+            background: var(--tiroler-accent-dark);
+        }
+        .story-box__name {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--tiroler-green-dark);
+        }
+        .story-box__role {
+            font-size: 0.75rem;
+            color: var(--md-outline);
+        }
+        .story-box__text {
+            font-style: italic;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           Section Title
+           ============================================ */
+        .section-block {
+            padding: 48px 0 32px;
+        }
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--tiroler-green-dark);
+            margin-bottom: 8px;
+        }
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--md-outline);
+            margin-bottom: 24px;
+        }
+        .section-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--tiroler-green);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            margin-bottom: 12px;
+        }
+
+        /* ============================================
+           Lists
+           ============================================ */
+        .md-list {
+            list-style: none;
+            padding: 0;
+        }
+        .md-list__item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        .md-list__item:last-child {
+            border-bottom: none;
+        }
+        .md-list__icon {
+            color: var(--tiroler-green);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .md-list__text {
+            flex: 1;
+        }
+        .md-list__primary {
+            font-weight: 500;
+        }
+        .md-list__secondary {
+            font-size: 0.85rem;
+            color: var(--md-outline);
+            margin-top: 2px;
+        }
+
+        /* ============================================
+           Chips
+           ============================================ */
+        .chip-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 16px 0;
+        }
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--md-outline-variant);
+            background: var(--md-surface);
+            transition: all 0.2s;
+        }
+        .chip--filled {
+            background: var(--tiroler-green-subtle);
+            border-color: var(--tiroler-green);
+            color: var(--tiroler-green-dark);
+        }
+        .chip .material-icons {
+            font-size: 1rem;
+        }
+
+        /* ============================================
+           Accordion / Expansion Panel
+           ============================================ */
+        .expansion-panel {
+            background: var(--md-surface);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--md-elevation-1);
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        .expansion-panel__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            cursor: pointer;
+            transition: background 0.2s;
+            user-select: none;
+        }
+        .expansion-panel__header:hover {
+            background: var(--md-surface-variant);
+        }
+        .expansion-panel__title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        .expansion-panel__title .material-icons {
+            color: var(--tiroler-green);
+            font-size: 1.5rem;
+        }
+        .expansion-panel__chevron {
+            font-size: 1.5rem;
+            color: var(--md-outline);
+            transition: transform 0.3s ease;
+        }
+        .expansion-panel.open .expansion-panel__chevron {
+            transform: rotate(180deg);
+        }
+        .expansion-panel__content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            padding: 0 24px;
+        }
+        .expansion-panel.open .expansion-panel__content {
+            max-height: 2000px;
+            padding: 0 24px 20px;
+        }
+
+        /* ============================================
+           Damage Cases (Schadensfälle)
+           ============================================ */
+        .case-card {
+            background: var(--md-surface);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--md-elevation-2);
+            padding: 28px;
+            margin-bottom: 20px;
+            border-top: 4px solid var(--tiroler-green);
+        }
+        .case-card__header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .case-card__number {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--tiroler-green);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .case-card__title {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .case-card p {
+            color: #444;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           Checklist
+           ============================================ */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        .checklist__item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            font-size: 0.95rem;
+        }
+        .checklist__icon {
+            font-size: 1.25rem;
+        }
+        .checklist__icon--success { color: var(--md-success); }
+        .checklist__icon--pending { color: var(--md-outline); }
+
+        /* ============================================
+           Buttons (Material)
+           ============================================ */
+        .md-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            padding: 12px 32px;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .md-btn--filled {
+            background: var(--tiroler-green);
+            color: #fff;
+            box-shadow: var(--md-elevation-1);
+        }
+        .md-btn--filled:hover {
+            background: var(--tiroler-green-light);
+            box-shadow: var(--md-elevation-2);
+        }
+        .md-btn--outlined {
+            background: transparent;
+            color: var(--tiroler-green);
+            border: 1px solid var(--tiroler-green);
+        }
+        .md-btn--outlined:hover {
+            background: var(--tiroler-green-subtle);
+        }
+        .md-btn--tonal {
+            background: var(--tiroler-green-subtle);
+            color: var(--tiroler-green-dark);
+        }
+        .md-btn--tonal:hover {
+            background: #d0ecd8;
+        }
+        .md-btn--large {
+            padding: 16px 40px;
+            font-size: 1.05rem;
+        }
+        .md-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        /* ============================================
+           Navigation between sections
+           ============================================ */
+        .section-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 32px 0 48px;
+            gap: 16px;
+        }
+        .section-nav .md-btn {
+            min-width: 140px;
+        }
+
+        /* ============================================
+           Lernziele (Learning Objectives)
+           ============================================ */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .objective-card {
+            background: var(--md-surface);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--md-elevation-1);
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+        .objective-card__icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--tiroler-green);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .objective-card__text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           Grid Layouts
+           ============================================ */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        /* ============================================
+           Fact / Highlight Box
+           ============================================ */
+        .fact-box {
+            background: #fff8e1;
+            border: 1px solid #ffe082;
+            border-radius: var(--radius-lg);
+            padding: 20px 24px;
+            margin: 24px 0;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+        .fact-box .material-icons {
+            color: var(--md-warning);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .fact-box__content {
+            flex: 1;
+        }
+        .fact-box__title {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        /* ============================================
+           Quiz Section
+           ============================================ */
+        .quiz-container {
+            padding: 48px 0;
+        }
+        .quiz-question {
+            background: var(--md-surface);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--md-elevation-2);
+            padding: 32px;
+            margin-bottom: 24px;
+            display: none;
+        }
+        .quiz-question.active {
+            display: block;
+            animation: fadeSlideIn 0.4s ease;
+        }
+        .quiz-question__number {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--tiroler-green);
+            margin-bottom: 12px;
+        }
+        .quiz-question__text {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+        .quiz-question__hint {
+            font-size: 0.85rem;
+            color: var(--md-outline);
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+        .quiz-option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 20px;
+            border: 2px solid var(--md-outline-variant);
+            border-radius: var(--radius-lg);
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--md-surface);
+            user-select: none;
+        }
+        .quiz-option:hover {
+            border-color: var(--tiroler-green);
+            background: var(--tiroler-green-50);
+        }
+        .quiz-option.selected {
+            border-color: var(--tiroler-green);
+            background: var(--tiroler-green-subtle);
+        }
+        .quiz-option.correct {
+            border-color: var(--md-success);
+            background: #e8f5e9;
+        }
+        .quiz-option.incorrect {
+            border-color: var(--md-error);
+            background: #fce4ec;
+        }
+        .quiz-option__marker {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid var(--md-outline-variant);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        .quiz-option__marker--multi {
+            border-radius: var(--radius-sm);
+        }
+        .quiz-option.selected .quiz-option__marker {
+            border-color: var(--tiroler-green);
+            background: var(--tiroler-green);
+            color: #fff;
+        }
+        .quiz-option.correct .quiz-option__marker {
+            border-color: var(--md-success);
+            background: var(--md-success);
+            color: #fff;
+        }
+        .quiz-option.incorrect .quiz-option__marker {
+            border-color: var(--md-error);
+            background: var(--md-error);
+            color: #fff;
+        }
+        .quiz-option__text {
+            flex: 1;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .quiz-feedback {
+            display: none;
+            padding: 16px 20px;
+            border-radius: var(--radius-lg);
+            margin-top: 20px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .quiz-feedback.show { display: flex; gap: 12px; align-items: flex-start; }
+        .quiz-feedback--correct {
+            background: #e8f5e9;
+            border: 1px solid #a5d6a7;
+            color: #1b5e20;
+        }
+        .quiz-feedback--incorrect {
+            background: #fce4ec;
+            border: 1px solid #ef9a9a;
+            color: #b71c1c;
+        }
+        .quiz-feedback .material-icons {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .quiz-score {
+            text-align: center;
+            padding: 48px 24px;
+        }
+        .quiz-score__number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--tiroler-green);
+            font-family: var(--font-heading);
+        }
+        .quiz-score__label {
+            font-size: 1.1rem;
+            color: var(--md-outline);
+            margin-top: 8px;
+        }
+        .quiz-score__message {
+            font-size: 1.25rem;
+            margin-top: 24px;
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           Completion Section
+           ============================================ */
+        .completion-section {
+            text-align: center;
+            padding: 64px 24px;
+            background: linear-gradient(135deg, var(--tiroler-green) 0%, var(--tiroler-green-dark) 100%);
+            color: #fff;
+            border-radius: var(--radius-xl);
+            margin: 32px 0;
+        }
+        .completion-section .material-icons {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            opacity: 0.9;
+        }
+        .completion-section h2 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+        .completion-section p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           Step Indicator
+           ============================================ */
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 20px 0;
+            flex-wrap: wrap;
+        }
+        .step-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--md-outline-variant);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .step-dot.active {
+            background: var(--tiroler-green);
+            width: 28px;
+            border-radius: 5px;
+        }
+        .step-dot.completed {
+            background: var(--tiroler-accent);
+        }
+
+        /* ============================================
+           Table
+           ============================================ */
+        .md-table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--md-elevation-1);
+        }
+        .md-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--md-surface);
+        }
+        .md-table th {
+            background: var(--tiroler-green);
+            color: #fff;
+            padding: 14px 20px;
+            font-weight: 500;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+        .md-table td {
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            font-size: 0.9rem;
+        }
+        .md-table tr:last-child td {
+            border-bottom: none;
+        }
+        .md-table tr:hover td {
+            background: var(--tiroler-green-50);
+        }
+
+        /* ============================================
+           Divider
+           ============================================ */
+        .divider {
+            height: 1px;
+            background: var(--md-outline-variant);
+            margin: 32px 0;
+        }
+
+        /* ============================================
+           Footer
+           ============================================ */
+        .training-footer {
+            background: var(--tiroler-green-dark);
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            padding: 24px;
+            font-size: 0.85rem;
+        }
+        .training-footer a {
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* ============================================
+           Responsive
+           ============================================ */
+        @media (max-width: 768px) {
+            .hero-banner h1 { font-size: 1.75rem; }
+            .hero-banner p { font-size: 1rem; }
+            .objectives-grid { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .grid-3 { grid-template-columns: 1fr; }
+            .section-nav { flex-direction: column; }
+            .section-nav .md-btn { width: 100%; }
+            .md-card { padding: 20px; }
+            .quiz-question { padding: 24px; }
+            .app-bar__subtitle { display: none; }
+            .step-indicator { gap: 6px; }
+            .section-title { font-size: 1.4rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-banner { padding: 48px 16px 40px; }
+            .hero-banner h1 { font-size: 1.5rem; }
+            .container { padding: 0 16px; }
+        }
+
+        /* ============================================
+           Print
+           ============================================ */
+        @media print {
+            .app-bar, .progress-container, .section-nav, .step-indicator { display: none; }
+            .training-section { display: block !important; }
+            .md-card { box-shadow: none; border: 1px solid #ddd; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top App Bar -->
+    <header class="app-bar">
+        <a href="sales-training.html" class="app-bar__back" title="Zurück zur Übersicht">
+            <span class="material-icons">arrow_back</span>
+        </a>
+        <span class="app-bar__title">TIROLER Produktschulung</span>
+        <span class="app-bar__subtitle">Wohnhausversicherung – Fürs Haus mit Hoppala-Plus</span>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Step Indicator -->
+    <div class="container">
+        <div class="step-indicator" id="stepIndicator"></div>
+    </div>
+
+    <!-- ====================================================
+         SECTION 0: Welcome / Story Introduction
+         ==================================================== -->
+    <div class="training-section active" data-section="0">
+        <div class="hero-banner">
+            <div class="hero-badge">
+                <span class="material-icons" style="font-size:1rem">school</span>
+                Interaktives Training
+            </div>
+            <h1>TIROLER Wohnhausversicherung<br>Fürs Haus mit Hoppala-Plus</h1>
+            <p>Begleiten Sie Thomas Berger auf der Suche nach dem idealen Versicherungsschutz für sein Eigenheim – und lernen Sie dabei alles Wichtige zur TIROLER Wohnhausversicherung.</p>
+            <svg class="hero-mountains" viewBox="0 0 1200 80" preserveAspectRatio="none">
+                <path d="M0,80 L0,45 L150,20 L300,50 L450,10 L600,40 L750,5 L900,35 L1050,15 L1200,45 L1200,80 Z" fill="rgba(255,255,255,0.08)"/>
+                <path d="M0,80 L0,55 L200,30 L400,55 L600,25 L800,50 L1000,20 L1200,55 L1200,80 Z" fill="var(--tiroler-warm)"/>
+            </svg>
+        </div>
+
+        <div class="container">
+            <div class="story-box" style="margin-top: 40px;">
+                <div class="story-box__speaker">
+                    <div class="story-box__avatar story-box__avatar--client">TB</div>
+                    <div>
+                        <div class="story-box__name">Thomas Berger</div>
+                        <div class="story-box__role">Eigenheimbesitzer aus Innsbruck</div>
+                    </div>
+                </div>
+                <div class="story-box__text">
+                    „Wir haben letztes Jahr unser Haus in Innsbruck-Igls fertiggestellt – ein Traum! Aber ehrlich gesagt: Wenn ich an Sturm, Wasserrohrbruch oder einen Blitzschlag denke, wird mir mulmig. Ich brauche eine Versicherung, die wirklich alles abdeckt. Aber wo fange ich an?"
+                </div>
+            </div>
+
+            <div class="section-block">
+                <div class="section-chip">
+                    <span class="material-icons" style="font-size:0.85rem">flag</span>
+                    Lernziele
+                </div>
+                <h2 class="section-title">Was Sie in diesem Training lernen</h2>
+                <p class="section-subtitle">Nach Abschluss dieses Kurses verfügen Sie über fundiertes Wissen zur TIROLER Wohnhausversicherung.</p>
+
+                <div class="objectives-grid">
+                    <div class="objective-card">
+                        <div class="objective-card__icon">
+                            <span class="material-icons">verified</span>
+                        </div>
+                        <div class="objective-card__text">
+                            Sie können die Leistungen der TIROLER Wohnhausversicherung <strong>erklären</strong> und im Beratungsgespräch verständlich darstellen.
+                        </div>
+                    </div>
+                    <div class="objective-card">
+                        <div class="objective-card__icon">
+                            <span class="material-icons">people</span>
+                        </div>
+                        <div class="objective-card__text">
+                            Sie erkennen <strong>individuelle Bedürfnisse</strong> im Beratungsgespräch und können den Versicherungsschutz passgenau empfehlen.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-nav">
+                <div></div>
+                <button class="md-btn md-btn--filled md-btn--large ripple" onclick="goToSection(1)">
+                    Training starten
+                    <span class="material-icons">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================
+         SECTION 1: Produktdetails – Gedeckte Risiken
+         ==================================================== -->
+    <div class="training-section" data-section="1">
+        <div class="container">
+            <div class="section-block">
+                <div class="section-chip">
+                    <span class="material-icons" style="font-size:0.85rem">shield</span>
+                    Modul 1
+                </div>
+                <h2 class="section-title">Produktdetails: Fürs Haus mit Hoppala-Plus</h2>
+                <p class="section-subtitle">Im Fokus stehen elementare Risiken und zusätzliche Alltagsrisiken.</p>
+            </div>
+
+            <div class="story-box">
+                <div class="story-box__speaker">
+                    <div class="story-box__avatar story-box__avatar--advisor">SH</div>
+                    <div>
+                        <div class="story-box__name">Sandra Hofer</div>
+                        <div class="story-box__role">Beraterin, TIROLER Versicherung</div>
+                    </div>
+                </div>
+                <div class="story-box__text">
+                    „Herr Berger, ich verstehe Ihre Sorgen. Lassen Sie mich Ihnen zeigen, wie unsere Wohnhausversicherung ‚Fürs Haus' Sie umfassend schützt – und warum ‚Hoppala-Plus' genau das Richtige für Sie sein könnte."
+                </div>
+            </div>
+
+            <h3 style="font-family: var(--font-heading); font-size: 1.2rem; margin: 28px 0 16px; color: var(--tiroler-green-dark);">
+                <span class="material-icons" style="color: var(--tiroler-green); vertical-align: -4px; margin-right: 8px;">security</span>
+                Gedeckte Risiken der Basisversicherung
+            </h3>
+
+            <div class="grid-2">
+                <div class="md-card md-card--elevated">
+                    <div class="md-card__header">
+                        <div class="md-card__icon md-card__icon--green">
+                            <span class="material-icons">local_fire_department</span>
+                        </div>
+                        <div>
+                            <div class="md-card__title">Feuer</div>
+                            <div class="md-card__subtitle">inkl. Blitzschlag, Explosion, Implosion</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md-card md-card--elevated">
+                    <div class="md-card__header">
+                        <div class="md-card__icon md-card__icon--info">
+                            <span class="material-icons">water_drop</span>
+                        </div>
+                        <div>
+                            <div class="md-card__title">Leitungswasser</div>
+                            <div class="md-card__subtitle">Frostschäden, Rohrbruch, Korrosion</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md-card md-card--elevated">
+                    <div class="md-card__header">
+                        <div class="md-card__icon md-card__icon--accent">
+                            <span class="material-icons">air</span>
+                        </div>
+                        <div>
+                            <div class="md-card__title">Sturm & Naturgefahren</div>
+                            <div class="md-card__subtitle">Hagel, Schneedruck, Felssturz u.a.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md-card md-card--elevated">
+                    <div class="md-card__header">
+                        <div class="md-card__icon md-card__icon--warning">
+                            <span class="material-icons">landscape</span>
+                        </div>
+                        <div>
+                            <div class="md-card__title">H.E.L.P. Alpin</div>
+                            <div class="md-card__subtitle">Lawinen, Vermurungen, Überschwemmung, Erdbeben</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md-card md-card--elevated" style="margin-top: 4px;">
+                <div class="md-card__header">
+                    <div class="md-card__icon md-card__icon--green">
+                        <span class="material-icons">gavel</span>
+                    </div>
+                    <div>
+                        <div class="md-card__title">Haus- und Grundbesitzhaftpflicht</div>
+                        <div class="md-card__subtitle">Personen- und Sachschäden aus dem Eigentum</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="font-family: var(--font-heading); font-size: 1.2rem; margin: 36px 0 16px; color: var(--tiroler-green-dark);">
+                <span class="material-icons" style="color: var(--tiroler-green); vertical-align: -4px; margin-right: 8px;">add_circle</span>
+                Zusatzleistungen im Leistungsumfang
+            </h3>
+
+            <div class="md-card">
+                <ul class="md-list">
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon">home</span>
+                        <div class="md-list__text">
+                            <div class="md-list__primary">Nebengebäude am versicherten Grundstück</div>
+                            <div class="md-list__secondary">Automatisch bis 10 % der Versicherungssumme mitversichert</div>
+                        </div>
+                    </li>
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon">solar_power</span>
+                        <div class="md-list__text">
+                            <div class="md-list__primary">Solaranlagen und Photovoltaik</div>
+                        </div>
+                    </li>
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon">payments</span>
+                        <div class="md-list__text">
+                            <div class="md-list__primary">Ersatz von Mietausfällen</div>
+                        </div>
+                    </li>
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon">warning</span>
+                        <div class="md-list__text">
+                            <div class="md-list__primary">Grobe Fahrlässigkeit als Schadensursache</div>
+                            <div class="md-list__secondary">Auch bei grobem Verschulden vollumfänglich gedeckt</div>
+                        </div>
+                    </li>
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon">account_balance_wallet</span>
+                        <div class="md-list__text">
+                            <div class="md-list__primary">Hohe Entschädigungsgrenzen und Sachverständigenkosten</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="story-box">
+                <div class="story-box__speaker">
+                    <div class="story-box__avatar story-box__avatar--client">TB</div>
+                    <div>
+                        <div class="story-box__name">Thomas Berger</div>
+                        <div class="story-box__role">Eigenheimbesitzer</div>
+                    </div>
+                </div>
+                <div class="story-box__text">
+                    „Das klingt schon mal sehr umfassend! Aber was ist mit den kleinen Alltagsunfällen? Meine Frau meint, ich sei ein wandelndes Hoppala beim Heimwerken..."
+                </div>
+            </div>
+
+            <div class="section-nav">
+                <button class="md-btn md-btn--outlined ripple" onclick="goToSection(0)">
+                    <span class="material-icons">arrow_back</span>
+                    Zurück
+                </button>
+                <button class="md-btn md-btn--filled ripple" onclick="goToSection(2)">
+                    Weiter: Hoppala-Plus
+                    <span class="material-icons">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================
+         SECTION 2: Hoppala-Plus
+         ==================================================== -->
+    <div class="training-section" data-section="2">
+        <div class="container">
+            <div class="section-block">
+                <div class="section-chip">
+                    <span class="material-icons" style="font-size:0.85rem">star</span>
+                    Modul 2
+                </div>
+                <h2 class="section-title">Hoppala-Plus – Der Schutz für Alltagsmissgeschicke</h2>
+                <p class="section-subtitle">Unkomplizierter Zusatzbaustein für viele Alltagsschäden, die sonst oft ausgeschlossen sind.</p>
+            </div>
+
+            <div class="story-box">
+                <div class="story-box__speaker">
+                    <div class="story-box__avatar story-box__avatar--advisor">SH</div>
+                    <div>
+                        <div class="story-box__name">Sandra Hofer</div>
+                        <div class="story-box__role">Beraterin, TIROLER Versicherung</div>
+                    </div>
+                </div>
+                <div class="story-box__text">
+                    „Da haben Sie genau das richtige Stichwort geliefert, Herr Berger! Unser ‚Hoppala-Plus'-Baustein ist genau dafür gemacht: Von versehentlichen Flüssigkeitsschäden am Boden bis zu beschädigten Leitungen beim Heimwerken – sogar Wespen im Dachstuhl sind abgedeckt!"
+                </div>
+            </div>
+
+            <div class="md-card md-card--elevated" style="border-left: 4px solid var(--tiroler-accent);">
+                <h3 style="font-family: var(--font-heading); font-size: 1.15rem; margin-bottom: 16px; color: var(--tiroler-green-dark);">
+                    Gedeckt durch Hoppala-Plus
+                </h3>
+                <div class="chip-group">
+                    <span class="chip chip--filled"><span class="material-icons">local_fire_department</span> Feuer & Blitzschlag</span>
+                    <span class="chip chip--filled"><span class="material-icons">water_drop</span> Leitungswasser & Frost</span>
+                    <span class="chip chip--filled"><span class="material-icons">air</span> Sturm & Naturgefahren</span>
+                    <span class="chip chip--filled"><span class="material-icons">lock</span> Einbruchdiebstahl</span>
+                    <span class="chip chip--filled"><span class="material-icons">landscape</span> Lawinen & Überschwemmung</span>
+                    <span class="chip chip--filled"><span class="material-icons">gavel</span> Haus- & Grundbesitzhaftpflicht</span>
+                    <span class="chip chip--filled"><span class="material-icons">window</span> Glasbruch</span>
+                </div>
+            </div>
+
+            <div class="fact-box">
+                <span class="material-icons">lightbulb</span>
+                <div class="fact-box__content">
+                    <div class="fact-box__title">Alleinstellungsmerkmale</div>
+                    <p>Der unkomplizierte „Hoppala-Plus"-Schutz, die Kombination aus Sach- und Haftpflichtversicherung sowie die transparente Höchstentschädigung machen die TIROLER Wohnhausversicherung einzigartig.</p>
+                </div>
+            </div>
+
+            <div class="story-box">
+                <div class="story-box__speaker">
+                    <div class="story-box__avatar story-box__avatar--client">TB</div>
+                    <div>
+                        <div class="story-box__name">Thomas Berger</div>
+                        <div class="story-box__role">Eigenheimbesitzer</div>
+                    </div>
+                </div>
+                <div class="story-box__text">
+                    „Wespen im Dachstuhl – das hatten wir tatsächlich letztes Jahr! Gibt es auch Bausteine, die ich individuell dazubuchen kann? Wir haben zum Beispiel eine Photovoltaikanlage auf dem Dach."
+                </div>
+            </div>
+
+            <div class="section-nav">
+                <button class="md-btn md-btn--outlined ripple" onclick="goToSection(1)">
+                    <span class="material-icons">arrow_back</span>
+                    Zurück
+                </button>
+                <button class="md-btn md-btn--filled ripple" onclick="goToSection(3)">
+                    Weiter: Optionale Bausteine
+                    <span class="material-icons">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================
+         SECTION 3: Optionale Bausteine
+         ==================================================== -->
+    <div class="training-section" data-section="3">
+        <div class="container">
+            <div class="section-block">
+                <div class="section-chip">
+                    <span class="material-icons" style="font-size:0.85rem">extension</span>
+                    Modul 3
+                </div>
+                <h2 class="section-title">Optionale Zusatzbausteine</h2>
+                <p class="section-subtitle">Individuelle Absicherung nach Bedarf – flexibel kombinierbar.</p>
+            </div>
+
+            <div class="story-box">
+                <div class="story-box__speaker">
+                    <div class="story-box__avatar story-box__avatar--advisor">SH</div>
+                    <div>
+                        <div class="story-box__name">Sandra Hofer</div>
+                        <div class="story-box__role">Beraterin, TIROLER Versicherung</div>
+                    </div>
+                </div>
+                <div class="story-box__text">
+                    „Absolut, Herr Berger! Für Ihre Photovoltaikanlage gibt es den Technikschutz-Baustein. Lassen Sie mich Ihnen alle Optionen zeigen – Sie können genau die Bausteine wählen, die zu Ihrem Haus passen."
+                </div>
+            </div>
+
+            <div class="expansion-panel" onclick="togglePanel(this)">
+                <div class="expansion-panel__header">
+                    <div class="expansion-panel__title">
+                        <span class="material-icons">window</span>
+                        Glasbruchversicherung
+                    </div>
+                    <span class="material-icons expansion-panel__chevron">expand_more</span>
+                </div>
+                <div class="expansion-panel__content">
+                    <p style="line-height:1.7; color:#444;">Deckt Schäden an Gebäude-Glasflächen, Spezialverglasungen, Photovoltaikanlagen und Gewächshäusern ab. Entsorgungskosten und Folgeschäden sind binnen definierter Höchstgrenzen mitversichert.</p>
+                </div>
+            </div>
+
+            <div class="expansion-panel" onclick="togglePanel(this)">
+                <div class="expansion-panel__header">
+                    <div class="expansion-panel__title">
+                        <span class="material-icons">settings</span>
+                        Technikschutz (Haustechnik & Photovoltaik)
+                    </div>
+                    <span class="material-icons expansion-panel__chevron">expand_more</span>
+                </div>
+                <div class="expansion-panel__content">
+                    <p style="line-height:1.7; color:#444;">Schützt elektronische und elektrotechnische Gebäudeanlagen sowie Schwimmbadtechnik und smarte Systeme gegen Bedienungsfehler, Überspannung, Ertragsausfall u.v.m. Auch Entsorgungskosten sind inkludiert.</p>
+                </div>
+            </div>
+
+            <div class="expansion-panel" onclick="togglePanel(this)">
+                <div class="expansion-panel__header">
+                    <div class="expansion-panel__title">
+                        <span class="material-icons">hotel</span>
+                        Mietverlustversicherung für Privatzimmervermietende
+                    </div>
+                    <span class="material-icons expansion-panel__chevron">expand_more</span>
+                </div>
+                <div class="expansion-panel__content">
+                    <p style="line-height:1.7; color:#444;">Erstattet entgangene Einnahmen bei Ausfall durch versicherte Ereignisse – speziell für Vermieter:innen von Ferienwohnungen, Zimmern oder Gästehäusern.</p>
+                </div>
+            </div>
+
+            <div class="expansion-panel" onclick="togglePanel(this)">
+                <div class="expansion-panel__header">
+                    <div class="expansion-panel__title">
+                        <span class="material-icons">support_agent</span>
+                        S.O.S. 24h Wohn-Assistance
+                    </div>
+                    <span class="material-icons expansion-panel__chevron">expand_more</span>
+                </div>
+                <div class="expansion-panel__content">
+                    <p style="line-height:1.7; color:#444;">Rund-um-die-Uhr-Service inklusive Notfallhandwerker, Leihheizung, Notunterkunft und Aufsperrdienst – ideale Unterstützung im Ernstfall oder bei akuten Problemen.</p>
+                </div>
+            </div>
+
+            <h3 style="font-family: var(--font-heading); font-size: 1.1rem; margin: 28px 0 16px; color: var(--tiroler-green-dark);">Weitere optionale Bausteine</h3>
+            <div class="chip-group">
+                <span class="chip"><span class="material-icons">gavel</span> Haftpflicht Fürn Vermieter</span>
+                <span class="chip"><span class="material-icons">luggage</span> Gästegut</span>
+                <span class="chip"><span class="material-icons">construction</span> Rohbauversicherung</span>
+                <span class="chip"><span class="material-icons">engineering</span> Bauwesenversicherung</span>
+                <span class="chip"><span class="material-icons">directions_car</span> Kfz-Versicherung</span>
+            </div>
+
+            <div class="fact-box">
+                <span class="material-icons">groups</span>
+                <div class="fact-box__content">
+                    <div class="fact-box__title">Zielgruppen</div>
+                    <p>Die Zusatzbausteine richten sich vor allem an Eigentümer:innen, die individuelle Risiken abdecken oder besonderen Komfort im Schadensfall wünschen.</p>
+                </div>
+            </div>
+
+            <div class="section-nav">
+                <button class="md-btn md-btn--outlined ripple" onclick="goToSection(2)">
+                    <span class="material-icons">arrow_back</span>
+                    Zurück
+                </button>
+                <button class="md-btn md-btn--filled ripple" onclick="goToSection(4)">
+                    Weiter: Prämienberechnung
+                    <span class="material-icons">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================
+         SECTION 4: Prämienberechnung
+         ==================================================== -->
+    <div class="training-section" data-section="4">
+        <div class="container">
+            <div class="section-block">
+                <div class="section-chip">
+                    <span class="material-icons" style="font-size:0.85rem">calculate</span>
+                    Modul 4
+                </div>
+                <h2 class="section-title">Prämienberechnung und Besonderheiten</h2>
+                <p class="section-subtitle">Die Prämie hängt von Gebäudeart, Baujahr, Ausstattung und Deckungsumfang ab.</p>
+            </div>
+
+            <div class="story-box">
+                <div class="story-box__speaker">
+                    <div class="story-box__avatar story-box__avatar--client">TB</div>
+                    <div>
+                        <div class="story-box__name">Thomas Berger</div>
+                        <div class="story-box__role">Eigenheimbesitzer</div>
+                    </div>
+                </div>
+                <div class="story-box__text">
+                    „Das klingt alles sehr durchdacht. Aber wie wird eigentlich die Prämie berechnet? Und wie bestimmt man den richtigen Gebäudewert?"
+                </div>
+            </div>
+
+            <h3 style="font-family: var(--font-heading); font-size: 1.15rem; margin: 24px 0 16px; color: var(--tiroler-green-dark);">
+                Drei Methoden zur Wertermittlung
+            </h3>
+
+            <div class="grid-3">
+                <div class="md-card md-card--elevated" style="text-align:center;">
+                    <div class="md-card__icon md-card__icon--green" style="margin: 0 auto 12px;">
+                        <span class="material-icons">square_foot</span>
+                    </div>
+                    <div class="md-card__title" style="font-size:1rem; margin-bottom:8px;">Objektbewertung</div>
+                    <p style="font-size:0.85rem; color:#666; line-height:1.5;">Nach Fläche und Geschosszahl mit aktuellen Baukosten pro m²</p>
+                </div>
+                <div class="md-card md-card--elevated" style="text-align:center;">
+                    <div class="md-card__icon md-card__icon--info" style="margin: 0 auto 12px;">
+                        <span class="material-icons">person_search</span>
+                    </div>
+                    <div class="md-card__title" style="font-size:1rem; margin-bottom:8px;">Gutachter&shy;bewertung</div>
+                    <p style="font-size:0.85rem; color:#666; line-height:1.5;">Durch interne oder externe qualifizierte Gutachter</p>
+                </div>
+                <div class="md-card md-card--elevated" style="text-align:center;">
+                    <div class="md-card__icon md-card__icon--warning" style="margin: 0 auto 12px;">
+                        <span class="material-icons">edit_note</span>
+                    </div>
+                    <div class="md-card__title" style="font-size:1rem; margin-bottom:8px;">Freie Summen&shy;ermittlung</div>
+                    <p style="font-size:0.85rem; color:#666; line-height:1.5;">Vom Kunden gewählt, genehmigungs&shy;pflichtig, mit 35 % Prämienzuschlag</p>
+                </div>
+            </div>
+
+            <div class="story-box">
+                <div class="story-box__speaker">
+                    <div class="story-box__avatar story-box__avatar--advisor">SH</div>
+                    <div>
+                        <div class="story-box__name">Sandra Hofer</div>
+                        <div class="story-box__role">Beraterin, TIROLER Versicherung</div>
+                    </div>
+                </div>
+                <div class="story-box__text">
+                    „Für Ihr neues Haus empfehle ich die Objektbewertung nach Fläche und Geschosszahl – das ist die genaueste Methode. Und das Schöne ist: Bei korrekter Wertermittlung verzichten wir auf Einwände wegen Unterversicherung!"
+                </div>
+            </div>
+
+            <h3 style="font-family: var(--font-heading); font-size: 1.15rem; margin: 28px 0 16px; color: var(--tiroler-green-dark);">
+                Wichtige Fakten
+            </h3>
+
+            <div class="md-card">
+                <ul class="md-list">
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon">trending_up</span>
+                        <div class="md-list__text">
+                            <div class="md-list__primary">Höchstentschädigungssumme</div>
+                            <div class="md-list__secondary">Versicherungssumme plus variabler Zuschlag – z.B. 36 % bei 580.000 € Gebäudewert</div>
+                        </div>
+                    </li>
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon">verified_user</span>
+                        <div class="md-list__text">
+                            <div class="md-list__primary">Unterversicherungsverzicht</div>
+                            <div class="md-list__secondary">Bei korrekter Wertermittlung verzichtet die TIROLER auf Einwände</div>
+                        </div>
+                    </li>
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon">home_work</span>
+                        <div class="md-list__text">
+                            <div class="md-list__primary">Nebengebäude automatisch mitversichert</div>
+                            <div class="md-list__secondary">Bis 10 % der Versicherungssumme</div>
+                        </div>
+                    </li>
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon">tune</span>
+                        <div class="md-list__text">
+                            <div class="md-list__primary">Flexible Nachlässe</div>
+                            <div class="md-list__secondary">Durch Wahl des Selbstbehalts – höherer Selbstbehalt senkt die Prämie</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="fact-box">
+                <span class="material-icons">info</span>
+                <div class="fact-box__content">
+                    <div class="fact-box__title">Hinweis</div>
+                    <p>Die Prämienberechnung ist nicht unabhängig vom Gebäudealter und der Ausstattung – diese Faktoren fließen stets in die Berechnung ein.</p>
+                </div>
+            </div>
+
+            <div class="section-nav">
+                <button class="md-btn md-btn--outlined ripple" onclick="goToSection(3)">
+                    <span class="material-icons">arrow_back</span>
+                    Zurück
+                </button>
+                <button class="md-btn md-btn--filled ripple" onclick="goToSection(5)">
+                    Weiter: Schadensfälle
+                    <span class="material-icons">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================
+         SECTION 5: Schadensfälle & Beratung
+         ==================================================== -->
+    <div class="training-section" data-section="5">
+        <div class="container">
+            <div class="section-block">
+                <div class="section-chip">
+                    <span class="material-icons" style="font-size:0.85rem">build</span>
+                    Modul 5
+                </div>
+                <h2 class="section-title">Typische Schadensfälle und Beratungsfragen</h2>
+                <p class="section-subtitle">Praxisbeispiele und Argumentationshilfen für das Kundengespräch.</p>
+            </div>
+
+            <div class="story-box">
+                <div class="story-box__speaker">
+                    <div class="story-box__avatar story-box__avatar--client">TB</div>
+                    <div>
+                        <div class="story-box__name">Thomas Berger</div>
+                        <div class="story-box__role">Eigenheimbesitzer</div>
+                    </div>
+                </div>
+                <div class="story-box__text">
+                    „Können Sie mir ein konkretes Beispiel geben? Was passiert zum Beispiel, wenn ein Sturm meine Photovoltaikanlage beschädigt?"
+                </div>
+            </div>
+
+            <h3 style="font-family: var(--font-heading); font-size: 1.15rem; margin: 24px 0 16px; color: var(--tiroler-green-dark);">
+                Beispiel-Schadensfälle
+            </h3>
+
+            <div class="case-card">
+                <div class="case-card__header">
+                    <div class="case-card__number">1</div>
+                    <div class="case-card__title">Sturmschaden an Photovoltaikanlage und Carport</div>
+                </div>
+                <p>Ein Sturm beschädigt die Photovoltaikanlage und einen Carport. Beide Schäden sind bis zur Höchstentschädigungsgrenze mitabgedeckt.</p>
+            </div>
+
+            <div class="case-card">
+                <div class="case-card__header">
+                    <div class="case-card__number">2</div>
+                    <div class="case-card__title">Baumschlag durch Unwetter</div>
+                </div>
+                <p>Ein Baum stürzt infolge eines Unwetters auf das Wohnhaus. Die Versicherung übernimmt Reparatur, Entfernung des Baums und notwendige Folgeleistungen.</p>
+            </div>
+
+            <div class="md-card md-card--elevated" style="border-left: 4px solid var(--md-success);">
+                <h3 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 16px; color: var(--md-success);">
+                    <span class="material-icons" style="vertical-align: -4px; margin-right: 6px;">thumb_up</span>
+                    Stärken der TIROLER Schadensabwicklung
+                </h3>
+                <ul class="checklist">
+                    <li class="checklist__item">
+                        <span class="material-icons checklist__icon checklist__icon--success">check_circle</span>
+                        Besonders schnelle und unkomplizierte Schadensabwicklung
+                    </li>
+                    <li class="checklist__item">
+                        <span class="material-icons checklist__icon checklist__icon--success">check_circle</span>
+                        Umfassende Leistungen auch bei komplexen Schadensfällen
+                    </li>
+                    <li class="checklist__item">
+                        <span class="material-icons checklist__icon checklist__icon--success">check_circle</span>
+                        Schnelle Vor-Ort-Betreuung durch regionale Sachverständige
+                    </li>
+                </ul>
+            </div>
+
+            <div class="story-box">
+                <div class="story-box__speaker">
+                    <div class="story-box__avatar story-box__avatar--advisor">SH</div>
+                    <div>
+                        <div class="story-box__name">Sandra Hofer</div>
+                        <div class="story-box__role">Beraterin, TIROLER Versicherung</div>
+                    </div>
+                </div>
+                <div class="story-box__text">
+                    „Genau das ist unsere Stärke als regionale Versicherung: Wenn etwas passiert, sind unsere Sachverständigen schnell vor Ort. Kein langes Warten, kein Hin und Her. ‚Wir haltn zamm' – das ist unser Versprechen."
+                </div>
+            </div>
+
+            <h3 style="font-family: var(--font-heading); font-size: 1.15rem; margin: 32px 0 16px; color: var(--tiroler-green-dark);">
+                Typische Beratungsfragen
+            </h3>
+
+            <div class="md-card">
+                <ul class="md-list">
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon">help_outline</span>
+                        <span class="md-list__primary">Wie werden Nebengebäude oder Carports mitversichert?</span>
+                    </li>
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon">help_outline</span>
+                        <span class="md-list__primary">Was passiert bei grober Fahrlässigkeit?</span>
+                    </li>
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon">help_outline</span>
+                        <span class="md-list__primary">Wann greift der Schutz bei Mietausfällen?</span>
+                    </li>
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon">help_outline</span>
+                        <span class="md-list__primary">Sind smarte Haustechnikanlagen inkludiert?</span>
+                    </li>
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon">help_outline</span>
+                        <span class="md-list__primary">Wie hoch ist die maximale Erstattung pro Schadensfall?</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section-nav">
+                <button class="md-btn md-btn--outlined ripple" onclick="goToSection(4)">
+                    <span class="material-icons">arrow_back</span>
+                    Zurück
+                </button>
+                <button class="md-btn md-btn--filled ripple" onclick="goToSection(6)">
+                    Weiter: Beratungs-Checkliste
+                    <span class="material-icons">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================
+         SECTION 6: Checkliste Beratungsgespräch
+         ==================================================== -->
+    <div class="training-section" data-section="6">
+        <div class="container">
+            <div class="section-block">
+                <div class="section-chip">
+                    <span class="material-icons" style="font-size:0.85rem">checklist</span>
+                    Modul 6
+                </div>
+                <h2 class="section-title">Checkliste für das Beratungsgespräch</h2>
+                <p class="section-subtitle">Strukturierte Vorbereitung und Gesprächsführung für optimale Ergebnisse.</p>
+            </div>
+
+            <div class="story-box">
+                <div class="story-box__speaker">
+                    <div class="story-box__avatar story-box__avatar--advisor">SH</div>
+                    <div>
+                        <div class="story-box__name">Sandra Hofer</div>
+                        <div class="story-box__role">Beraterin, TIROLER Versicherung</div>
+                    </div>
+                </div>
+                <div class="story-box__text">
+                    „Herr Berger, lassen Sie uns gemeinsam Ihre Situation durchgehen. Mit unserer bewährten Checkliste stellen wir sicher, dass wir an alles denken."
+                </div>
+            </div>
+
+            <div class="md-card md-card--elevated">
+                <h3 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 16px; color: var(--tiroler-green-dark);">
+                    <span class="material-icons" style="vertical-align: -4px; margin-right: 6px; color: var(--tiroler-green);">assignment</span>
+                    Vorbereitung
+                </h3>
+                <ul class="checklist">
+                    <li class="checklist__item">
+                        <span class="material-icons checklist__icon checklist__icon--success">task_alt</span>
+                        Ermittlung des Gebäudewerts und individueller Risiken
+                    </li>
+                    <li class="checklist__item">
+                        <span class="material-icons checklist__icon checklist__icon--success">task_alt</span>
+                        Klärung der Hauptnutzung (privat/gewerblich, Anzahl Wohneinheiten)
+                    </li>
+                </ul>
+            </div>
+
+            <div class="md-card md-card--elevated">
+                <h3 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 16px; color: var(--tiroler-green-dark);">
+                    <span class="material-icons" style="vertical-align: -4px; margin-right: 6px; color: var(--tiroler-green);">forum</span>
+                    Kernfragen im Gespräch
+                </h3>
+                <ul class="md-list">
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon">chevron_right</span>
+                        <span>Welche Gefahren und Schäden sollen abgedeckt werden?</span>
+                    </li>
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon">chevron_right</span>
+                        <span>Gibt es spezielle Wünsche für optionale Bausteine (z.B. Photovoltaikschutz, Assistance)?</span>
+                    </li>
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon">chevron_right</span>
+                        <span>Sind Nebengebäude, Technik oder Vermietungsanteile zu berücksichtigen?</span>
+                    </li>
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon">chevron_right</span>
+                        <span>Wie hoch ist die gewünschte Selbstbeteiligung?</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="md-card md-card--elevated" style="border-left: 4px solid var(--tiroler-accent);">
+                <h3 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 16px; color: var(--tiroler-green-dark);">
+                    <span class="material-icons" style="vertical-align: -4px; margin-right: 6px; color: var(--tiroler-accent-dark);">campaign</span>
+                    Argumentationshilfen
+                </h3>
+                <ul class="md-list">
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon" style="color: var(--tiroler-accent-dark);">star</span>
+                        <div class="md-list__text">
+                            <div class="md-list__primary">Hoppala-Plus</div>
+                            <div class="md-list__secondary">Schützt vor typischen Missgeschicken im Alltag</div>
+                        </div>
+                    </li>
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon" style="color: var(--tiroler-accent-dark);">visibility</span>
+                        <div class="md-list__text">
+                            <div class="md-list__primary">Transparenz</div>
+                            <div class="md-list__secondary">Nachvollziehbare Höchstentschädigung</div>
+                        </div>
+                    </li>
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon" style="color: var(--tiroler-accent-dark);">tune</span>
+                        <div class="md-list__text">
+                            <div class="md-list__primary">Kombinierbarkeit</div>
+                            <div class="md-list__secondary">Flexible Anpassung des Versicherungsschutzes</div>
+                        </div>
+                    </li>
+                    <li class="md-list__item">
+                        <span class="material-icons md-list__icon" style="color: var(--tiroler-accent-dark);">place</span>
+                        <div class="md-list__text">
+                            <div class="md-list__primary">Regionale Verankerung</div>
+                            <div class="md-list__secondary">Kompetente Hilfe vor Ort durch die TIROLER</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="fact-box">
+                <span class="material-icons">priority_high</span>
+                <div class="fact-box__content">
+                    <div class="fact-box__title">Wichtige Hinweise</div>
+                    <ul style="margin-top:8px; padding-left: 20px; line-height: 1.8; color: #555;">
+                        <li>Individuelle Anpassungen und Beratung je nach Kundensituation</li>
+                        <li>Klare Kommunikation zu Prämien, Einschlüssen und Ausschlüssen</li>
+                        <li>Abschluss nicht ohne umfassende Risikoanalyse und Aufklärung</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="story-box">
+                <div class="story-box__speaker">
+                    <div class="story-box__avatar story-box__avatar--client">TB</div>
+                    <div>
+                        <div class="story-box__name">Thomas Berger</div>
+                        <div class="story-box__role">Eigenheimbesitzer</div>
+                    </div>
+                </div>
+                <div class="story-box__text">
+                    „Frau Hofer, ich bin beeindruckt! Das ist genau die Versicherung, die ich gesucht habe. ‚Fürs Haus mit Hoppala-Plus' plus den Technikschutz für meine PV-Anlage – das nehme ich! Und die 24h-Assistance klingt auch sehr beruhigend."
+                </div>
+            </div>
+
+            <div class="story-box">
+                <div class="story-box__speaker">
+                    <div class="story-box__avatar story-box__avatar--advisor">SH</div>
+                    <div>
+                        <div class="story-box__name">Sandra Hofer</div>
+                        <div class="story-box__role">Beraterin, TIROLER Versicherung</div>
+                    </div>
+                </div>
+                <div class="story-box__text">
+                    „Wunderbar, Herr Berger! Dann stellen wir Ihnen ein maßgeschneidertes Paket zusammen. Willkommen bei der TIROLER – wir haltn zamm!"
+                </div>
+            </div>
+
+            <div class="section-nav">
+                <button class="md-btn md-btn--outlined ripple" onclick="goToSection(5)">
+                    <span class="material-icons">arrow_back</span>
+                    Zurück
+                </button>
+                <button class="md-btn md-btn--filled ripple" onclick="goToSection(7)">
+                    Weiter zum Quiz
+                    <span class="material-icons">quiz</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================
+         SECTION 7: Quiz
+         ==================================================== -->
+    <div class="training-section" data-section="7">
+        <div class="container">
+            <div class="section-block">
+                <div class="section-chip">
+                    <span class="material-icons" style="font-size:0.85rem">quiz</span>
+                    Wissenstest
+                </div>
+                <h2 class="section-title">Quiz – Testen Sie Ihr Wissen</h2>
+                <p class="section-subtitle">8 Fragen zur TIROLER Wohnhausversicherung. Prüfen Sie, was hängen geblieben ist!</p>
+            </div>
+
+            <div id="quizContainer">
+                <!-- Questions are rendered by JS -->
+            </div>
+
+            <div id="quizResult" style="display:none;">
+                <div class="md-card md-card--elevated" style="text-align:center; padding: 48px 32px;">
+                    <div class="quiz-score">
+                        <span class="material-icons" style="font-size: 4rem; color: var(--tiroler-green);" id="resultIcon">emoji_events</span>
+                        <div class="quiz-score__number" id="scoreDisplay">0/8</div>
+                        <div class="quiz-score__label">Fragen richtig beantwortet</div>
+                        <div class="quiz-score__message" id="scoreMessage"></div>
+                    </div>
+                    <div class="btn-row" style="justify-content: center; margin-top: 24px;">
+                        <button class="md-btn md-btn--outlined ripple" onclick="resetQuiz()">
+                            <span class="material-icons">replay</span>
+                            Quiz wiederholen
+                        </button>
+                        <button class="md-btn md-btn--filled ripple" onclick="goToSection(8)">
+                            Zum Abschluss
+                            <span class="material-icons">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-nav" id="quizNav">
+                <button class="md-btn md-btn--outlined ripple" onclick="goToSection(6)">
+                    <span class="material-icons">arrow_back</span>
+                    Zurück zum Training
+                </button>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================
+         SECTION 8: Completion
+         ==================================================== -->
+    <div class="training-section" data-section="8">
+        <div class="container" style="padding-top: 48px; padding-bottom: 48px;">
+            <div class="completion-section">
+                <span class="material-icons">workspace_premium</span>
+                <h2>Herzlichen Glückwunsch!</h2>
+                <p>Sie haben diese Produktschulung zur TIROLER Wohnhausversicherung erfolgreich abgeschlossen. Sie verfügen jetzt über fundiertes Wissen und können als Profi für einen passgenauen und überzeugenden Versicherungsschutz mit Mehrwert sorgen.</p>
+            </div>
+
+            <div class="story-box" style="margin-top: 32px;">
+                <div class="story-box__speaker">
+                    <div class="story-box__avatar story-box__avatar--client">TB</div>
+                    <div>
+                        <div class="story-box__name">Thomas Berger</div>
+                        <div class="story-box__role">Zufriedener TIROLER-Kunde</div>
+                    </div>
+                </div>
+                <div class="story-box__text">
+                    „Danke, Frau Hofer! Jetzt fühle ich mich rundum abgesichert. Mein Haus, meine Photovoltaikanlage, sogar meine Heimwerker-Hoppalas – alles bestens geschützt. So kann ich beruhigt in die Zukunft blicken!"
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="sales-training.html" class="md-btn md-btn--filled md-btn--large ripple">
+                    <span class="material-icons">home</span>
+                    Zurück zur Übersicht
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="training-footer">
+        <p>TIROLER Wohnhausversicherung – Produktschulung | Erstellt mit imc Express</p>
+    </footer>
+
+    <!-- ====================================================
+         JavaScript
+         ==================================================== -->
+    <script>
+    (function() {
+        'use strict';
+
+        // ---- State ----
+        var currentSection = 0;
+        var totalSections = 9; // 0-8
+        var quizAnswered = {};
+        var quizScore = 0;
+
+        // ---- Quiz Data ----
+        var quizData = [
+            {
+                id: 1,
+                question: 'Welche Risiken deckt die Basisversicherung „Fürs Haus" ab?',
+                multi: false,
+                options: [
+                    { text: 'Feuer, Leitungswasser, Sturm/Naturgefahren, H.E.L.P. Alpin, Haftpflicht', correct: true },
+                    { text: 'Nur Feuer und Blitzschlag', correct: false },
+                    { text: 'Nur Wasserschäden', correct: false }
+                ]
+            },
+            {
+                id: 2,
+                question: 'Was ist der Zweck von „Hoppala-Plus"?',
+                multi: false,
+                options: [
+                    { text: 'Deckung von typischen Alltagsmissgeschicken wie kleine Unfälle oder Missgeschicke', correct: true },
+                    { text: 'Erhöht nur die Versicherungssumme', correct: false },
+                    { text: 'Gilt nur für Naturkatastrophen', correct: false }
+                ]
+            },
+            {
+                id: 3,
+                question: 'Welcher Baustein schützt smarte Haustechnikanlagen?',
+                multi: false,
+                options: [
+                    { text: 'Technikschutz (Haustechnik & Photovoltaik)', correct: true },
+                    { text: 'Mietverlustversicherung', correct: false },
+                    { text: 'Bauherrenhaftpflicht', correct: false }
+                ]
+            },
+            {
+                id: 4,
+                question: 'Was ist die Höchstentschädigungssumme?',
+                multi: false,
+                options: [
+                    { text: 'Der maximal auszahlbare Betrag im Schadensfall, bestehend aus Versicherungssumme plus Zuschlag', correct: true },
+                    { text: 'Die jährliche Prämienhöhe', correct: false },
+                    { text: 'Ein Rabatt auf die Selbstbeteiligung', correct: false }
+                ]
+            },
+            {
+                id: 5,
+                question: 'Wie kann der Gebäudewert ermittelt werden?',
+                hint: 'Mehrere Antworten sind möglich.',
+                multi: true,
+                options: [
+                    { text: 'Durch Schätzung des Kunden ohne weitere Angaben', correct: false },
+                    { text: 'Nach Bruttogeschossfläche und Anzahl der Geschosse', correct: true },
+                    { text: 'Durch einen qualifizierten Gutachter', correct: true },
+                    { text: 'Durch die freie Summenermittlung (ohne qualifizierte Bewertung, genehmigungspflichtig, mit Zuschlag)', correct: true }
+                ]
+            },
+            {
+                id: 6,
+                question: 'Wie wird grobe Fahrlässigkeit behandelt?',
+                multi: false,
+                options: [
+                    { text: 'Schäden durch grobe Fahrlässigkeit können vollumfänglich gedeckt werden', correct: true },
+                    { text: 'Grobe Fahrlässigkeit ist nie gedeckt', correct: false },
+                    { text: 'Grobe Fahrlässigkeit führt immer zu Leistungsausschluss', correct: false }
+                ]
+            },
+            {
+                id: 7,
+                question: 'Welcher Schadensfall ist durch „Hoppala-Plus" gedeckt?',
+                multi: false,
+                options: [
+                    { text: 'Schäden durch versehentlich beschädigte Leitungen beim Heimwerken', correct: true },
+                    { text: 'Lawinenschaden am Dach', correct: false },
+                    { text: 'Unfall mit dem Kfz auf öffentlicher Straße', correct: false }
+                ]
+            },
+            {
+                id: 8,
+                question: 'Wie wirkt sich die Wahl des Selbstbehalts auf die Prämie aus?',
+                hint: 'Mehrere Antworten sind möglich.',
+                multi: true,
+                options: [
+                    { text: 'Ein höherer Selbstbehalt senkt die Versicherungsprämie', correct: true },
+                    { text: 'Ein niedriger Selbstbehalt erhöht die Prämienzahlung', correct: true },
+                    { text: 'Die Selbstbeteiligung hat keinen Einfluss auf die Prämie', correct: false }
+                ]
+            }
+        ];
+
+        // ---- Step Indicator ----
+        function buildStepIndicator() {
+            var container = document.getElementById('stepIndicator');
+            container.innerHTML = '';
+            for (var i = 0; i < totalSections; i++) {
+                var dot = document.createElement('div');
+                dot.className = 'step-dot';
+                if (i === currentSection) dot.className += ' active';
+                else if (i < currentSection) dot.className += ' completed';
+                dot.setAttribute('data-step', i);
+                dot.addEventListener('click', (function(step) {
+                    return function() { goToSection(step); };
+                })(i));
+                container.appendChild(dot);
+            }
+        }
+
+        // ---- Progress Bar ----
+        function updateProgress() {
+            var pct = (currentSection / (totalSections - 1)) * 100;
+            document.getElementById('progressBar').style.width = pct + '%';
+        }
+
+        // ---- Navigation ----
+        window.goToSection = function(index) {
+            if (index < 0 || index >= totalSections) return;
+            var sections = document.querySelectorAll('.training-section');
+            sections.forEach(function(s) { s.classList.remove('active'); });
+            var target = document.querySelector('[data-section="' + index + '"]');
+            if (target) {
+                target.classList.add('active');
+                currentSection = index;
+                updateProgress();
+                buildStepIndicator();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        };
+
+        // ---- Expansion Panels ----
+        window.togglePanel = function(panel) {
+            panel.classList.toggle('open');
+        };
+
+        // ---- Quiz ----
+        function buildQuiz() {
+            var container = document.getElementById('quizContainer');
+            container.innerHTML = '';
+            quizData.forEach(function(q, qi) {
+                var div = document.createElement('div');
+                div.className = 'quiz-question' + (qi === 0 ? ' active' : '');
+                div.id = 'q' + q.id;
+
+                var numberHtml = '<div class="quiz-question__number"><span class="material-icons" style="font-size:1rem;">quiz</span> Frage ' + q.id + ' von ' + quizData.length + '</div>';
+                var textHtml = '<div class="quiz-question__text">' + q.question + '</div>';
+                var hintHtml = q.hint ? '<div class="quiz-question__hint">' + q.hint + '</div>' : '';
+
+                var optionsHtml = '';
+                q.options.forEach(function(opt, oi) {
+                    var markerClass = q.multi ? ' quiz-option__marker--multi' : '';
+                    optionsHtml += '<div class="quiz-option" data-question="' + qi + '" data-option="' + oi + '" onclick="selectOption(this,' + qi + ',' + oi + ',' + q.multi + ')">' +
+                        '<div class="quiz-option__marker' + markerClass + '"></div>' +
+                        '<div class="quiz-option__text">' + opt.text + '</div>' +
+                        '</div>';
+                });
+
+                var feedbackHtml = '<div class="quiz-feedback" id="feedback' + q.id + '"></div>';
+
+                var btnHtml = '<div class="btn-row" style="justify-content:flex-end;">';
+                btnHtml += '<button class="md-btn md-btn--tonal ripple" id="checkBtn' + q.id + '" onclick="checkAnswer(' + qi + ')" disabled>Antwort prüfen</button>';
+                if (qi < quizData.length - 1) {
+                    btnHtml += '<button class="md-btn md-btn--filled ripple" id="nextBtn' + q.id + '" onclick="nextQuestion(' + qi + ')" style="display:none">Nächste Frage <span class="material-icons" style="font-size:1rem">arrow_forward</span></button>';
+                } else {
+                    btnHtml += '<button class="md-btn md-btn--filled ripple" id="nextBtn' + q.id + '" onclick="showResult()" style="display:none">Ergebnis anzeigen <span class="material-icons" style="font-size:1rem">assessment</span></button>';
+                }
+                btnHtml += '</div>';
+
+                div.innerHTML = numberHtml + textHtml + hintHtml + optionsHtml + feedbackHtml + btnHtml;
+                container.appendChild(div);
+            });
+        }
+
+        window.selectOption = function(el, qi, oi, multi) {
+            if (quizAnswered[qi]) return;
+            var qDiv = el.closest('.quiz-question');
+            if (!multi) {
+                qDiv.querySelectorAll('.quiz-option').forEach(function(o) { o.classList.remove('selected'); });
+            }
+            el.classList.toggle('selected');
+
+            var hasSelection = qDiv.querySelectorAll('.quiz-option.selected').length > 0;
+            var checkBtn = document.getElementById('checkBtn' + quizData[qi].id);
+            checkBtn.disabled = !hasSelection;
+        };
+
+        window.checkAnswer = function(qi) {
+            if (quizAnswered[qi]) return;
+            quizAnswered[qi] = true;
+            var q = quizData[qi];
+            var qDiv = document.getElementById('q' + q.id);
+            var options = qDiv.querySelectorAll('.quiz-option');
+            var allCorrect = true;
+
+            options.forEach(function(opt, oi) {
+                var isSelected = opt.classList.contains('selected');
+                var isCorrect = q.options[oi].correct;
+                opt.style.pointerEvents = 'none';
+
+                if (isCorrect) {
+                    opt.classList.add('correct');
+                    opt.querySelector('.quiz-option__marker').innerHTML = '<span class="material-icons" style="font-size:0.9rem">check</span>';
+                }
+                if (isSelected && !isCorrect) {
+                    opt.classList.add('incorrect');
+                    opt.querySelector('.quiz-option__marker').innerHTML = '<span class="material-icons" style="font-size:0.9rem">close</span>';
+                    allCorrect = false;
+                }
+                if (!isSelected && isCorrect) {
+                    allCorrect = false;
+                }
+            });
+
+            if (allCorrect) quizScore++;
+
+            var feedback = document.getElementById('feedback' + q.id);
+            if (allCorrect) {
+                feedback.className = 'quiz-feedback quiz-feedback--correct show';
+                feedback.innerHTML = '<span class="material-icons">check_circle</span><span>Richtig! Sehr gut.</span>';
+            } else {
+                feedback.className = 'quiz-feedback quiz-feedback--incorrect show';
+                feedback.innerHTML = '<span class="material-icons">cancel</span><span>Leider nicht ganz richtig. Die korrekte Antwort ist grün markiert.</span>';
+            }
+
+            document.getElementById('checkBtn' + q.id).style.display = 'none';
+            document.getElementById('nextBtn' + q.id).style.display = '';
+        };
+
+        window.nextQuestion = function(qi) {
+            var questions = document.querySelectorAll('.quiz-question');
+            questions.forEach(function(q) { q.classList.remove('active'); });
+            if (qi + 1 < quizData.length) {
+                questions[qi + 1].classList.add('active');
+            }
+        };
+
+        window.showResult = function() {
+            document.querySelectorAll('.quiz-question').forEach(function(q) { q.style.display = 'none'; });
+            document.getElementById('quizNav').style.display = 'none';
+
+            var resultDiv = document.getElementById('quizResult');
+            resultDiv.style.display = 'block';
+            document.getElementById('scoreDisplay').textContent = quizScore + '/' + quizData.length;
+
+            var icon = document.getElementById('resultIcon');
+            var msg = document.getElementById('scoreMessage');
+            var pct = quizScore / quizData.length;
+
+            if (pct >= 0.875) {
+                icon.textContent = 'emoji_events';
+                icon.style.color = '#FFD700';
+                msg.innerHTML = 'Ausgezeichnet! Sie sind bestens vorbereitet für die Beratung zur TIROLER Wohnhausversicherung.';
+            } else if (pct >= 0.625) {
+                icon.textContent = 'thumb_up';
+                icon.style.color = 'var(--tiroler-green)';
+                msg.innerHTML = 'Gut gemacht! Sie haben ein solides Verständnis der Wohnhausversicherung.';
+            } else {
+                icon.textContent = 'menu_book';
+                icon.style.color = 'var(--md-warning)';
+                msg.innerHTML = 'Wir empfehlen, das Training noch einmal durchzugehen, um Ihr Wissen zu festigen.';
+            }
+        };
+
+        window.resetQuiz = function() {
+            quizAnswered = {};
+            quizScore = 0;
+            document.getElementById('quizResult').style.display = 'none';
+            document.getElementById('quizNav').style.display = '';
+            buildQuiz();
+        };
+
+        // ---- Init ----
+        buildStepIndicator();
+        updateProgress();
+        buildQuiz();
+    })();
+    </script>
+</body>
+</html>
