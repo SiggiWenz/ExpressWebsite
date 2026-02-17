@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Express Sales Training - Interaktive Vertriebsschulungen für Versicherungsprodukte. Erstellt mit imc Express.">
+    <title>Express Sales Training | Interaktive Vertriebsschulungen</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Sales Training - Custom Styles */
+        .st-hero {
+            background: linear-gradient(135deg, #1A1A2E 0%, #2D2D44 60%, #3D3D5C 100%);
+            padding: 120px 0 80px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .st-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,107,53,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .st-hero h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            line-height: 1.2;
+            position: relative;
+        }
+        .st-hero p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.75);
+            max-width: 650px;
+            margin: 0 auto 32px;
+            line-height: 1.7;
+            position: relative;
+        }
+        .st-hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-top: 40px;
+            position: relative;
+        }
+        .st-hero-stat {
+            text-align: center;
+        }
+        .st-hero-stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #FF6B35;
+        }
+        .st-hero-stat-label {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 4px;
+        }
+
+        /* Training Tiles Grid */
+        .st-grid-section {
+            padding: 80px 0;
+            background: #F4F4F8;
+        }
+        .st-section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .st-section-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1A1A2E;
+            margin-bottom: 12px;
+        }
+        .st-section-header p {
+            font-size: 1.05rem;
+            color: #6B6B8D;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .st-tiles {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .st-tile {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+        }
+        .st-tile:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+        }
+        .st-tile--featured {
+            border: 2px solid #FF6B35;
+        }
+        .st-tile--featured::after {
+            content: 'NEU';
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #FF6B35;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 12px;
+            letter-spacing: 0.05em;
+        }
+        .st-tile--disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .st-tile__visual {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .st-tile__icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        .st-tile__icon svg {
+            width: 32px;
+            height: 32px;
+        }
+        .st-tile__body {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .st-tile__category {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+        }
+        .st-tile__title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1A1A2E;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        .st-tile__description {
+            font-size: 0.9rem;
+            color: #6B6B8D;
+            line-height: 1.6;
+            flex: 1;
+        }
+        .st-tile__meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 24px;
+            border-top: 1px solid #E8E8EF;
+            font-size: 0.8rem;
+            color: #8E8EA9;
+        }
+        .st-tile__meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .st-tile__meta-item svg {
+            width: 16px;
+            height: 16px;
+            opacity: 0.7;
+        }
+
+        /* Color themes for tile visuals */
+        .st-visual--green {
+            background: linear-gradient(135deg, #006835, #00894a);
+        }
+        .st-visual--green .st-tile__icon {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+        }
+        .st-visual--orange {
+            background: linear-gradient(135deg, #E55A2B, #FF8A5C);
+        }
+        .st-visual--orange .st-tile__icon {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+        }
+        .st-visual--blue {
+            background: linear-gradient(135deg, #1565C0, #42A5F5);
+        }
+        .st-visual--blue .st-tile__icon {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+        }
+        .st-visual--purple {
+            background: linear-gradient(135deg, #6A1B9A, #AB47BC);
+        }
+        .st-visual--purple .st-tile__icon {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+        }
+        .st-visual--teal {
+            background: linear-gradient(135deg, #00695C, #26A69A);
+        }
+        .st-visual--teal .st-tile__icon {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+        }
+        .st-visual--gray {
+            background: linear-gradient(135deg, #616161, #9E9E9E);
+        }
+        .st-visual--gray .st-tile__icon {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+        }
+
+        .st-tile__category--green { color: #006835; }
+        .st-tile__category--orange { color: #E55A2B; }
+        .st-tile__category--blue { color: #1565C0; }
+        .st-tile__category--purple { color: #6A1B9A; }
+        .st-tile__category--teal { color: #00695C; }
+        .st-tile__category--gray { color: #616161; }
+
+        /* Coming soon overlay */
+        .st-tile--coming-soon .st-tile__visual::after {
+            content: 'Demnächst verfügbar';
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 12px;
+            white-space: nowrap;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .st-tiles { grid-template-columns: repeat(2, 1fr); }
+            .st-hero h1 { font-size: 2rem; }
+        }
+        @media (max-width: 600px) {
+            .st-tiles { grid-template-columns: 1fr; }
+            .st-hero { padding: 80px 0 60px; }
+            .st-hero h1 { font-size: 1.75rem; }
+            .st-hero-stats { gap: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="imc-express-logo-horizontal-main-logo.svg" alt="imc Express" class="logo-img">
+            </a>
+            <button class="nav-toggle" aria-label="Navigation umschalten">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li class="nav-dropdown">
+                    <a href="features.html" class="nav-dropdown-toggle">Produkt <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="erste-schritte.html">Erste Schritte</a></li>
+                        <li><a href="airis.html">Airis (KI)</a></li>
+                        <li><a href="kurs-vorlagen.html">Kurs Vorlagen</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="vorteile.html" class="nav-dropdown-toggle">Vorteile <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="vorteile.html">Vorteile</a></li>
+                        <li><a href="airis.html">KI (Airis)</a></li>
+                        <li><a href="tool-vergleich.html">Tool Vergleich</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="referenzen.html" class="nav-dropdown-toggle">Referenzen <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="referenzen-ueberblick.html">Überblick</a></li>
+                        <li><a href="referenzen.html">Referenzen</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="preise.html" class="nav-dropdown-toggle">Preise <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="preise.html">Preise</a></li>
+                        <li><a href="roi-kalkulator.html">ROI Kalkulator</a></li>
+                    </ul>
+                </li>
+                <li><a href="kontakt.html" class="btn btn-nav">Demo anfragen</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="st-hero">
+        <div class="container">
+            <span class="section-badge" style="background: rgba(255,107,53,0.2); color: #FF8A5C;">Sales Training</span>
+            <h1>Express Sales Training<span class="highlight">_</span></h1>
+            <p>Interaktive Vertriebsschulungen für Versicherungsprodukte – erstellt mit imc Express. Praxisnah, modular und jederzeit verfügbar.</p>
+            <div class="st-hero-stats">
+                <div class="st-hero-stat">
+                    <span class="st-hero-stat-number">6</span>
+                    <span class="st-hero-stat-label">Trainingsmodule</span>
+                </div>
+                <div class="st-hero-stat">
+                    <span class="st-hero-stat-number">100%</span>
+                    <span class="st-hero-stat-label">Interaktiv</span>
+                </div>
+                <div class="st-hero-stat">
+                    <span class="st-hero-stat-number">8</span>
+                    <span class="st-hero-stat-label">Quizfragen</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Training Tiles -->
+    <section class="st-grid-section">
+        <div class="st-section-header">
+            <h2>Trainingsmodule</h2>
+            <p>Wählen Sie ein Modul, um das interaktive Training zu starten.</p>
+        </div>
+        <div class="st-tiles">
+
+            <!-- Tile 1: Produktwissen -->
+            <a class="st-tile st-tile--coming-soon st-tile--disabled" href="#">
+                <div class="st-tile__visual st-visual--blue">
+                    <div class="st-tile__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    </div>
+                </div>
+                <div class="st-tile__body">
+                    <div class="st-tile__category st-tile__category--blue">Grundlagen</div>
+                    <div class="st-tile__title">Produktwissen kompakt</div>
+                    <div class="st-tile__description">Überblick zu den wichtigsten Versicherungsprodukten und deren Leistungsmerkmalen.</div>
+                </div>
+                <div class="st-tile__meta">
+                    <span class="st-tile__meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        ca. 20 Min.
+                    </span>
+                    <span class="st-tile__meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        Interaktiv
+                    </span>
+                </div>
+            </a>
+
+            <!-- Tile 2: Bedarfsanalyse -->
+            <a class="st-tile st-tile--coming-soon st-tile--disabled" href="#">
+                <div class="st-tile__visual st-visual--purple">
+                    <div class="st-tile__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    </div>
+                </div>
+                <div class="st-tile__body">
+                    <div class="st-tile__category st-tile__category--purple">Gesprächsführung</div>
+                    <div class="st-tile__title">Bedarfsanalyse</div>
+                    <div class="st-tile__description">Methoden zur systematischen Ermittlung des Versicherungsbedarfs Ihrer Kund:innen.</div>
+                </div>
+                <div class="st-tile__meta">
+                    <span class="st-tile__meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        ca. 15 Min.
+                    </span>
+                    <span class="st-tile__meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        Interaktiv
+                    </span>
+                </div>
+            </a>
+
+            <!-- Tile 3: Rollenspiel-Szenarien (FEATURED - links to training) -->
+            <a class="st-tile st-tile--featured" href="training-wohnhaus.html">
+                <div class="st-tile__visual st-visual--green">
+                    <div class="st-tile__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                </div>
+                <div class="st-tile__body">
+                    <div class="st-tile__category st-tile__category--green">Praxistraining</div>
+                    <div class="st-tile__title">Rollenspiel-Szenarien</div>
+                    <div class="st-tile__description">TIROLER Wohnhausversicherung: Begleiten Sie einen Klienten bei der Suche nach dem idealen Versicherungsschutz für sein Eigenheim.</div>
+                </div>
+                <div class="st-tile__meta">
+                    <span class="st-tile__meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        ca. 25 Min.
+                    </span>
+                    <span class="st-tile__meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        Interaktiv + Quiz
+                    </span>
+                </div>
+            </a>
+
+            <!-- Tile 4: Einwandbehandlung -->
+            <a class="st-tile st-tile--coming-soon st-tile--disabled" href="#">
+                <div class="st-tile__visual st-visual--orange">
+                    <div class="st-tile__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                </div>
+                <div class="st-tile__body">
+                    <div class="st-tile__category st-tile__category--orange">Vertriebstechnik</div>
+                    <div class="st-tile__title">Einwandbehandlung</div>
+                    <div class="st-tile__description">Typische Kundeneinwände erkennen und souverän mit passenden Argumenten begegnen.</div>
+                </div>
+                <div class="st-tile__meta">
+                    <span class="st-tile__meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        ca. 15 Min.
+                    </span>
+                    <span class="st-tile__meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        Interaktiv
+                    </span>
+                </div>
+            </a>
+
+            <!-- Tile 5: Schadensfälle -->
+            <a class="st-tile st-tile--coming-soon st-tile--disabled" href="#">
+                <div class="st-tile__visual st-visual--teal">
+                    <div class="st-tile__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    </div>
+                </div>
+                <div class="st-tile__body">
+                    <div class="st-tile__category st-tile__category--teal">Fallstudien</div>
+                    <div class="st-tile__title">Schadensfälle in der Praxis</div>
+                    <div class="st-tile__description">Anhand realer Beispiele die korrekte Schadensabwicklung und Kundenkommunikation üben.</div>
+                </div>
+                <div class="st-tile__meta">
+                    <span class="st-tile__meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        ca. 20 Min.
+                    </span>
+                    <span class="st-tile__meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        Interaktiv
+                    </span>
+                </div>
+            </a>
+
+            <!-- Tile 6: Abschlusstechniken -->
+            <a class="st-tile st-tile--coming-soon st-tile--disabled" href="#">
+                <div class="st-tile__visual st-visual--gray">
+                    <div class="st-tile__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                </div>
+                <div class="st-tile__body">
+                    <div class="st-tile__category st-tile__category--gray">Abschluss</div>
+                    <div class="st-tile__title">Abschlusstechniken</div>
+                    <div class="st-tile__description">Beratungsgespräche zielorientiert führen und den Abschluss professionell gestalten.</div>
+                </div>
+                <div class="st-tile__meta">
+                    <span class="st-tile__meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        ca. 15 Min.
+                    </span>
+                    <span class="st-tile__meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        Interaktiv
+                    </span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Eigene Vertriebsschulungen erstellen?</h2>
+            <p>Mit imc Express erstellen Sie interaktive E-Learnings wie dieses in wenigen Stunden – ohne Programmierkenntnisse.</p>
+            <div class="cta-buttons">
+                <a href="kontakt.html" class="btn btn-primary btn-large">Kostenlose Demo</a>
+                <a href="features.html" class="btn btn-secondary btn-large">Features entdecken</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="imc-express-logo-horizontal-white.svg" alt="imc Express" class="footer-logo">
+                    <p>Die intuitive E-Learning Autorensoftware.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Produkt</h4>
+                    <ul>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="preise.html">Preise</a></li>
+                        <li><a href="kurs-vorlagen.html">Kurs Vorlagen</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Ressourcen</h4>
+                    <ul>
+                        <li><a href="erste-schritte.html">Erste Schritte</a></li>
+                        <li><a href="sales-training.html">Sales Training</a></li>
+                        <li><a href="tool-vergleich.html">Tool Vergleich</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Unternehmen</h4>
+                    <ul>
+                        <li><a href="referenzen.html">Referenzen</a></li>
+                        <li><a href="kontakt.html">Kontakt</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 imc AG. Alle Rechte vorbehalten. | Erstellt mit imc Express</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
