@@ -309,12 +309,125 @@
             margin: 0 auto;
         }
 
+        /* Tacho / Speedometer Section */
+        .tacho-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, #EEEDF5 0%, #F4F4F8 100%);
+        }
+        .tacho-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 36px;
+        }
+        .tacho-gauge-container {
+            position: relative;
+            width: 380px;
+            height: 220px;
+        }
+        .tacho-svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+        .tacho-needle {
+            transform-origin: 190px 190px;
+            transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .tacho-value-display {
+            text-align: center;
+            margin-top: -10px;
+        }
+        .tacho-value-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #1A1A2E;
+            line-height: 1;
+        }
+        .tacho-value-label {
+            font-size: 0.95rem;
+            color: #6B6B8D;
+            margin-top: 4px;
+        }
+        .tacho-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+        .tacho-btn {
+            position: relative;
+            padding: 14px 24px;
+            border: 2px solid #E8E8EF;
+            background: #fff;
+            border-radius: 14px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1A1A2E;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            min-width: 130px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .tacho-btn:hover {
+            border-color: #AB47BC;
+            background: rgba(106,27,154,0.04);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(106,27,154,0.12);
+        }
+        .tacho-btn.active {
+            border-color: #6A1B9A;
+            background: linear-gradient(135deg, #6A1B9A, #AB47BC);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(106,27,154,0.25);
+        }
+        .tacho-btn-amount {
+            display: block;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+        .tacho-btn-discount {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 500;
+            opacity: 0.75;
+            margin-top: 2px;
+        }
+        .tacho-info {
+            max-width: 600px;
+            text-align: center;
+            background: #fff;
+            border-radius: 16px;
+            padding: 28px 32px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            border: 1px solid #E8E8EF;
+        }
+        .tacho-info h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1A1A2E;
+            margin-bottom: 10px;
+        }
+        .tacho-info p {
+            font-size: 0.92rem;
+            color: #6B6B8D;
+            line-height: 1.7;
+            margin: 0;
+        }
+
         /* Responsive */
         @media (max-width: 900px) {
             .ie-hero h1 { font-size: 2rem; }
             .tl-section { padding: 60px 0; }
             .tl-chart { padding: 10px 16px; }
             .ie-nav { top: 60px; }
+            .tacho-section { padding: 60px 0; }
+            .tacho-gauge-container { width: 320px; height: 190px; }
         }
         @media (max-width: 600px) {
             .ie-hero { padding: 80px 0 48px; }
@@ -327,6 +440,12 @@
             .ie-nav { top: 56px; }
             .ie-nav-label { display: none; }
             .ie-nav-link { padding: 12px 14px; font-size: 0.82rem; }
+            .tacho-section { padding: 48px 0; }
+            .tacho-gauge-container { width: 280px; height: 170px; }
+            .tacho-value-number { font-size: 2.2rem; }
+            .tacho-btn { min-width: 110px; padding: 12px 16px; font-size: 0.85rem; }
+            .tacho-btn-amount { font-size: 0.95rem; }
+            .tacho-info { padding: 20px 20px; }
         }
     </style>
 </head>
@@ -395,6 +514,10 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 Zeitstrahl
             </a>
+            <a href="#tacho" class="ie-nav-link" data-section="tacho">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 6v2"/><path d="M6.93 8.93l1.41 1.41"/><path d="M6 14h2"/><path d="M14.12 9.88l3.54-3.54"/></svg>
+                Tacho
+            </a>
             <!-- Weitere Elemente können hier ergänzt werden -->
         </div>
     </nav>
@@ -408,6 +531,55 @@
                 <p>Von Sputnik bis SpaceX - klicken Sie auf einen Meilenstein, um mehr zu erfahren.</p>
             </div>
             <div id="timeline-chart" class="tl-chart"></div>
+        </div>
+    </section>
+
+    <!-- Tacho Section -->
+    <section id="tacho" class="tacho-section">
+        <div class="container">
+            <div class="ie-section-header">
+                <span class="section-badge" style="background: rgba(106,27,154,0.15); color: #AB47BC;">Versicherung</span>
+                <h2>Staffelung von Selbstbehalt und Nachlass<span class="highlight">_</span></h2>
+                <p>Klicken Sie auf einen Selbstbehalt, um den zugehörigen Nachlass im Tacho zu sehen.</p>
+            </div>
+            <div class="tacho-wrapper">
+                <!-- Speedometer Gauge -->
+                <div class="tacho-gauge-container">
+                    <svg class="tacho-svg" viewBox="0 0 380 220" id="tacho-svg"></svg>
+                </div>
+                <div class="tacho-value-display">
+                    <div class="tacho-value-number" id="tacho-value">0%</div>
+                    <div class="tacho-value-label" id="tacho-label">Wählen Sie einen Selbstbehalt</div>
+                </div>
+                <!-- Buttons -->
+                <div class="tacho-buttons" id="tacho-buttons">
+                    <button class="tacho-btn" data-amount="500" data-discount="10">
+                        <span class="tacho-btn-amount">€ 500,-</span>
+                        <span class="tacho-btn-discount">10% Nachlass</span>
+                    </button>
+                    <button class="tacho-btn" data-amount="1000" data-discount="20">
+                        <span class="tacho-btn-amount">€ 1.000,-</span>
+                        <span class="tacho-btn-discount">20% Nachlass</span>
+                    </button>
+                    <button class="tacho-btn" data-amount="3000" data-discount="40">
+                        <span class="tacho-btn-amount">€ 3.000,-</span>
+                        <span class="tacho-btn-discount">40% Nachlass</span>
+                    </button>
+                    <button class="tacho-btn" data-amount="5000" data-discount="50">
+                        <span class="tacho-btn-amount">€ 5.000,-</span>
+                        <span class="tacho-btn-discount">50% Nachlass</span>
+                    </button>
+                    <button class="tacho-btn" data-amount="10000" data-discount="60">
+                        <span class="tacho-btn-amount">€ 10.000,-</span>
+                        <span class="tacho-btn-discount">60% Nachlass</span>
+                    </button>
+                </div>
+                <!-- Info Box -->
+                <div class="tacho-info">
+                    <h3>So funktioniert der Selbstbehalt</h3>
+                    <p>Die Nachlässe sind gestaffelt nach der Höhe des gewählten Selbstbehalts pro Schadenfall. Je höher der gewählte Selbstbehalt, desto größer ist der gewährte Nachlass auf den Versicherungsbeitrag.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -821,6 +993,273 @@
                     var targetPos = target.offsetTop - navHeight;
                     window.scrollTo({ top: targetPos, behavior: 'smooth' });
                 }
+            });
+        });
+    })();
+    </script>
+
+    <!-- Tacho / Speedometer Script -->
+    <script>
+    (function() {
+        var svg = document.getElementById('tacho-svg');
+        if (!svg) return;
+
+        var centerX = 190;
+        var centerY = 190;
+        var radius = 150;
+        var startAngle = -210;  // degrees (left side)
+        var endAngle = 30;      // degrees (right side)
+        var totalSweep = endAngle - startAngle; // 240 degrees
+
+        // Helper: degrees to radians
+        function degToRad(deg) {
+            return deg * Math.PI / 180;
+        }
+
+        // Helper: polar to cartesian
+        function polarToCartesian(cx, cy, r, angleDeg) {
+            var rad = degToRad(angleDeg);
+            return {
+                x: cx + r * Math.cos(rad),
+                y: cy + r * Math.sin(rad)
+            };
+        }
+
+        // Helper: SVG arc path
+        function describeArc(cx, cy, r, startDeg, endDeg) {
+            var start = polarToCartesian(cx, cy, r, endDeg);
+            var end = polarToCartesian(cx, cy, r, startDeg);
+            var largeArc = (endDeg - startDeg) > 180 ? 1 : 0;
+            return 'M ' + start.x + ' ' + start.y +
+                   ' A ' + r + ' ' + r + ' 0 ' + largeArc + ' 0 ' + end.x + ' ' + end.y;
+        }
+
+        // Create SVG namespace helper
+        function svgEl(tag, attrs) {
+            var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+            if (attrs) {
+                for (var key in attrs) {
+                    el.setAttribute(key, attrs[key]);
+                }
+            }
+            return el;
+        }
+
+        // -- Build the gauge --
+
+        // Defs for gradients
+        var defs = svgEl('defs');
+
+        // Arc gradient
+        var grad = svgEl('linearGradient', { id: 'tacho-arc-grad', x1: '0%', y1: '0%', x2: '100%', y2: '0%' });
+        var stop1 = svgEl('stop', { offset: '0%', 'stop-color': '#4CAF50' });
+        var stop2 = svgEl('stop', { offset: '40%', 'stop-color': '#FF9800' });
+        var stop3 = svgEl('stop', { offset: '100%', 'stop-color': '#F44336' });
+        grad.appendChild(stop1);
+        grad.appendChild(stop2);
+        grad.appendChild(stop3);
+        defs.appendChild(grad);
+
+        // Needle gradient
+        var needleGrad = svgEl('linearGradient', { id: 'tacho-needle-grad', x1: '0%', y1: '0%', x2: '0%', y2: '100%' });
+        var ns1 = svgEl('stop', { offset: '0%', 'stop-color': '#D32F2F' });
+        var ns2 = svgEl('stop', { offset: '100%', 'stop-color': '#B71C1C' });
+        needleGrad.appendChild(ns1);
+        needleGrad.appendChild(ns2);
+        defs.appendChild(needleGrad);
+
+        // Drop shadow filter
+        var filter = svgEl('filter', { id: 'tacho-shadow', x: '-20%', y: '-20%', width: '140%', height: '140%' });
+        var feGaussian = svgEl('feGaussianBlur', { 'in': 'SourceAlpha', stdDeviation: '3' });
+        var feOffset = svgEl('feOffset', { dx: '0', dy: '2', result: 'offsetblur' });
+        var feFlood = svgEl('feFlood', { 'flood-color': 'rgba(0,0,0,0.15)' });
+        var feComposite = svgEl('feComposite', { in2: 'offsetblur', operator: 'in' });
+        var feMerge = svgEl('feMerge');
+        var feMergeNode1 = svgEl('feMergeNode');
+        var feMergeNode2 = svgEl('feMergeNode', { 'in': 'SourceGraphic' });
+        feMerge.appendChild(feMergeNode1);
+        feMerge.appendChild(feMergeNode2);
+        filter.appendChild(feGaussian);
+        filter.appendChild(feOffset);
+        filter.appendChild(feFlood);
+        filter.appendChild(feComposite);
+        filter.appendChild(feMerge);
+        defs.appendChild(filter);
+
+        svg.appendChild(defs);
+
+        // Background arc (gray track)
+        var bgArc = svgEl('path', {
+            d: describeArc(centerX, centerY, radius, startAngle, endAngle),
+            fill: 'none',
+            stroke: '#E0E0E0',
+            'stroke-width': '20',
+            'stroke-linecap': 'round'
+        });
+        svg.appendChild(bgArc);
+
+        // Colored arc
+        var colorArc = svgEl('path', {
+            d: describeArc(centerX, centerY, radius, startAngle, endAngle),
+            fill: 'none',
+            stroke: 'url(#tacho-arc-grad)',
+            'stroke-width': '20',
+            'stroke-linecap': 'round',
+            opacity: '0.85'
+        });
+        svg.appendChild(colorArc);
+
+        // Tick marks and labels
+        var tickValues = [0, 10, 20, 30, 40, 50, 60];
+        tickValues.forEach(function(val) {
+            var fraction = val / 60;
+            var angle = startAngle + fraction * totalSweep;
+            var outerPoint = polarToCartesian(centerX, centerY, radius + 14, angle);
+            var innerPoint = polarToCartesian(centerX, centerY, radius - 14, angle);
+            var labelPoint = polarToCartesian(centerX, centerY, radius - 36, angle);
+
+            // Major tick
+            var tick = svgEl('line', {
+                x1: outerPoint.x,
+                y1: outerPoint.y,
+                x2: innerPoint.x,
+                y2: innerPoint.y,
+                stroke: '#1A1A2E',
+                'stroke-width': '2.5',
+                'stroke-linecap': 'round'
+            });
+            svg.appendChild(tick);
+
+            // Label
+            var label = svgEl('text', {
+                x: labelPoint.x,
+                y: labelPoint.y,
+                'text-anchor': 'middle',
+                'dominant-baseline': 'central',
+                fill: '#1A1A2E',
+                'font-size': '13',
+                'font-weight': '700',
+                'font-family': 'Inter, sans-serif'
+            });
+            label.textContent = val + '%';
+            svg.appendChild(label);
+        });
+
+        // Minor ticks (every 5%)
+        for (var v = 0; v <= 60; v += 5) {
+            if (v % 10 === 0) continue; // skip major ticks
+            var frac = v / 60;
+            var ang = startAngle + frac * totalSweep;
+            var outerP = polarToCartesian(centerX, centerY, radius + 8, ang);
+            var innerP = polarToCartesian(centerX, centerY, radius - 8, ang);
+            var minorTick = svgEl('line', {
+                x1: outerP.x,
+                y1: outerP.y,
+                x2: innerP.x,
+                y2: innerP.y,
+                stroke: '#9E9E9E',
+                'stroke-width': '1.5',
+                'stroke-linecap': 'round'
+            });
+            svg.appendChild(minorTick);
+        }
+
+        // Needle group
+        var needleGroup = svgEl('g', {
+            'class': 'tacho-needle',
+            filter: 'url(#tacho-shadow)'
+        });
+
+        // Needle shape (triangle)
+        var needle = svgEl('polygon', {
+            points: (centerX) + ',' + (centerY - radius + 25) + ' ' +
+                    (centerX - 5) + ',' + (centerY) + ' ' +
+                    (centerX + 5) + ',' + (centerY),
+            fill: 'url(#tacho-needle-grad)'
+        });
+        needleGroup.appendChild(needle);
+
+        // Needle center cap (outer)
+        var capOuter = svgEl('circle', {
+            cx: centerX,
+            cy: centerY,
+            r: '14',
+            fill: '#2D2D44'
+        });
+        needleGroup.appendChild(capOuter);
+
+        // Needle center cap (inner)
+        var capInner = svgEl('circle', {
+            cx: centerX,
+            cy: centerY,
+            r: '8',
+            fill: '#6A1B9A'
+        });
+        needleGroup.appendChild(capInner);
+
+        svg.appendChild(needleGroup);
+
+        // Set initial needle position (0%)
+        var initialAngle = startAngle + 90; // CSS rotation offset
+        needleGroup.style.transform = 'rotate(' + initialAngle + 'deg)';
+
+        // Current state
+        var currentDiscount = 0;
+
+        // Animate needle to a given percentage (0-60)
+        function setNeedleToValue(percent) {
+            var fraction = percent / 60;
+            var targetAngle = startAngle + fraction * totalSweep + 90; // +90 CSS offset
+            needleGroup.style.transform = 'rotate(' + targetAngle + 'deg)';
+            currentDiscount = percent;
+
+            // Animate number counter
+            animateValue(percent);
+        }
+
+        // Animate the displayed number
+        var valueEl = document.getElementById('tacho-value');
+        var labelEl = document.getElementById('tacho-label');
+        var animFrame = null;
+
+        function animateValue(target) {
+            var startVal = parseFloat(valueEl.textContent) || 0;
+            var startTime = null;
+            var duration = 800;
+
+            if (animFrame) cancelAnimationFrame(animFrame);
+
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                var progress = Math.min((timestamp - startTime) / duration, 1);
+                // Easing
+                var eased = 1 - Math.pow(1 - progress, 3);
+                var current = Math.round(startVal + (target - startVal) * eased);
+                valueEl.textContent = current + '%';
+                if (progress < 1) {
+                    animFrame = requestAnimationFrame(step);
+                }
+            }
+            animFrame = requestAnimationFrame(step);
+        }
+
+        // Button click handlers
+        var buttons = document.querySelectorAll('#tacho-buttons .tacho-btn');
+        buttons.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                // Remove active from all
+                buttons.forEach(function(b) { b.classList.remove('active'); });
+                // Set active
+                btn.classList.add('active');
+
+                var discount = parseInt(btn.getAttribute('data-discount'));
+                var amount = btn.getAttribute('data-amount');
+
+                setNeedleToValue(discount);
+
+                // Format amount with dots
+                var formatted = '€ ' + parseInt(amount).toLocaleString('de-DE') + ',-';
+                labelEl.textContent = 'Selbstbehalt: ' + formatted + ' → ' + discount + '% Nachlass';
             });
         });
     })();
