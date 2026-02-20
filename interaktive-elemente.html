@@ -674,57 +674,6 @@
             margin-top: 4px;
         }
 
-        /* Staffel table */
-        .kalk-table-wrapper {
-            width: 100%;
-            background: #fff;
-            border-radius: 20px;
-            padding: 28px 32px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-            border: 1px solid #E8E8EF;
-        }
-        .kalk-table-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #1A1A2E;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-        .kalk-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .kalk-table th {
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: #6B6B8D;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 10px 12px;
-            border-bottom: 2px solid #E8E8EF;
-            text-align: left;
-        }
-        .kalk-table td {
-            font-size: 0.9rem;
-            color: #1A1A2E;
-            padding: 10px 12px;
-            border-bottom: 1px solid #F0F0F5;
-        }
-        .kalk-table tr:last-child td {
-            border-bottom: none;
-        }
-        .kalk-table tr.active-row {
-            background: rgba(8,94,236,0.06);
-        }
-        .kalk-table tr.active-row td {
-            font-weight: 700;
-            color: #085eec;
-        }
-        .kalk-table .zuschlag-col {
-            text-align: right;
-            font-weight: 600;
-        }
-
         /* Responsive */
         @media (max-width: 900px) {
             .ie-hero h1 { font-size: 2rem; }
@@ -768,8 +717,6 @@
             .kalk-result-box { padding: 14px 16px; }
             .kalk-result-box-value { font-size: 1.1rem; }
             .kalk-boundaries { flex-direction: column; }
-            .kalk-table-wrapper { padding: 20px 16px; }
-            .kalk-table td, .kalk-table th { padding: 8px 8px; font-size: 0.82rem; }
         }
     </style>
 </head>
@@ -968,20 +915,6 @@
 
                     <!-- Boundary info -->
                     <div class="kalk-boundaries" id="kalk-boundaries"></div>
-
-                    <!-- Staffel Table -->
-                    <div class="kalk-table-wrapper" style="margin-top: 20px;">
-                        <div class="kalk-table-title">Alle Zuschlagsstufen im Überblick</div>
-                        <table class="kalk-table" id="kalk-table">
-                            <thead>
-                                <tr>
-                                    <th>Gebäudeneuwert</th>
-                                    <th class="zuschlag-col">Zuschlag</th>
-                                </tr>
-                            </thead>
-                            <tbody id="kalk-table-body"></tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1934,9 +1867,6 @@
 
         btn.addEventListener('click', calculate);
 
-        // Build the table on load
-        buildTable(-1);
-
         function findTierIndex(value) {
             for (var i = 0; i < tiers.length; i++) {
                 if (value >= tiers[i].min && value <= tiers[i].max) {
@@ -1969,9 +1899,6 @@
 
             // Build boundary info
             buildBoundaries(value, tierIdx);
-
-            // Rebuild table with active row
-            buildTable(tierIdx);
 
             // Show result area with animation
             resultEl.classList.add('visible');
@@ -2052,18 +1979,6 @@
             }
         }
 
-        function buildTable(activeIdx) {
-            var tbody = document.getElementById('kalk-table-body');
-            tbody.innerHTML = '';
-            tiers.forEach(function(t, i) {
-                var tr = document.createElement('tr');
-                if (i === activeIdx) tr.className = 'active-row';
-                tr.innerHTML =
-                    '<td>' + t.label + '</td>' +
-                    '<td class="zuschlag-col">' + formatRate(t.rate) + '</td>';
-                tbody.appendChild(tr);
-            });
-        }
     })();
     </script>
 </body>
