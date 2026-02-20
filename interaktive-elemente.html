@@ -1161,6 +1161,224 @@
             background: rgba(8,94,236,0.04);
         }
 
+        /* Infografik Section */
+        .infografik-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, #F4F4F8 0%, #EEEDF5 100%);
+        }
+        .infografik-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .infografik-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+        }
+        .infografik-sort-btn {
+            padding: 10px 22px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            color: #6B6B8D;
+            background: #fff;
+            border: 2px solid #E8E8EF;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .infografik-sort-btn:hover {
+            border-color: #4A8DF7;
+            color: #085eec;
+            background: rgba(8,94,236,0.04);
+        }
+        .infografik-sort-btn.active {
+            border-color: #085eec;
+            background: linear-gradient(135deg, #085eec, #4A8DF7);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(8,94,236,0.25);
+        }
+        .infografik-sort-btn .material-icons {
+            font-size: 18px;
+        }
+        .infografik-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .infografik-card {
+            position: relative;
+            background: #fff;
+            border-radius: 20px;
+            padding: 0;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            border: 1px solid #E8E8EF;
+            cursor: grab;
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease, opacity 0.35s ease;
+            overflow: hidden;
+            user-select: none;
+        }
+        .infografik-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.13);
+        }
+        .infografik-card.dragging {
+            opacity: 0.4;
+            transform: scale(0.95);
+        }
+        .infografik-card.drag-over {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 16px 40px rgba(8,94,236,0.2);
+        }
+        .infografik-card-accent {
+            height: 6px;
+            width: 100%;
+        }
+        .infografik-card-body {
+            padding: 28px 28px 24px;
+        }
+        .infografik-card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            transition: transform 0.3s ease;
+        }
+        .infografik-card:hover .infografik-card-icon {
+            transform: scale(1.1);
+        }
+        .infografik-card-icon .material-icons {
+            font-size: 28px;
+            color: #fff;
+        }
+        .infografik-card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1A1A2E;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        .infografik-card-text {
+            font-size: 0.92rem;
+            color: #6B6B8D;
+            line-height: 1.7;
+            margin: 0;
+        }
+        .infografik-card-number {
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            opacity: 0.9;
+            transition: transform 0.3s ease;
+        }
+        .infografik-card:hover .infografik-card-number {
+            transform: scale(1.15);
+        }
+
+        /* Individual card colors */
+        .infografik-card[data-id="einfach"] .infografik-card-accent { background: linear-gradient(90deg, #4CAF50, #66BB6A); }
+        .infografik-card[data-id="einfach"] .infografik-card-icon { background: linear-gradient(135deg, #4CAF50, #66BB6A); }
+        .infografik-card[data-id="einfach"] .infografik-card-number { background: #4CAF50; }
+
+        .infografik-card[data-id="schnell"] .infografik-card-accent { background: linear-gradient(90deg, #FF6B35, #FF8F65); }
+        .infografik-card[data-id="schnell"] .infografik-card-icon { background: linear-gradient(135deg, #FF6B35, #FF8F65); }
+        .infografik-card[data-id="schnell"] .infografik-card-number { background: #FF6B35; }
+
+        .infografik-card[data-id="fueralle"] .infografik-card-accent { background: linear-gradient(90deg, #4A8DF7, #6CA0F7); }
+        .infografik-card[data-id="fueralle"] .infografik-card-icon { background: linear-gradient(135deg, #4A8DF7, #6CA0F7); }
+        .infografik-card[data-id="fueralle"] .infografik-card-number { background: #4A8DF7; }
+
+        .infografik-card[data-id="barrierefrei"] .infografik-card-accent { background: linear-gradient(90deg, #7C4DFF, #9C7CFF); }
+        .infografik-card[data-id="barrierefrei"] .infografik-card-icon { background: linear-gradient(135deg, #7C4DFF, #9C7CFF); }
+        .infografik-card[data-id="barrierefrei"] .infografik-card-number { background: #7C4DFF; }
+
+        .infografik-card[data-id="mehrsprachig"] .infografik-card-accent { background: linear-gradient(90deg, #00BCD4, #26C6DA); }
+        .infografik-card[data-id="mehrsprachig"] .infografik-card-icon { background: linear-gradient(135deg, #00BCD4, #26C6DA); }
+        .infografik-card[data-id="mehrsprachig"] .infografik-card-number { background: #00BCD4; }
+
+        .infografik-card[data-id="ki"] .infografik-card-accent { background: linear-gradient(90deg, #E91E63, #F06292); }
+        .infografik-card[data-id="ki"] .infografik-card-icon { background: linear-gradient(135deg, #E91E63, #F06292); }
+        .infografik-card[data-id="ki"] .infografik-card-number { background: #E91E63; }
+
+        /* Expanded card detail */
+        .infografik-card-detail {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+            padding: 0 28px;
+        }
+        .infografik-card.expanded .infografik-card-detail {
+            max-height: 120px;
+            padding: 0 28px 24px;
+        }
+        .infografik-card-detail-inner {
+            padding-top: 16px;
+            border-top: 1px solid #E8E8EF;
+            font-size: 0.85rem;
+            color: #8E8EA9;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .infografik-card-detail-inner .material-icons {
+            font-size: 18px;
+        }
+        .infografik-card-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            cursor: pointer;
+            color: #B0B0C8;
+            transition: color 0.2s;
+            border-top: 1px solid #F0F0F5;
+            background: #FAFAFC;
+            border-radius: 0 0 20px 20px;
+        }
+        .infografik-card-toggle:hover {
+            color: #085eec;
+            background: #F4F4F8;
+        }
+        .infografik-card-toggle .material-icons {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+        .infografik-card.expanded .infografik-card-toggle .material-icons {
+            transform: rotate(180deg);
+        }
+
+        .infografik-hint {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 0.85rem;
+            color: #B0B0C8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .infografik-hint .material-icons {
+            font-size: 18px;
+        }
+
         /* Responsive */
         @media (max-width: 900px) {
             .ie-hero h1 { font-size: 2rem; }
@@ -1181,6 +1399,9 @@
             .luecken-section { padding: 60px 0; }
             .luecken-card { padding: 28px 24px; }
             .luecken-result { padding: 24px; }
+            .infografik-section { padding: 60px 0; }
+            .infografik-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+            .infografik-card-body { padding: 24px 24px 20px; }
         }
         @media (max-width: 600px) {
             .ie-hero { padding: 80px 0 48px; }
@@ -1227,6 +1448,13 @@
             .luecken-result { padding: 20px 16px; border-radius: 16px; }
             .luecken-result-score { font-size: 2rem; }
             .luecken-btn { width: 100%; }
+            .infografik-section { padding: 48px 0; }
+            .infografik-grid { grid-template-columns: 1fr; gap: 16px; }
+            .infografik-card-body { padding: 22px 20px 18px; }
+            .infografik-card-icon { width: 48px; height: 48px; margin-bottom: 14px; }
+            .infografik-card-icon .material-icons { font-size: 24px; }
+            .infografik-controls { gap: 8px; }
+            .infografik-sort-btn { padding: 8px 16px; font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -1314,6 +1542,10 @@
             <a href="#lueckentext" class="ie-nav-link" data-section="lueckentext">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h13"/><rect x="17" y="14" width="4" height="6" rx="1" fill="none"/></svg>
                 Lückentext
+            </a>
+            <a href="#infografik" class="ie-nav-link" data-section="infografik">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><circle cx="17.5" cy="17.5" r="3.5"/></svg>
+                Infografik
             </a>
         </div>
     </nav>
@@ -1546,6 +1778,157 @@
                         <button class="luecken-btn-reset" id="luecken-reset">Nochmal versuchen</button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Infografik Section -->
+    <section id="infografik" class="infografik-section">
+        <div class="container">
+            <div class="ie-section-header">
+                <span class="section-badge" style="background: rgba(8,94,236,0.15); color: #4A8DF7;">imc Express</span>
+                <h2>Infografik<span class="highlight">_</span></h2>
+                <p>Entdecken Sie die Vorteile von imc Express auf einen Blick – sortieren Sie die Karten nach Ihren Prioritäten.</p>
+            </div>
+            <div class="infografik-controls" id="infografik-controls">
+                <button class="infografik-sort-btn active" data-sort="default">
+                    <span class="material-icons">dashboard</span> Standard
+                </button>
+                <button class="infografik-sort-btn" data-sort="alpha">
+                    <span class="material-icons">sort_by_alpha</span> A–Z
+                </button>
+                <button class="infografik-sort-btn" data-sort="alpha-desc">
+                    <span class="material-icons">sort_by_alpha</span> Z–A
+                </button>
+                <button class="infografik-sort-btn" data-sort="shuffle">
+                    <span class="material-icons">shuffle</span> Zufall
+                </button>
+            </div>
+            <div class="infografik-grid" id="infografik-grid">
+                <div class="infografik-card" data-id="einfach" draggable="true">
+                    <div class="infografik-card-accent"></div>
+                    <div class="infografik-card-number">1</div>
+                    <div class="infografik-card-body">
+                        <div class="infografik-card-icon">
+                            <span class="material-icons">touch_app</span>
+                        </div>
+                        <div class="infografik-card-title">einfach</div>
+                        <p class="infografik-card-text">imc Express ist einfach bedienbar. In unter 10 Minuten ist man in der Lage eLearning Content zu erstellen.</p>
+                    </div>
+                    <div class="infografik-card-detail">
+                        <div class="infografik-card-detail-inner">
+                            <span class="material-icons">timer</span>
+                            Intuitive Oberfläche – keine Einarbeitung nötig.
+                        </div>
+                    </div>
+                    <div class="infografik-card-toggle" role="button" aria-label="Details anzeigen">
+                        <span class="material-icons">expand_more</span>
+                    </div>
+                </div>
+                <div class="infografik-card" data-id="schnell" draggable="true">
+                    <div class="infografik-card-accent"></div>
+                    <div class="infografik-card-number">2</div>
+                    <div class="infografik-card-body">
+                        <div class="infografik-card-icon">
+                            <span class="material-icons">bolt</span>
+                        </div>
+                        <div class="infografik-card-title">schnell</div>
+                        <p class="infografik-card-text">Mit imc Express kommen Sie bis zu 15 Mal schneller an Ihr Ziel als mit herkömmlicher Autorensoftware.</p>
+                    </div>
+                    <div class="infografik-card-detail">
+                        <div class="infografik-card-detail-inner">
+                            <span class="material-icons">speed</span>
+                            15x schneller als herkömmliche Tools.
+                        </div>
+                    </div>
+                    <div class="infografik-card-toggle" role="button" aria-label="Details anzeigen">
+                        <span class="material-icons">expand_more</span>
+                    </div>
+                </div>
+                <div class="infografik-card" data-id="fueralle" draggable="true">
+                    <div class="infografik-card-accent"></div>
+                    <div class="infografik-card-number">3</div>
+                    <div class="infografik-card-body">
+                        <div class="infografik-card-icon">
+                            <span class="material-icons">groups</span>
+                        </div>
+                        <div class="infografik-card-title">für alle</div>
+                        <p class="infografik-card-text">Alle Mitarbeitenden können ohne Schulung interaktive Lerninhalte im Unternehmensdesign erstellen.</p>
+                    </div>
+                    <div class="infografik-card-detail">
+                        <div class="infografik-card-detail-inner">
+                            <span class="material-icons">school</span>
+                            Keine Vorkenntnisse erforderlich.
+                        </div>
+                    </div>
+                    <div class="infografik-card-toggle" role="button" aria-label="Details anzeigen">
+                        <span class="material-icons">expand_more</span>
+                    </div>
+                </div>
+                <div class="infografik-card" data-id="barrierefrei" draggable="true">
+                    <div class="infografik-card-accent"></div>
+                    <div class="infografik-card-number">4</div>
+                    <div class="infografik-card-body">
+                        <div class="infografik-card-icon">
+                            <span class="material-icons">accessibility_new</span>
+                        </div>
+                        <div class="infografik-card-title">barrierefrei</div>
+                        <p class="infografik-card-text">imc Express ist cloudbasiert, sicher und leicht zugänglich (WCAG 2.1 AA-konform).</p>
+                    </div>
+                    <div class="infografik-card-detail">
+                        <div class="infografik-card-detail-inner">
+                            <span class="material-icons">cloud_done</span>
+                            Cloudbasiert &amp; WCAG 2.1 AA-konform.
+                        </div>
+                    </div>
+                    <div class="infografik-card-toggle" role="button" aria-label="Details anzeigen">
+                        <span class="material-icons">expand_more</span>
+                    </div>
+                </div>
+                <div class="infografik-card" data-id="mehrsprachig" draggable="true">
+                    <div class="infografik-card-accent"></div>
+                    <div class="infografik-card-number">5</div>
+                    <div class="infografik-card-body">
+                        <div class="infografik-card-icon">
+                            <span class="material-icons">translate</span>
+                        </div>
+                        <div class="infografik-card-title">mehrsprachig</div>
+                        <p class="infografik-card-text">Lokalisieren Sie Ihre Inhalte in mehr als 70 Sprachen - ohne Aufwand für Übersetzungsagenturen.</p>
+                    </div>
+                    <div class="infografik-card-detail">
+                        <div class="infografik-card-detail-inner">
+                            <span class="material-icons">language</span>
+                            Über 70 Sprachen verfügbar.
+                        </div>
+                    </div>
+                    <div class="infografik-card-toggle" role="button" aria-label="Details anzeigen">
+                        <span class="material-icons">expand_more</span>
+                    </div>
+                </div>
+                <div class="infografik-card" data-id="ki" draggable="true">
+                    <div class="infografik-card-accent"></div>
+                    <div class="infografik-card-number">6</div>
+                    <div class="infografik-card-body">
+                        <div class="infografik-card-icon">
+                            <span class="material-icons">auto_awesome</span>
+                        </div>
+                        <div class="infografik-card-title">K.I. unterstützt</div>
+                        <p class="infografik-card-text">Lassen Sie "Express GPT" für Sie arbeiten und Lerninhalte, Fragen, Interaktionen und Bilder erstellen.</p>
+                    </div>
+                    <div class="infografik-card-detail">
+                        <div class="infografik-card-detail-inner">
+                            <span class="material-icons">smart_toy</span>
+                            KI generiert Inhalte, Quizze &amp; Bilder.
+                        </div>
+                    </div>
+                    <div class="infografik-card-toggle" role="button" aria-label="Details anzeigen">
+                        <span class="material-icons">expand_more</span>
+                    </div>
+                </div>
+            </div>
+            <div class="infografik-hint">
+                <span class="material-icons">drag_indicator</span>
+                Karten per Drag &amp; Drop nach Ihrer Priorität sortieren
             </div>
         </div>
     </section>
@@ -2838,6 +3221,190 @@
                     }
                 }
             });
+        });
+    })();
+    </script>
+
+    <!-- Infografik Script -->
+    <script>
+    (function() {
+        var grid = document.getElementById('infografik-grid');
+        var controls = document.getElementById('infografik-controls');
+        if (!grid || !controls) return;
+
+        var cards = Array.prototype.slice.call(grid.querySelectorAll('.infografik-card'));
+        var defaultOrder = ['einfach', 'schnell', 'fueralle', 'barrierefrei', 'mehrsprachig', 'ki'];
+        var dragSrcEl = null;
+
+        // Toggle card detail on click
+        cards.forEach(function(card) {
+            var toggle = card.querySelector('.infografik-card-toggle');
+            if (toggle) {
+                toggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    card.classList.toggle('expanded');
+                });
+            }
+            card.querySelector('.infografik-card-body').addEventListener('click', function() {
+                card.classList.toggle('expanded');
+            });
+        });
+
+        // Update numbering
+        function updateNumbers() {
+            var currentCards = grid.querySelectorAll('.infografik-card');
+            currentCards.forEach(function(card, idx) {
+                var num = card.querySelector('.infografik-card-number');
+                if (num) num.textContent = idx + 1;
+            });
+        }
+
+        // Animate reorder
+        function animateReorder(newOrder) {
+            var fragment = document.createDocumentFragment();
+            newOrder.forEach(function(id) {
+                var card = grid.querySelector('.infografik-card[data-id="' + id + '"]');
+                if (card) fragment.appendChild(card);
+            });
+            grid.appendChild(fragment);
+            updateNumbers();
+
+            // Trigger entry animation
+            var allCards = grid.querySelectorAll('.infografik-card');
+            allCards.forEach(function(card, i) {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(function() {
+                    card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                    setTimeout(function() {
+                        card.style.transition = '';
+                        card.style.transform = '';
+                    }, 450);
+                }, i * 80);
+            });
+        }
+
+        // Sort buttons
+        var sortBtns = controls.querySelectorAll('.infografik-sort-btn');
+        sortBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                sortBtns.forEach(function(b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+
+                var sortType = btn.getAttribute('data-sort');
+                var currentCards = Array.prototype.slice.call(grid.querySelectorAll('.infografik-card'));
+                var ids;
+
+                if (sortType === 'default') {
+                    ids = defaultOrder.slice();
+                } else if (sortType === 'alpha') {
+                    ids = currentCards.map(function(c) { return c.getAttribute('data-id'); });
+                    var titles = {};
+                    currentCards.forEach(function(c) {
+                        titles[c.getAttribute('data-id')] = c.querySelector('.infografik-card-title').textContent.trim().toLowerCase();
+                    });
+                    ids.sort(function(a, b) { return titles[a].localeCompare(titles[b], 'de'); });
+                } else if (sortType === 'alpha-desc') {
+                    ids = currentCards.map(function(c) { return c.getAttribute('data-id'); });
+                    var titlesDesc = {};
+                    currentCards.forEach(function(c) {
+                        titlesDesc[c.getAttribute('data-id')] = c.querySelector('.infografik-card-title').textContent.trim().toLowerCase();
+                    });
+                    ids.sort(function(a, b) { return titlesDesc[b].localeCompare(titlesDesc[a], 'de'); });
+                } else if (sortType === 'shuffle') {
+                    ids = currentCards.map(function(c) { return c.getAttribute('data-id'); });
+                    for (var i = ids.length - 1; i > 0; i--) {
+                        var j = Math.floor(Math.random() * (i + 1));
+                        var tmp = ids[i];
+                        ids[i] = ids[j];
+                        ids[j] = tmp;
+                    }
+                }
+
+                animateReorder(ids);
+            });
+        });
+
+        // Drag and drop
+        function handleDragStart(e) {
+            dragSrcEl = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', this.getAttribute('data-id'));
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            this.classList.add('drag-over');
+            return false;
+        }
+
+        function handleDragEnter(e) {
+            this.classList.add('drag-over');
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            this.classList.remove('drag-over');
+
+            if (dragSrcEl !== this) {
+                var allCards = Array.prototype.slice.call(grid.querySelectorAll('.infografik-card'));
+                var srcIdx = allCards.indexOf(dragSrcEl);
+                var destIdx = allCards.indexOf(this);
+
+                if (srcIdx < destIdx) {
+                    grid.insertBefore(dragSrcEl, this.nextSibling);
+                } else {
+                    grid.insertBefore(dragSrcEl, this);
+                }
+
+                updateNumbers();
+
+                // Reset sort buttons – manual order = no preset sort
+                sortBtns.forEach(function(b) { b.classList.remove('active'); });
+            }
+
+            return false;
+        }
+
+        function handleDragEnd(e) {
+            cards.forEach(function(card) {
+                card.classList.remove('dragging');
+                card.classList.remove('drag-over');
+            });
+        }
+
+        cards.forEach(function(card) {
+            card.addEventListener('dragstart', handleDragStart, false);
+            card.addEventListener('dragover', handleDragOver, false);
+            card.addEventListener('dragenter', handleDragEnter, false);
+            card.addEventListener('dragleave', handleDragLeave, false);
+            card.addEventListener('drop', handleDrop, false);
+            card.addEventListener('dragend', handleDragEnd, false);
+        });
+
+        // Touch drag support for mobile
+        var touchSrcEl = null;
+        var touchClone = null;
+        var touchStartY = 0;
+        var touchStartX = 0;
+
+        cards.forEach(function(card) {
+            card.addEventListener('touchstart', function(e) {
+                if (e.target.closest('.infografik-card-toggle') || e.target.closest('.infografik-card-body')) return;
+                touchSrcEl = card;
+                var touch = e.touches[0];
+                touchStartX = touch.clientX;
+                touchStartY = touch.clientY;
+            }, { passive: true });
         });
     })();
     </script>
