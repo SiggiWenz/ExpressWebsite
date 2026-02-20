@@ -688,8 +688,35 @@
             font-size: 1rem;
             font-weight: 700;
             color: #1A1A2E;
-            margin-bottom: 16px;
+            margin-bottom: 0;
             text-align: center;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            user-select: none;
+            padding: 4px 0;
+        }
+        .kalk-table-title:hover {
+            color: #085eec;
+        }
+        .kalk-table-title .kalk-toggle-icon {
+            display: inline-block;
+            transition: transform 0.3s ease;
+            font-size: 0.7rem;
+        }
+        .kalk-table-title.open .kalk-toggle-icon {
+            transform: rotate(180deg);
+        }
+        .kalk-table-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .kalk-table-content.open {
+            max-height: 800px;
+            margin-top: 16px;
         }
         .kalk-table {
             width: 100%;
@@ -1168,16 +1195,18 @@
 
                     <!-- Staffel Table -->
                     <div class="kalk-table-wrapper" style="margin-top: 20px;">
-                        <div class="kalk-table-title">Alle Zuschlagsstufen im Überblick</div>
-                        <table class="kalk-table" id="kalk-table">
-                            <thead>
-                                <tr>
-                                    <th>Gebäudeneuwert</th>
-                                    <th class="zuschlag-col">Zuschlag</th>
-                                </tr>
-                            </thead>
-                            <tbody id="kalk-table-body"></tbody>
-                        </table>
+                        <div class="kalk-table-title" id="kalk-table-toggle">Alle Zuschlagsstufen im Überblick <span class="kalk-toggle-icon">&#9660;</span></div>
+                        <div class="kalk-table-content" id="kalk-table-content">
+                            <table class="kalk-table" id="kalk-table">
+                                <thead>
+                                    <tr>
+                                        <th>Gebäudeneuwert</th>
+                                        <th class="zuschlag-col">Zuschlag</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="kalk-table-body"></tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2224,6 +2253,16 @@
         // Build the table on load
         buildTable(-1);
 
+        // Toggle table visibility
+        var tableToggle = document.getElementById('kalk-table-toggle');
+        var tableContent = document.getElementById('kalk-table-content');
+        if (tableToggle && tableContent) {
+            tableToggle.addEventListener('click', function() {
+                tableToggle.classList.toggle('open');
+                tableContent.classList.toggle('open');
+            });
+        }
+
         function findTierIndex(value) {
             for (var i = 0; i < tiers.length; i++) {
                 if (value >= tiers[i].min && value <= tiers[i].max) {
@@ -2270,23 +2309,6 @@
             container.innerHTML = '';
 
             var tier = tiers[tierIdx];
-
-            // Lower tier (less surcharge)
-            if (tierIdx < tiers.length - 1) {
-                var nextTier = tiers[tierIdx + 1];
-                var card = document.createElement('div');
-                card.className = 'kalk-boundary-card more';
-                card.innerHTML =
-                    '<div class="kalk-boundary-icon">&#9650;</div>' +
-                    '<div class="kalk-boundary-title">Mehr Zuschlag ab</div>' +
-                    '<div class="kalk-boundary-value">Unter ' + formatEuro(tier.min) + '</div>' +
-                    '<div class="kalk-boundary-detail">Nächst höhere Stufe: ' + formatRate(tiers[Math.max(0, tierIdx - 1)].rate) + ' Zuschlag</div>';
-
-                // Only show if there's a higher tier
-                if (tierIdx > 0) {
-                    container.appendChild(card);
-                }
-            }
 
             if (tierIdx === 0) {
                 // At the highest surcharge tier
