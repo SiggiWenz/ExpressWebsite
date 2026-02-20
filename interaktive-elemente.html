@@ -549,29 +549,24 @@
                 </div>
                 <div class="tacho-value-display">
                     <div class="tacho-value-number" id="tacho-value">0%</div>
-                    <div class="tacho-value-label" id="tacho-label">Wählen Sie einen Selbstbehalt</div>
+                    <div class="tacho-value-label" id="tacho-label">Rabatt</div>
                 </div>
                 <!-- Buttons -->
                 <div class="tacho-buttons" id="tacho-buttons">
                     <button class="tacho-btn" data-amount="500" data-discount="10">
                         <span class="tacho-btn-amount">€ 500,-</span>
-                        <span class="tacho-btn-discount">10% Nachlass</span>
                     </button>
                     <button class="tacho-btn" data-amount="1000" data-discount="20">
                         <span class="tacho-btn-amount">€ 1.000,-</span>
-                        <span class="tacho-btn-discount">20% Nachlass</span>
                     </button>
                     <button class="tacho-btn" data-amount="3000" data-discount="40">
                         <span class="tacho-btn-amount">€ 3.000,-</span>
-                        <span class="tacho-btn-discount">40% Nachlass</span>
                     </button>
                     <button class="tacho-btn" data-amount="5000" data-discount="50">
                         <span class="tacho-btn-amount">€ 5.000,-</span>
-                        <span class="tacho-btn-discount">50% Nachlass</span>
                     </button>
                     <button class="tacho-btn" data-amount="10000" data-discount="60">
                         <span class="tacho-btn-amount">€ 10.000,-</span>
-                        <span class="tacho-btn-discount">60% Nachlass</span>
                     </button>
                 </div>
                 <!-- Info Box -->
@@ -1259,7 +1254,7 @@
 
                 // Format amount with dots
                 var formatted = '€ ' + parseInt(amount).toLocaleString('de-DE') + ',-';
-                labelEl.textContent = 'Selbstbehalt: ' + formatted + ' → ' + discount + '% Nachlass';
+                labelEl.textContent = 'Rabatt';
             });
         });
     })();
