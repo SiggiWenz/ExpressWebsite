@@ -421,6 +421,43 @@
             margin: 0;
         }
 
+        /* Balkendiagramm Section */
+        .barchart-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, #F4F4F8 0%, #EEEDF5 100%);
+        }
+        .barchart-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            border: 1px solid #E8E8EF;
+        }
+        .barchart-info {
+            max-width: 700px;
+            margin: 28px auto 0;
+            text-align: center;
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px 32px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            border: 1px solid #E8E8EF;
+        }
+        .barchart-info h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #1A1A2E;
+            margin-bottom: 8px;
+        }
+        .barchart-info p {
+            font-size: 0.88rem;
+            color: #6B6B8D;
+            line-height: 1.7;
+            margin: 0;
+        }
+
         /* Responsive */
         @media (max-width: 900px) {
             .ie-hero h1 { font-size: 2rem; }
@@ -429,6 +466,8 @@
             .ie-nav { top: 60px; }
             .tacho-section { padding: 60px 0; }
             .tacho-gauge-container { width: 320px; height: 190px; }
+            .barchart-section { padding: 60px 0; }
+            .barchart-wrapper { padding: 24px 16px; }
         }
         @media (max-width: 600px) {
             .ie-hero { padding: 80px 0 48px; }
@@ -447,6 +486,9 @@
             .tacho-btn { min-width: 110px; padding: 12px 16px; font-size: 0.85rem; }
             .tacho-btn-amount { font-size: 0.95rem; }
             .tacho-info { padding: 20px 20px; }
+            .barchart-section { padding: 48px 0; }
+            .barchart-wrapper { padding: 16px 8px; border-radius: 14px; }
+            .barchart-info { padding: 18px 16px; }
         }
     </style>
 </head>
@@ -519,6 +561,10 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 6v2"/><path d="M6.93 8.93l1.41 1.41"/><path d="M6 14h2"/><path d="M14.12 9.88l3.54-3.54"/></svg>
                 Tacho
             </a>
+            <a href="#balkendiagramm" class="ie-nav-link" data-section="balkendiagramm">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9"/><rect x="10" y="5" width="4" height="16"/><rect x="17" y="8" width="4" height="13"/></svg>
+                Balkendiagramm
+            </a>
             <!-- Weitere Elemente können hier ergänzt werden -->
         </div>
     </nav>
@@ -579,6 +625,24 @@
         </div>
     </section>
 
+    <!-- Balkendiagramm Section -->
+    <section id="balkendiagramm" class="barchart-section">
+        <div class="container">
+            <div class="ie-section-header">
+                <span class="section-badge" style="background: rgba(8,94,236,0.15); color: #4A8DF7;">Preisübersicht</span>
+                <h2>Balkendiagramm<span class="highlight">_</span></h2>
+                <p>Quadratmeterpreise nach Geschoß – klicken Sie auf einen Balken für Details.</p>
+            </div>
+            <div class="barchart-wrapper">
+                <div id="barchart-container"></div>
+            </div>
+            <div class="barchart-info">
+                <h3>Hinweis</h3>
+                <p>Nur zum internen Gebrauch. Die automatische Berechnung erfolgt durch Eingabe der entsprechenden Geschoße und der jeweiligen Quadratmeteranzahl in das System.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
@@ -630,6 +694,7 @@
     </footer>
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="js/main.js"></script>
     <script>
     (function() {
@@ -1258,6 +1323,197 @@
                 labelEl.textContent = 'Rabatt';
             });
         });
+    })();
+    </script>
+
+    <!-- Balkendiagramm (ApexCharts) Script -->
+    <script>
+    (function() {
+        var chartContainer = document.getElementById('barchart-container');
+        if (!chartContainer) return;
+
+        var categories = [
+            'Kellergeschoß\n(unbewohnt)',
+            'Bewohntes\nKellergeschoß',
+            'Erdgeschoß',
+            '1. Obergeschoß',
+            '2. Obergeschoß',
+            '3. Obergeschoß',
+            '4. Obergeschoß',
+            'Über 4.\nObergeschoß',
+            'Dachgeschoß\nausgebaut'
+        ];
+
+        var prices = [1066, 2307, 3691, 2292, 2292, 2324, 2363, 2363, 1681];
+
+        var options = {
+            series: [{
+                name: 'Preis pro m²',
+                data: prices
+            }],
+            chart: {
+                type: 'bar',
+                height: 480,
+                fontFamily: 'Inter, sans-serif',
+                toolbar: {
+                    show: false
+                },
+                animations: {
+                    enabled: true,
+                    easing: 'easeinout',
+                    speed: 800,
+                    animateGradually: {
+                        enabled: true,
+                        delay: 100
+                    },
+                    dynamicAnimation: {
+                        enabled: true,
+                        speed: 350
+                    }
+                },
+                events: {
+                    dataPointSelection: function(event, chartContext, config) {
+                        var idx = config.dataPointIndex;
+                        var label = categories[idx].replace(/\n/g, ' ');
+                        var price = prices[idx].toLocaleString('de-DE');
+                        alert(label + ': €' + price + ',- pro m²');
+                    }
+                }
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 8,
+                    columnWidth: '60%',
+                    distributed: true,
+                    dataLabels: {
+                        position: 'top'
+                    }
+                }
+            },
+            colors: [
+                '#6B7B8D',
+                '#5A7FA8',
+                '#085eec',
+                '#4A8DF7',
+                '#4A8DF7',
+                '#5B96F7',
+                '#6CA0F7',
+                '#6CA0F7',
+                '#8EB5F0'
+            ],
+            dataLabels: {
+                enabled: true,
+                formatter: function(val) {
+                    return '€' + val.toLocaleString('de-DE') + ',-';
+                },
+                offsetY: -24,
+                style: {
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    colors: ['#1A1A2E']
+                }
+            },
+            legend: {
+                show: false
+            },
+            xaxis: {
+                categories: categories,
+                labels: {
+                    style: {
+                        fontSize: '11px',
+                        fontWeight: 600,
+                        colors: '#6B6B8D'
+                    },
+                    rotate: -45,
+                    rotateAlways: false,
+                    trim: false
+                },
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                }
+            },
+            yaxis: {
+                labels: {
+                    formatter: function(val) {
+                        return '€' + val.toLocaleString('de-DE');
+                    },
+                    style: {
+                        fontSize: '12px',
+                        colors: '#6B6B8D'
+                    }
+                },
+                min: 0,
+                max: 4000
+            },
+            grid: {
+                borderColor: '#E8E8EF',
+                strokeDashArray: 4,
+                xaxis: {
+                    lines: {
+                        show: false
+                    }
+                }
+            },
+            tooltip: {
+                enabled: true,
+                y: {
+                    formatter: function(val) {
+                        return '€' + val.toLocaleString('de-DE') + ',- pro m²';
+                    }
+                },
+                style: {
+                    fontSize: '13px'
+                }
+            },
+            states: {
+                hover: {
+                    filter: {
+                        type: 'darken',
+                        value: 0.15
+                    }
+                },
+                active: {
+                    filter: {
+                        type: 'darken',
+                        value: 0.25
+                    }
+                }
+            },
+            responsive: [{
+                breakpoint: 600,
+                options: {
+                    chart: {
+                        height: 400
+                    },
+                    plotOptions: {
+                        bar: {
+                            columnWidth: '75%',
+                            borderRadius: 5
+                        }
+                    },
+                    dataLabels: {
+                        style: {
+                            fontSize: '9px'
+                        },
+                        offsetY: -18
+                    },
+                    xaxis: {
+                        labels: {
+                            style: {
+                                fontSize: '9px'
+                            },
+                            rotate: -55
+                        }
+                    }
+                }
+            }]
+        };
+
+        var chart = new ApexCharts(chartContainer, options);
+        chart.render();
     })();
     </script>
 </body>
