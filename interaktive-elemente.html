@@ -458,6 +458,273 @@
             margin: 0;
         }
 
+        /* Kalkulator Section */
+        .kalk-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, #EEEDF5 0%, #F4F4F8 100%);
+        }
+        .kalk-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+        }
+        .kalk-input-card {
+            width: 100%;
+            background: #fff;
+            border-radius: 20px;
+            padding: 36px 40px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            border: 1px solid #E8E8EF;
+        }
+        .kalk-input-group {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+        }
+        .kalk-input-field {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .kalk-input-field label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1A1A2E;
+        }
+        .kalk-input-field input {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            color: #1A1A2E;
+            border: 2px solid #E8E8EF;
+            border-radius: 14px;
+            background: #F9F9FC;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            box-sizing: border-box;
+        }
+        .kalk-input-field input:focus {
+            border-color: #085eec;
+            box-shadow: 0 0 0 4px rgba(8,94,236,0.1);
+            background: #fff;
+        }
+        .kalk-input-field input::placeholder {
+            color: #B0B0C8;
+            font-weight: 400;
+        }
+        .kalk-btn {
+            padding: 14px 32px;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+            background: linear-gradient(135deg, #085eec, #4A8DF7);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 16px rgba(8,94,236,0.25);
+        }
+        .kalk-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(8,94,236,0.35);
+        }
+        .kalk-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Result area */
+        .kalk-result {
+            width: 100%;
+            display: none;
+        }
+        .kalk-result.visible {
+            display: block;
+        }
+        .kalk-result-main {
+            background: #fff;
+            border-radius: 20px;
+            padding: 32px 40px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            border: 1px solid #E8E8EF;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .kalk-result-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #085eec, #4A8DF7);
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 6px 18px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+        .kalk-result-percentage {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #085eec;
+            line-height: 1.1;
+        }
+        .kalk-result-label {
+            font-size: 1rem;
+            color: #6B6B8D;
+            margin-top: 4px;
+            margin-bottom: 16px;
+        }
+        .kalk-result-values {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .kalk-result-box {
+            background: #F4F4F8;
+            border-radius: 14px;
+            padding: 18px 24px;
+            flex: 1;
+            min-width: 180px;
+        }
+        .kalk-result-box-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #6B6B8D;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .kalk-result-box-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1A1A2E;
+        }
+
+        /* Boundary info cards */
+        .kalk-boundaries {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .kalk-boundary-card {
+            flex: 1;
+            min-width: 200px;
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            border: 1px solid #E8E8EF;
+        }
+        .kalk-boundary-card.less {
+            border-left: 4px solid #4CAF50;
+        }
+        .kalk-boundary-card.more {
+            border-left: 4px solid #FF9800;
+        }
+        .kalk-boundary-card.at-min {
+            border-left: 4px solid #085eec;
+        }
+        .kalk-boundary-card.at-max {
+            border-left: 4px solid #085eec;
+        }
+        .kalk-boundary-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        .kalk-boundary-card.less .kalk-boundary-icon {
+            background: rgba(76,175,80,0.12);
+            color: #4CAF50;
+        }
+        .kalk-boundary-card.more .kalk-boundary-icon {
+            background: rgba(255,152,0,0.12);
+            color: #FF9800;
+        }
+        .kalk-boundary-card.at-min .kalk-boundary-icon,
+        .kalk-boundary-card.at-max .kalk-boundary-icon {
+            background: rgba(8,94,236,0.12);
+            color: #085eec;
+        }
+        .kalk-boundary-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #6B6B8D;
+            margin-bottom: 6px;
+        }
+        .kalk-boundary-value {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #1A1A2E;
+            line-height: 1.4;
+        }
+        .kalk-boundary-detail {
+            font-size: 0.82rem;
+            color: #8E8EA9;
+            margin-top: 4px;
+        }
+
+        /* Staffel table */
+        .kalk-table-wrapper {
+            width: 100%;
+            background: #fff;
+            border-radius: 20px;
+            padding: 28px 32px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            border: 1px solid #E8E8EF;
+        }
+        .kalk-table-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1A1A2E;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .kalk-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .kalk-table th {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #6B6B8D;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 10px 12px;
+            border-bottom: 2px solid #E8E8EF;
+            text-align: left;
+        }
+        .kalk-table td {
+            font-size: 0.9rem;
+            color: #1A1A2E;
+            padding: 10px 12px;
+            border-bottom: 1px solid #F0F0F5;
+        }
+        .kalk-table tr:last-child td {
+            border-bottom: none;
+        }
+        .kalk-table tr.active-row {
+            background: rgba(8,94,236,0.06);
+        }
+        .kalk-table tr.active-row td {
+            font-weight: 700;
+            color: #085eec;
+        }
+        .kalk-table .zuschlag-col {
+            text-align: right;
+            font-weight: 600;
+        }
+
         /* Responsive */
         @media (max-width: 900px) {
             .ie-hero h1 { font-size: 2rem; }
@@ -468,6 +735,9 @@
             .tacho-gauge-container { width: 320px; height: 190px; }
             .barchart-section { padding: 60px 0; }
             .barchart-wrapper { padding: 24px 16px; }
+            .kalk-section { padding: 60px 0; }
+            .kalk-input-card { padding: 28px 24px; }
+            .kalk-result-main { padding: 28px 24px; }
         }
         @media (max-width: 600px) {
             .ie-hero { padding: 80px 0 48px; }
@@ -489,6 +759,17 @@
             .barchart-section { padding: 48px 0; }
             .barchart-wrapper { padding: 16px 8px; border-radius: 14px; }
             .barchart-info { padding: 18px 16px; }
+            .kalk-section { padding: 48px 0; }
+            .kalk-input-card { padding: 24px 20px; border-radius: 16px; }
+            .kalk-input-group { flex-direction: column; gap: 12px; }
+            .kalk-btn { width: 100%; }
+            .kalk-result-main { padding: 24px 20px; border-radius: 16px; }
+            .kalk-result-percentage { font-size: 2.4rem; }
+            .kalk-result-box { padding: 14px 16px; }
+            .kalk-result-box-value { font-size: 1.1rem; }
+            .kalk-boundaries { flex-direction: column; }
+            .kalk-table-wrapper { padding: 20px 16px; }
+            .kalk-table td, .kalk-table th { padding: 8px 8px; font-size: 0.82rem; }
         }
     </style>
 </head>
@@ -565,6 +846,10 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9"/><rect x="10" y="5" width="4" height="16"/><rect x="17" y="8" width="4" height="13"/></svg>
                 Balkendiagramm
             </a>
+            <a href="#kalkulator" class="ie-nav-link" data-section="kalkulator">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="14" y1="18" x2="16" y2="18"/></svg>
+                Kalkulator
+            </a>
             <!-- Weitere Elemente können hier ergänzt werden -->
         </div>
     </nav>
@@ -639,6 +924,65 @@
             <div class="barchart-info">
                 <h3>Hinweis</h3>
                 <p>Nur zum internen Gebrauch. Die automatische Berechnung erfolgt durch Eingabe der entsprechenden Geschoße und der jeweiligen Quadratmeteranzahl in das System.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kalkulator Section -->
+    <section id="kalkulator" class="kalk-section">
+        <div class="container">
+            <div class="ie-section-header">
+                <span class="section-badge" style="background: rgba(8,94,236,0.15); color: #4A8DF7;">Versicherung</span>
+                <h2>Kalkulator<span class="highlight">_</span></h2>
+                <p>Ermitteln Sie den Zuschlag anhand des Gebäudeneuwerts – geben Sie den Wert ein und klicken Sie auf "Berechnen".</p>
+            </div>
+            <div class="kalk-wrapper">
+                <!-- Input Card -->
+                <div class="kalk-input-card">
+                    <div class="kalk-input-group">
+                        <div class="kalk-input-field">
+                            <label for="kalk-input">Gebäudeneuwert in Euro</label>
+                            <input type="text" id="kalk-input" placeholder="z.B. 250.000" inputmode="numeric" autocomplete="off">
+                        </div>
+                        <button class="kalk-btn" id="kalk-btn" type="button">Berechnen</button>
+                    </div>
+                </div>
+
+                <!-- Result (hidden until calculated) -->
+                <div class="kalk-result" id="kalk-result">
+                    <div class="kalk-result-main">
+                        <div class="kalk-result-badge">Ihr Ergebnis</div>
+                        <div class="kalk-result-percentage" id="kalk-percent">42,0%</div>
+                        <div class="kalk-result-label">Zuschlag auf den Gebäudeneuwert</div>
+                        <div class="kalk-result-values">
+                            <div class="kalk-result-box">
+                                <div class="kalk-result-box-label">Gebäudeneuwert</div>
+                                <div class="kalk-result-box-value" id="kalk-val-input">€ 250.000</div>
+                            </div>
+                            <div class="kalk-result-box">
+                                <div class="kalk-result-box-label">Zuschlagssumme</div>
+                                <div class="kalk-result-box-value" id="kalk-val-surcharge">€ 105.000</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Boundary info -->
+                    <div class="kalk-boundaries" id="kalk-boundaries"></div>
+
+                    <!-- Staffel Table -->
+                    <div class="kalk-table-wrapper" style="margin-top: 20px;">
+                        <div class="kalk-table-title">Alle Zuschlagsstufen im Überblick</div>
+                        <table class="kalk-table" id="kalk-table">
+                            <thead>
+                                <tr>
+                                    <th>Gebäudeneuwert</th>
+                                    <th class="zuschlag-col">Zuschlag</th>
+                                </tr>
+                            </thead>
+                            <tbody id="kalk-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1514,6 +1858,212 @@
 
         var chart = new ApexCharts(chartContainer, options);
         chart.render();
+    })();
+    </script>
+
+    <!-- Kalkulator Script -->
+    <script>
+    (function() {
+        var input = document.getElementById('kalk-input');
+        var btn = document.getElementById('kalk-btn');
+        var resultEl = document.getElementById('kalk-result');
+        if (!input || !btn || !resultEl) return;
+
+        // Zuschlagsstaffelung
+        var tiers = [
+            { min: 0,        max: 34999,    rate: 100.0, label: 'Bis 34.999 €' },
+            { min: 35000,    max: 49999,    rate: 92.0,  label: '35.000 – 49.999 €' },
+            { min: 50000,    max: 69999,    rate: 75.0,  label: '50.000 – 69.999 €' },
+            { min: 70000,    max: 94999,    rate: 63.0,  label: '70.000 – 94.999 €' },
+            { min: 95000,    max: 124999,   rate: 56.0,  label: '95.000 – 124.999 €' },
+            { min: 125000,   max: 164999,   rate: 50.0,  label: '125.000 – 164.999 €' },
+            { min: 165000,   max: 224999,   rate: 45.0,  label: '165.000 – 224.999 €' },
+            { min: 225000,   max: 299999,   rate: 42.0,  label: '225.000 – 299.999 €' },
+            { min: 300000,   max: 374999,   rate: 39.5,  label: '300.000 – 374.999 €' },
+            { min: 375000,   max: 474999,   rate: 38.0,  label: '375.000 – 474.999 €' },
+            { min: 475000,   max: 574999,   rate: 37.0,  label: '475.000 – 574.999 €' },
+            { min: 575000,   max: 749999,   rate: 36.0,  label: '575.000 – 749.999 €' },
+            { min: 750000,   max: 999999,   rate: 35.0,  label: '750.000 – 999.999 €' },
+            { min: 1000000,  max: 1199999,  rate: 34.5,  label: '1.000.000 – 1.199.999 €' },
+            { min: 1200000,  max: 1499999,  rate: 34.0,  label: '1.200.000 – 1.499.999 €' },
+            { min: 1500000,  max: 1999999,  rate: 33.5,  label: '1.500.000 – 1.999.999 €' },
+            { min: 2000000,  max: Infinity,  rate: 33.0,  label: 'Ab 2.000.000 €' }
+        ];
+
+        // Format number German-style
+        function formatEuro(val) {
+            return '€ ' + Math.round(val).toLocaleString('de-DE');
+        }
+
+        function formatRate(rate) {
+            return rate.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
+        }
+
+        // Parse input (allow German formatting)
+        function parseInput(str) {
+            var cleaned = str.replace(/[^0-9,.\-]/g, '');
+            // Remove thousand separators (dots), keep comma as decimal
+            cleaned = cleaned.replace(/\./g, '').replace(',', '.');
+            var val = parseFloat(cleaned);
+            return isNaN(val) ? null : Math.round(val);
+        }
+
+        // Format input while typing
+        input.addEventListener('input', function() {
+            var cursorPos = this.selectionStart;
+            var raw = this.value.replace(/[^0-9]/g, '');
+            if (raw === '') {
+                this.value = '';
+                return;
+            }
+            var num = parseInt(raw, 10);
+            var formatted = num.toLocaleString('de-DE');
+            var diff = formatted.length - this.value.length;
+            this.value = formatted;
+            var newPos = cursorPos + diff;
+            this.setSelectionRange(newPos, newPos);
+        });
+
+        // Enter key triggers calculation
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                calculate();
+            }
+        });
+
+        btn.addEventListener('click', calculate);
+
+        // Build the table on load
+        buildTable(-1);
+
+        function findTierIndex(value) {
+            for (var i = 0; i < tiers.length; i++) {
+                if (value >= tiers[i].min && value <= tiers[i].max) {
+                    return i;
+                }
+            }
+            return tiers.length - 1;
+        }
+
+        function calculate() {
+            var value = parseInput(input.value);
+            if (value === null || value < 0) {
+                input.style.borderColor = '#F44336';
+                input.style.boxShadow = '0 0 0 4px rgba(244,67,54,0.1)';
+                setTimeout(function() {
+                    input.style.borderColor = '';
+                    input.style.boxShadow = '';
+                }, 1500);
+                return;
+            }
+
+            var tierIdx = findTierIndex(value);
+            var tier = tiers[tierIdx];
+            var surcharge = value * (tier.rate / 100);
+
+            // Show result
+            document.getElementById('kalk-percent').textContent = formatRate(tier.rate);
+            document.getElementById('kalk-val-input').textContent = formatEuro(value);
+            document.getElementById('kalk-val-surcharge').textContent = formatEuro(surcharge);
+
+            // Build boundary info
+            buildBoundaries(value, tierIdx);
+
+            // Rebuild table with active row
+            buildTable(tierIdx);
+
+            // Show result area with animation
+            resultEl.classList.add('visible');
+            resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function buildBoundaries(value, tierIdx) {
+            var container = document.getElementById('kalk-boundaries');
+            container.innerHTML = '';
+
+            var tier = tiers[tierIdx];
+
+            // Lower tier (less surcharge)
+            if (tierIdx < tiers.length - 1) {
+                var nextTier = tiers[tierIdx + 1];
+                var card = document.createElement('div');
+                card.className = 'kalk-boundary-card more';
+                card.innerHTML =
+                    '<div class="kalk-boundary-icon">&#9650;</div>' +
+                    '<div class="kalk-boundary-title">Mehr Zuschlag ab</div>' +
+                    '<div class="kalk-boundary-value">Unter ' + formatEuro(tier.min) + '</div>' +
+                    '<div class="kalk-boundary-detail">Nächst höhere Stufe: ' + formatRate(tiers[Math.max(0, tierIdx - 1)].rate) + ' Zuschlag</div>';
+
+                // Only show if there's a higher tier
+                if (tierIdx > 0) {
+                    container.appendChild(card);
+                }
+            }
+
+            if (tierIdx === 0) {
+                // At the highest surcharge tier
+                var cardMax = document.createElement('div');
+                cardMax.className = 'kalk-boundary-card at-max';
+                cardMax.innerHTML =
+                    '<div class="kalk-boundary-icon">&#9679;</div>' +
+                    '<div class="kalk-boundary-title">Höchste Zuschlagsstufe</div>' +
+                    '<div class="kalk-boundary-value">' + formatRate(tier.rate) + ' Zuschlag</div>' +
+                    '<div class="kalk-boundary-detail">Dies ist die maximale Zuschlagsstufe</div>';
+                container.appendChild(cardMax);
+            }
+
+            // Lower surcharge info
+            if (tierIdx < tiers.length - 1) {
+                var lowerTier = tiers[tierIdx + 1];
+                var cardLess = document.createElement('div');
+                cardLess.className = 'kalk-boundary-card less';
+                cardLess.innerHTML =
+                    '<div class="kalk-boundary-icon">&#9660;</div>' +
+                    '<div class="kalk-boundary-title">Weniger Zuschlag ab</div>' +
+                    '<div class="kalk-boundary-value">Ab ' + formatEuro(lowerTier.min) + '</div>' +
+                    '<div class="kalk-boundary-detail">Dann nur noch ' + formatRate(lowerTier.rate) + ' Zuschlag</div>';
+                container.appendChild(cardLess);
+            }
+
+            if (tierIdx === tiers.length - 1) {
+                // At the lowest surcharge tier
+                var cardMin = document.createElement('div');
+                cardMin.className = 'kalk-boundary-card at-min';
+                cardMin.innerHTML =
+                    '<div class="kalk-boundary-icon">&#9679;</div>' +
+                    '<div class="kalk-boundary-title">Niedrigste Zuschlagsstufe</div>' +
+                    '<div class="kalk-boundary-value">' + formatRate(tier.rate) + ' Zuschlag</div>' +
+                    '<div class="kalk-boundary-detail">Dies ist die minimale Zuschlagsstufe</div>';
+                container.appendChild(cardMin);
+            }
+
+            // Higher surcharge info
+            if (tierIdx > 0) {
+                var higherTier = tiers[tierIdx - 1];
+                var cardMore = document.createElement('div');
+                cardMore.className = 'kalk-boundary-card more';
+                cardMore.innerHTML =
+                    '<div class="kalk-boundary-icon">&#9650;</div>' +
+                    '<div class="kalk-boundary-title">Mehr Zuschlag unter</div>' +
+                    '<div class="kalk-boundary-value">Unter ' + formatEuro(tier.min) + '</div>' +
+                    '<div class="kalk-boundary-detail">Dann ' + formatRate(higherTier.rate) + ' Zuschlag</div>';
+                container.appendChild(cardMore);
+            }
+        }
+
+        function buildTable(activeIdx) {
+            var tbody = document.getElementById('kalk-table-body');
+            tbody.innerHTML = '';
+            tiers.forEach(function(t, i) {
+                var tr = document.createElement('tr');
+                if (i === activeIdx) tr.className = 'active-row';
+                tr.innerHTML =
+                    '<td>' + t.label + '</td>' +
+                    '<td class="zuschlag-col">' + formatRate(t.rate) + '</td>';
+                tbody.appendChild(tr);
+            });
+        }
     })();
     </script>
 </body>
