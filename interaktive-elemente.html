@@ -48,7 +48,7 @@
             position: relative;
         }
 
-        /* Kurznavigation */
+        /* Kurznavigation – Dropdown */
         .ie-nav {
             background: #fff;
             border-bottom: 1px solid #E8E8EF;
@@ -64,47 +64,119 @@
             padding: 0 24px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
+            position: relative;
         }
-        .ie-nav-inner::-webkit-scrollbar {
-            display: none;
+        .ie-nav-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1A1A2E;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            border-bottom: 3px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .ie-nav-toggle:hover {
+            color: #085eec;
+        }
+        .ie-nav-toggle.open {
+            color: #085eec;
+            border-bottom-color: #085eec;
+        }
+        .ie-nav-toggle svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+        }
+        .ie-nav-toggle.open svg {
+            transform: rotate(180deg);
+        }
+        .ie-nav-active-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #085eec;
+            margin-left: 8px;
+            padding: 4px 12px;
+            background: rgba(8,94,236,0.08);
+            border-radius: 20px;
+        }
+        .ie-nav-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid #E8E8EF;
+            border-top: none;
+            border-radius: 0 0 16px 16px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            padding: 24px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+            z-index: 200;
+        }
+        .ie-nav-dropdown.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .ie-nav-column {
+            padding: 0 28px;
+            border-right: 1px solid #F0F0F5;
+        }
+        .ie-nav-column:last-child {
+            border-right: none;
+        }
+        .ie-nav-column-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #8E8EA9;
+            padding: 0 12px 10px;
+            margin-bottom: 4px;
+            border-bottom: 1px solid #F0F0F5;
         }
         .ie-nav-link {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 16px 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #6B6B8D;
+            gap: 10px;
+            padding: 9px 12px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: #4A4A6A;
             text-decoration: none;
-            white-space: nowrap;
-            border-bottom: 3px solid transparent;
-            transition: color 0.2s, border-color 0.2s;
+            border-radius: 8px;
+            transition: background 0.15s, color 0.15s;
         }
         .ie-nav-link:hover {
-            color: #1A1A2E;
+            background: rgba(8,94,236,0.06);
+            color: #085eec;
         }
         .ie-nav-link.active {
+            background: rgba(8,94,236,0.1);
             color: #085eec;
-            border-bottom-color: #085eec;
+            font-weight: 600;
         }
         .ie-nav-link svg {
             width: 18px;
             height: 18px;
             flex-shrink: 0;
+            opacity: 0.6;
         }
-        .ie-nav-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #8E8EA9;
-            padding: 16px 12px 16px 0;
-            white-space: nowrap;
-            border-right: 1px solid #E8E8EF;
-            margin-right: 4px;
+        .ie-nav-link:hover svg,
+        .ie-nav-link.active svg {
+            opacity: 1;
         }
 
         /* Timeline Section */
@@ -1385,6 +1457,8 @@
             .tl-section { padding: 60px 0; }
             .tl-chart { padding: 10px 16px; }
             .ie-nav { top: 60px; }
+            .ie-nav-dropdown { grid-template-columns: repeat(2, 1fr); }
+            .ie-nav-column:nth-child(2) { border-right: none; }
             .tacho-section { padding: 60px 0; }
             .tacho-gauge-container { width: 320px; height: 190px; }
             .barchart-section { padding: 60px 0; }
@@ -1412,8 +1486,12 @@
             .tl-overlay-title { font-size: 1.15rem; }
             .tl-overlay-text { font-size: 0.9rem; }
             .ie-nav { top: 56px; }
-            .ie-nav-label { display: none; }
-            .ie-nav-link { padding: 12px 14px; font-size: 0.82rem; }
+            .ie-nav-dropdown { grid-template-columns: 1fr; padding: 16px 0; max-height: 60vh; overflow-y: auto; }
+            .ie-nav-column { border-right: none; border-bottom: 1px solid #F0F0F5; padding: 8px 20px 16px; }
+            .ie-nav-column:last-child { border-bottom: none; }
+            .ie-nav-toggle { font-size: 0.88rem; padding: 14px 16px; }
+            .ie-nav-active-label { font-size: 0.78rem; }
+            .ie-nav-link { padding: 8px 12px; font-size: 0.82rem; }
             .tacho-section { padding: 48px 0; }
             .tacho-gauge-container { width: 280px; height: 170px; }
             .tacho-value-number { font-size: 2.2rem; }
@@ -1518,35 +1596,149 @@
     <!-- Kurznavigation -->
     <nav class="ie-nav" id="ie-nav">
         <div class="ie-nav-inner">
-            <span class="ie-nav-label">Inhalte</span>
-            <a href="#zeitstrahl" class="ie-nav-link active" data-section="zeitstrahl">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                Zeitstrahl
-            </a>
-            <a href="#tacho" class="ie-nav-link" data-section="tacho">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 6v2"/><path d="M6.93 8.93l1.41 1.41"/><path d="M6 14h2"/><path d="M14.12 9.88l3.54-3.54"/></svg>
-                Tacho
-            </a>
-            <a href="#balkendiagramm" class="ie-nav-link" data-section="balkendiagramm">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9"/><rect x="10" y="5" width="4" height="16"/><rect x="17" y="8" width="4" height="13"/></svg>
-                Balkendiagramm
-            </a>
-            <a href="#kalkulator" class="ie-nav-link" data-section="kalkulator">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="14" y1="18" x2="16" y2="18"/></svg>
-                Kalkulator
-            </a>
-            <a href="#clickbereiche" class="ie-nav-link" data-section="clickbereiche">
+            <button class="ie-nav-toggle" id="ie-nav-toggle" aria-expanded="false" aria-controls="ie-nav-dropdown">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-                Clickbereiche
-            </a>
-            <a href="#lueckentext" class="ie-nav-link" data-section="lueckentext">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h13"/><rect x="17" y="14" width="4" height="6" rx="1" fill="none"/></svg>
-                Lückentext
-            </a>
-            <a href="#infografik" class="ie-nav-link" data-section="infografik">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><circle cx="17.5" cy="17.5" r="3.5"/></svg>
-                Infografik
-            </a>
+                Inhalte
+                <svg class="ie-nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <span class="ie-nav-active-label" id="ie-nav-active-label"></span>
+
+            <div class="ie-nav-dropdown" id="ie-nav-dropdown">
+                <!-- Spalte 1: Darstellung & Diagramme -->
+                <div class="ie-nav-column">
+                    <div class="ie-nav-column-title">Darstellung</div>
+                    <a href="#zeitstrahl" class="ie-nav-link" data-section="zeitstrahl">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        Zeitstrahl
+                    </a>
+                    <a href="#tacho" class="ie-nav-link" data-section="tacho">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 6v2"/><path d="M6.93 8.93l1.41 1.41"/><path d="M6 14h2"/><path d="M14.12 9.88l3.54-3.54"/></svg>
+                        Tacho
+                    </a>
+                    <a href="#balkendiagramm" class="ie-nav-link" data-section="balkendiagramm">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9"/><rect x="10" y="5" width="4" height="16"/><rect x="17" y="8" width="4" height="13"/></svg>
+                        Balkendiagramm
+                    </a>
+                    <a href="#infografik" class="ie-nav-link" data-section="infografik">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><circle cx="17.5" cy="17.5" r="3.5"/></svg>
+                        Infografik
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        Kreisdiagramm
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                        Liniendiagramm
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        Bildergalerie
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Kartenansicht
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="14"/><line x1="6" y1="18" x2="12" y2="14"/><line x1="18" y1="18" x2="12" y2="14"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg>
+                        Organigramm
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+                        Prozessdiagramm
+                    </a>
+                </div>
+
+                <!-- Spalte 2: Interaktion -->
+                <div class="ie-nav-column">
+                    <div class="ie-nav-column-title">Interaktion</div>
+                    <a href="#kalkulator" class="ie-nav-link" data-section="kalkulator">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="14" y1="18" x2="16" y2="18"/></svg>
+                        Kalkulator
+                    </a>
+                    <a href="#clickbereiche" class="ie-nav-link" data-section="clickbereiche">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                        Clickbereiche
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><polyline points="15 19 12 22 9 19"/><polyline points="19 9 22 12 19 15"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
+                        Drag &amp; Drop
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><circle cx="15.5" cy="15.5" r="1.5"/><circle cx="15.5" cy="8.5" r="1.5"/></svg>
+                        Hotspot-Bild
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+                        Schieberegler
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><polyline points="8 8 4 12 8 16"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                        Accordion
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 4v16"/><path d="M2 12h8"/></svg>
+                        Karteikarten
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/><line x1="3" y1="3" x2="21" y2="3"/></svg>
+                        Sortierung
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                        Zuordnung
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2v10l7 4"/></svg>
+                        Drehrad
+                    </a>
+                </div>
+
+                <!-- Spalte 3: Wissen & Quiz -->
+                <div class="ie-nav-column">
+                    <div class="ie-nav-column-title">Wissen &amp; Quiz</div>
+                    <a href="#lueckentext" class="ie-nav-link" data-section="lueckentext">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h13"/><rect x="17" y="14" width="4" height="6" rx="1" fill="none"/></svg>
+                        Lückentext
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                        Multiple Choice
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4" fill="currentColor"/></svg>
+                        Single Choice
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Wahr oder Falsch
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        Freitext-Eingabe
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        Bewertungsskala
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                        Rangfolge
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="9" height="9" rx="1"/><rect x="13" y="2" width="9" height="9" rx="1"/><rect x="2" y="13" width="9" height="9" rx="1"/><rect x="13" y="13" width="9" height="9" rx="1"/></svg>
+                        Memory-Spiel
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="3" x2="21" y2="3"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="3" y1="21" x2="21" y2="21"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
+                        Kreuzworträtsel
+                    </a>
+                    <a href="#" class="ie-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                        Wissenscheck
+                    </a>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -2308,6 +2500,26 @@
             resizeTimer = setTimeout(renderTimeline, 250);
         });
 
+        // Dropdown toggle
+        var toggleBtn = document.getElementById('ie-nav-toggle');
+        var dropdown = document.getElementById('ie-nav-dropdown');
+        var activeLabel = document.getElementById('ie-nav-active-label');
+
+        toggleBtn.addEventListener('click', function() {
+            var isOpen = dropdown.classList.toggle('open');
+            toggleBtn.classList.toggle('open', isOpen);
+            toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.ie-nav-inner')) {
+                dropdown.classList.remove('open');
+                toggleBtn.classList.remove('open');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
+
         // Kurznavigation: active state on scroll
         var navLinks = document.querySelectorAll('.ie-nav-link');
         var sections = [];
@@ -2328,21 +2540,34 @@
                 }
             });
             navLinks.forEach(function(l) { l.classList.remove('active'); });
-            if (activeSection) activeSection.link.classList.add('active');
+            if (activeSection) {
+                activeSection.link.classList.add('active');
+                activeLabel.textContent = activeSection.link.textContent.trim();
+                activeLabel.style.display = '';
+            } else {
+                activeLabel.textContent = '';
+                activeLabel.style.display = 'none';
+            }
         }
 
         window.addEventListener('scroll', updateActiveNav);
+        updateActiveNav();
 
         // Smooth scroll for nav links
         navLinks.forEach(function(link) {
             link.addEventListener('click', function(e) {
-                e.preventDefault();
                 var sectionId = this.getAttribute('data-section');
+                if (!sectionId) return; // placeholder links – do nothing
+                e.preventDefault();
                 var target = document.getElementById(sectionId);
                 if (target) {
                     var navHeight = document.getElementById('ie-nav').offsetHeight + 70;
                     var targetPos = target.offsetTop - navHeight;
                     window.scrollTo({ top: targetPos, behavior: 'smooth' });
+                    // Close dropdown after navigation
+                    dropdown.classList.remove('open');
+                    toggleBtn.classList.remove('open');
+                    toggleBtn.setAttribute('aria-expanded', 'false');
                 }
             });
         });
