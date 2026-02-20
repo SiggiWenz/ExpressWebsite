@@ -934,6 +934,233 @@
             color: #1A1A2E;
         }
 
+        /* Lückentext Section */
+        .luecken-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, #EEEDF5 0%, #F4F4F8 100%);
+        }
+        .luecken-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .luecken-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px 44px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            border: 1px solid #E8E8EF;
+        }
+        .luecken-question {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1A1A2E;
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+        .luecken-text {
+            font-size: 1rem;
+            color: #4A4A6A;
+            line-height: 2.4;
+        }
+        .luecken-text .luecken-input-wrap {
+            display: inline-block;
+            position: relative;
+            vertical-align: baseline;
+        }
+        .luecken-text input.luecken-input {
+            width: 140px;
+            padding: 6px 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            color: #1A1A2E;
+            border: 2px solid #E8E8EF;
+            border-radius: 10px;
+            background: #F9F9FC;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .luecken-text input.luecken-input:focus {
+            border-color: #085eec;
+            box-shadow: 0 0 0 4px rgba(8,94,236,0.1);
+            background: #fff;
+        }
+        .luecken-text input.luecken-input::placeholder {
+            color: #B0B0C8;
+            font-weight: 400;
+            font-size: 0.85rem;
+        }
+        .luecken-text input.luecken-input.correct {
+            border-color: #4CAF50;
+            background: rgba(76,175,80,0.06);
+            color: #2E7D32;
+        }
+        .luecken-text input.luecken-input.half {
+            border-color: #FF9800;
+            background: rgba(255,152,0,0.06);
+            color: #E65100;
+        }
+        .luecken-text input.luecken-input.wrong {
+            border-color: #F44336;
+            background: rgba(244,67,54,0.06);
+            color: #C62828;
+        }
+        .luecken-submit-row {
+            margin-top: 32px;
+            text-align: center;
+        }
+        .luecken-btn {
+            padding: 14px 40px;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+            background: linear-gradient(135deg, #085eec, #4A8DF7);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 16px rgba(8,94,236,0.25);
+        }
+        .luecken-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(8,94,236,0.35);
+        }
+        .luecken-btn:active {
+            transform: translateY(0);
+        }
+        .luecken-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 2px 8px rgba(8,94,236,0.15);
+        }
+        .luecken-result {
+            display: none;
+            margin-top: 28px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 32px 40px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            border: 1px solid #E8E8EF;
+            text-align: center;
+        }
+        .luecken-result.visible {
+            display: block;
+        }
+        .luecken-result-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #085eec, #4A8DF7);
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 6px 18px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+        .luecken-result-score {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #085eec;
+            line-height: 1.1;
+        }
+        .luecken-result-label {
+            font-size: 1rem;
+            color: #6B6B8D;
+            margin-top: 4px;
+            margin-bottom: 20px;
+        }
+        .luecken-detail-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: left;
+        }
+        .luecken-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            background: #F9F9FC;
+            font-size: 0.92rem;
+        }
+        .luecken-detail-item.correct {
+            background: rgba(76,175,80,0.08);
+        }
+        .luecken-detail-item.half {
+            background: rgba(255,152,0,0.08);
+        }
+        .luecken-detail-item.wrong {
+            background: rgba(244,67,54,0.08);
+        }
+        .luecken-detail-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .luecken-detail-item.correct .luecken-detail-icon {
+            background: #4CAF50;
+            color: #fff;
+        }
+        .luecken-detail-item.half .luecken-detail-icon {
+            background: #FF9800;
+            color: #fff;
+        }
+        .luecken-detail-item.wrong .luecken-detail-icon {
+            background: #F44336;
+            color: #fff;
+        }
+        .luecken-detail-text {
+            flex: 1;
+            color: #4A4A6A;
+            line-height: 1.4;
+        }
+        .luecken-detail-text strong {
+            color: #1A1A2E;
+        }
+        .luecken-detail-points {
+            font-weight: 700;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        .luecken-detail-item.correct .luecken-detail-points {
+            color: #4CAF50;
+        }
+        .luecken-detail-item.half .luecken-detail-points {
+            color: #FF9800;
+        }
+        .luecken-detail-item.wrong .luecken-detail-points {
+            color: #F44336;
+        }
+        .luecken-reset-row {
+            margin-top: 20px;
+        }
+        .luecken-btn-reset {
+            padding: 10px 28px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            color: #085eec;
+            background: #fff;
+            border: 2px solid #E8E8EF;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .luecken-btn-reset:hover {
+            border-color: #085eec;
+            background: rgba(8,94,236,0.04);
+        }
+
         /* Responsive */
         @media (max-width: 900px) {
             .ie-hero h1 { font-size: 2rem; }
@@ -951,6 +1178,9 @@
             .click-buttons-row { gap: 16px; }
             .click-btn { padding: 24px 16px; min-height: 150px; }
             .click-panel-inner { padding: 24px; }
+            .luecken-section { padding: 60px 0; }
+            .luecken-card { padding: 28px 24px; }
+            .luecken-result { padding: 24px; }
         }
         @media (max-width: 600px) {
             .ie-hero { padding: 80px 0 48px; }
@@ -991,6 +1221,12 @@
             .click-btn-label { font-size: 0.88rem; text-align: left; }
             .click-panel-inner { padding: 20px 16px; margin-top: 12px; }
             .click-panel-inner ul li { font-size: 0.85rem; }
+            .luecken-section { padding: 48px 0; }
+            .luecken-card { padding: 24px 20px; border-radius: 16px; }
+            .luecken-text input.luecken-input { width: 110px; font-size: 0.85rem; padding: 5px 8px; }
+            .luecken-result { padding: 20px 16px; border-radius: 16px; }
+            .luecken-result-score { font-size: 2rem; }
+            .luecken-btn { width: 100%; }
         }
     </style>
 </head>
@@ -1074,6 +1310,10 @@
             <a href="#clickbereiche" class="ie-nav-link" data-section="clickbereiche">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
                 Clickbereiche
+            </a>
+            <a href="#lueckentext" class="ie-nav-link" data-section="lueckentext">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h13"/><rect x="17" y="14" width="4" height="6" rx="1" fill="none"/></svg>
+                Lückentext
             </a>
         </div>
     </nav>
@@ -1266,6 +1506,44 @@
                             <li><strong>WH2/16:</strong> Bis € 7.500,- prämienfrei (Erhöhung möglich)</li>
                             <li><strong>WH25:</strong> € 30.000,- (keine Erhöhung möglich)</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lückentext Section -->
+    <section id="lueckentext" class="luecken-section">
+        <div class="container">
+            <div class="ie-section-header">
+                <span class="section-badge" style="background: rgba(8,94,236,0.15); color: #4A8DF7;">Golfsport</span>
+                <h2>Lückentext<span class="highlight">_</span></h2>
+                <p>Testen Sie Ihr Wissen über Golf – füllen Sie die Lücken im Text aus.</p>
+            </div>
+            <div class="luecken-wrapper">
+                <div class="luecken-card">
+                    <div class="luecken-question">Vervollständigen Sie den folgenden Text über die Grundlagen des Golfsports:</div>
+                    <div class="luecken-text" id="luecken-text">
+                        Golf wird auf einem Platz mit
+                        <span class="luecken-input-wrap"><input type="text" class="luecken-input" data-answer="18" data-index="0" placeholder="?" autocomplete="off"></span>
+                        Löchern gespielt. Das Ziel ist es, den Ball mit möglichst wenigen Schlägen ins Loch zu befördern. Schafft man ein Loch mit einem Schlag unter Par, nennt man das einen
+                        <span class="luecken-input-wrap"><input type="text" class="luecken-input" data-answer="Birdie" data-index="1" placeholder="?" autocomplete="off"></span>.
+                        Der bekannteste Golfwettbewerb der Welt ist das
+                        <span class="luecken-input-wrap"><input type="text" class="luecken-input" data-answer="Masters" data-index="2" placeholder="?" autocomplete="off"></span>
+                        Turnier in Augusta. Wird ein Loch mit zwei Schlägen unter Par gespielt, spricht man von einem
+                        <span class="luecken-input-wrap"><input type="text" class="luecken-input" data-answer="Eagle" data-index="3" placeholder="?" autocomplete="off"></span>.
+                    </div>
+                    <div class="luecken-submit-row">
+                        <button class="luecken-btn" id="luecken-submit">Antworten prüfen</button>
+                    </div>
+                </div>
+                <div class="luecken-result" id="luecken-result">
+                    <span class="luecken-result-badge">Ihr Ergebnis</span>
+                    <div class="luecken-result-score" id="luecken-score"></div>
+                    <div class="luecken-result-label" id="luecken-result-label"></div>
+                    <div class="luecken-detail-list" id="luecken-details"></div>
+                    <div class="luecken-reset-row">
+                        <button class="luecken-btn-reset" id="luecken-reset">Nochmal versuchen</button>
                     </div>
                 </div>
             </div>
@@ -2373,6 +2651,194 @@
                 tbody.appendChild(tr);
             });
         }
+    })();
+    </script>
+
+    <!-- Lückentext Script -->
+    <script>
+    (function() {
+        var submitBtn = document.getElementById('luecken-submit');
+        var resultEl = document.getElementById('luecken-result');
+        var resetBtn = document.getElementById('luecken-reset');
+        if (!submitBtn || !resultEl) return;
+
+        var inputs = document.querySelectorAll('.luecken-input');
+
+        // Levenshtein distance for fuzzy matching
+        function levenshtein(a, b) {
+            var matrix = [];
+            for (var i = 0; i <= b.length; i++) {
+                matrix[i] = [i];
+            }
+            for (var j = 0; j <= a.length; j++) {
+                matrix[0][j] = j;
+            }
+            for (var i = 1; i <= b.length; i++) {
+                for (var j = 1; j <= a.length; j++) {
+                    if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                        matrix[i][j] = matrix[i - 1][j - 1];
+                    } else {
+                        matrix[i][j] = Math.min(
+                            matrix[i - 1][j - 1] + 1,
+                            matrix[i][j - 1] + 1,
+                            matrix[i - 1][j] + 1
+                        );
+                    }
+                }
+            }
+            return matrix[b.length][a.length];
+        }
+
+        // Score a single answer: 1 = correct, 0.5 = close (typo), 0 = wrong
+        function scoreAnswer(userInput, correctAnswer) {
+            var user = userInput.trim();
+            var correct = correctAnswer.trim();
+
+            if (user === '') return { points: 0, status: 'wrong' };
+
+            // Exact match (case-insensitive)
+            if (user.toLowerCase() === correct.toLowerCase()) {
+                return { points: 1, status: 'correct' };
+            }
+
+            // Fuzzy match using Levenshtein distance
+            var userLower = user.toLowerCase();
+            var correctLower = correct.toLowerCase();
+            var dist = levenshtein(userLower, correctLower);
+            var maxLen = Math.max(userLower.length, correctLower.length);
+
+            // Allow typo tolerance: for short words (<=4 chars) max 1 edit,
+            // for longer words max 2 edits, but the word must still be recognizable
+            var threshold;
+            if (maxLen <= 3) {
+                threshold = 1;
+            } else if (maxLen <= 6) {
+                threshold = 2;
+            } else {
+                threshold = Math.floor(maxLen * 0.3);
+            }
+
+            if (dist > 0 && dist <= threshold) {
+                return { points: 0.5, status: 'half' };
+            }
+
+            return { points: 0, status: 'wrong' };
+        }
+
+        function evaluate() {
+            var totalPoints = 0;
+            var maxPoints = inputs.length;
+            var details = [];
+
+            inputs.forEach(function(input) {
+                var correctAnswer = input.getAttribute('data-answer');
+                var userAnswer = input.value;
+                var result = scoreAnswer(userAnswer, correctAnswer);
+
+                totalPoints += result.points;
+                details.push({
+                    userAnswer: userAnswer || '(leer)',
+                    correctAnswer: correctAnswer,
+                    points: result.points,
+                    status: result.status
+                });
+
+                // Style the input
+                input.classList.remove('correct', 'half', 'wrong');
+                input.classList.add(result.status);
+                input.disabled = true;
+            });
+
+            // Disable submit button
+            submitBtn.disabled = true;
+
+            // Show result
+            var scoreStr = totalPoints % 1 === 0 ? totalPoints.toString() : totalPoints.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+            document.getElementById('luecken-score').textContent = scoreStr + ' von ' + maxPoints + ' Punkten';
+
+            var correctCount = details.filter(function(d) { return d.status === 'correct'; }).length;
+            var halfCount = details.filter(function(d) { return d.status === 'half'; }).length;
+            var wrongCount = details.filter(function(d) { return d.status === 'wrong'; }).length;
+
+            var labelParts = [];
+            if (correctCount > 0) labelParts.push(correctCount + ' richtig');
+            if (halfCount > 0) labelParts.push(halfCount + ' teilweise richtig');
+            if (wrongCount > 0) labelParts.push(wrongCount + ' falsch');
+            document.getElementById('luecken-result-label').textContent = labelParts.join(' · ');
+
+            // Build detail list
+            var detailsContainer = document.getElementById('luecken-details');
+            detailsContainer.innerHTML = '';
+            details.forEach(function(d, i) {
+                var item = document.createElement('div');
+                item.className = 'luecken-detail-item ' + d.status;
+
+                var iconText;
+                if (d.status === 'correct') iconText = '&#10003;';
+                else if (d.status === 'half') iconText = '&#189;';
+                else iconText = '&#10007;';
+
+                var pointsLabel;
+                if (d.status === 'correct') pointsLabel = '1 Punkt';
+                else if (d.status === 'half') pointsLabel = '0,5 Punkte';
+                else pointsLabel = '0 Punkte';
+
+                var explanation;
+                if (d.status === 'correct') {
+                    explanation = '<strong>' + d.correctAnswer + '</strong> – richtig!';
+                } else if (d.status === 'half') {
+                    explanation = 'Ihre Antwort: <strong>' + escapeHtml(d.userAnswer) + '</strong> – gemeint war <strong>' + d.correctAnswer + '</strong> (Tippfehler)';
+                } else {
+                    explanation = 'Ihre Antwort: <strong>' + escapeHtml(d.userAnswer) + '</strong> – richtig wäre <strong>' + d.correctAnswer + '</strong>';
+                }
+
+                item.innerHTML =
+                    '<div class="luecken-detail-icon">' + iconText + '</div>' +
+                    '<div class="luecken-detail-text">Lücke ' + (i + 1) + ': ' + explanation + '</div>' +
+                    '<div class="luecken-detail-points">' + pointsLabel + '</div>';
+                detailsContainer.appendChild(item);
+            });
+
+            resultEl.classList.add('visible');
+            resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function escapeHtml(str) {
+            var div = document.createElement('div');
+            div.appendChild(document.createTextNode(str));
+            return div.innerHTML;
+        }
+
+        function reset() {
+            inputs.forEach(function(input) {
+                input.value = '';
+                input.disabled = false;
+                input.classList.remove('correct', 'half', 'wrong');
+            });
+            submitBtn.disabled = false;
+            resultEl.classList.remove('visible');
+            inputs[0].focus();
+        }
+
+        submitBtn.addEventListener('click', evaluate);
+
+        if (resetBtn) {
+            resetBtn.addEventListener('click', reset);
+        }
+
+        // Allow Enter key to move to next input or submit
+        inputs.forEach(function(input, idx) {
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (idx < inputs.length - 1) {
+                        inputs[idx + 1].focus();
+                    } else {
+                        evaluate();
+                    }
+                }
+            });
+        });
     })();
     </script>
 </body>
