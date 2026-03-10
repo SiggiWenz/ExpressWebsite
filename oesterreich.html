@@ -62,10 +62,22 @@
             white-space: nowrap;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        .logo-marquee-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
         .logo-marquee-item:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             color: var(--imc-orange);
+        }
+        .marquee-logo {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            flex-shrink: 0;
+            border-radius: 4px;
         }
         @keyframes marquee-scroll {
             0% { transform: translateX(0); }
@@ -374,85 +386,85 @@
         </div>
         <div class="logo-marquee-wrapper">
             <div class="logo-marquee-track">
-                <span class="logo-marquee-item">Raiffeisen</span>
-                <span class="logo-marquee-item">Generali Versicherung</span>
-                <span class="logo-marquee-item">GRAWE Versicherung</span>
-                <span class="logo-marquee-item">Doppelmayr</span>
-                <span class="logo-marquee-item">Alpla</span>
-                <span class="logo-marquee-item">Palfinger</span>
-                <span class="logo-marquee-item">Wiener Städtische</span>
-                <span class="logo-marquee-item">Donau Versicherung</span>
-                <span class="logo-marquee-item">Flughafen Wien</span>
-                <span class="logo-marquee-item">Austrian Airlines</span>
-                <span class="logo-marquee-item">Fresenius Kabi</span>
-                <span class="logo-marquee-item">ERGO</span>
-                <span class="logo-marquee-item">Allianz</span>
-                <span class="logo-marquee-item">Austrian Power Grid</span>
-                <span class="logo-marquee-item">Backaldrin</span>
-                <span class="logo-marquee-item">Frankstahl</span>
-                <span class="logo-marquee-item">Gewista</span>
-                <span class="logo-marquee-item">Helvetia Versicherung</span>
-                <span class="logo-marquee-item">ÖAMTC</span>
-                <span class="logo-marquee-item">Österr. Beamtenversicherung</span>
-                <span class="logo-marquee-item">Internorm</span>
-                <span class="logo-marquee-item">Bausparkasse Wüstenrot</span>
-                <span class="logo-marquee-item">Zürich Versicherung</span>
-                <span class="logo-marquee-item">UNIQA Versicherung</span>
-                <span class="logo-marquee-item">Wiener Linien</span>
-                <span class="logo-marquee-item">Pensionsversicherungsanstalt</span>
-                <span class="logo-marquee-item">BEKO</span>
-                <span class="logo-marquee-item">Leder &amp; Schuh</span>
-                <span class="logo-marquee-item">Holding Graz</span>
-                <span class="logo-marquee-item">Wiener Sozialdienste</span>
-                <span class="logo-marquee-item">Unicredit</span>
-                <span class="logo-marquee-item">Mavie Med Holding</span>
-                <span class="logo-marquee-item">Donhauser</span>
-                <span class="logo-marquee-item">Constantia Industries</span>
-                <span class="logo-marquee-item">Primetals</span>
-                <span class="logo-marquee-item">Bank für Tirol und Vorarlberg</span>
-                <span class="logo-marquee-item">Volkskreditbank</span>
-                <span class="logo-marquee-item">Berglandmilch</span>
-                <span class="logo-marquee-item">Libro Pagro (MTH)</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/raiffeisen.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Raiffeisen</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/generali.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Generali Versicherung</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/grawe.at" alt="" class="marquee-logo" onerror="this.style.display='none'">GRAWE Versicherung</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/doppelmayr.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Doppelmayr</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/alpla.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Alpla</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/palfinger.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Palfinger</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/wienerstaedtische.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Wiener Städtische</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/donauversicherung.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Donau Versicherung</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/viennaairport.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Flughafen Wien</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/austrian.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Austrian Airlines</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/fresenius-kabi.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Fresenius Kabi</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/ergo.com" alt="" class="marquee-logo" onerror="this.style.display='none'">ERGO</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/allianz.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Allianz</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/apg.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Austrian Power Grid</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/backaldrin.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Backaldrin</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/frankstahl.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Frankstahl</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/gewista.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Gewista</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/helvetia.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Helvetia Versicherung</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/oeamtc.at" alt="" class="marquee-logo" onerror="this.style.display='none'">ÖAMTC</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/oebv.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Österr. Beamtenversicherung</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/internorm.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Internorm</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/wuestenrot.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Bausparkasse Wüstenrot</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/zurich.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Zürich Versicherung</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/uniqa.at" alt="" class="marquee-logo" onerror="this.style.display='none'">UNIQA Versicherung</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/wienerlinien.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Wiener Linien</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/pv.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Pensionsversicherungsanstalt</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/beko.at" alt="" class="marquee-logo" onerror="this.style.display='none'">BEKO</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/humanic.net" alt="" class="marquee-logo" onerror="this.style.display='none'">Leder &amp; Schuh</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/holding-graz.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Holding Graz</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/wsd.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Wiener Sozialdienste</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/unicreditgroup.eu" alt="" class="marquee-logo" onerror="this.style.display='none'">Unicredit</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/mavie.care" alt="" class="marquee-logo" onerror="this.style.display='none'">Mavie Med Holding</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/donhauser.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Donhauser</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/constantia-industries.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Constantia Industries</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/primetals.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Primetals</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/btv.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Bank für Tirol und Vorarlberg</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/volkskreditbank.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Volkskreditbank</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/berglandmilch.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Berglandmilch</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/libro.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Libro Pagro (MTH)</span>
                 <!-- Duplicate for seamless loop -->
-                <span class="logo-marquee-item">Raiffeisen</span>
-                <span class="logo-marquee-item">Generali Versicherung</span>
-                <span class="logo-marquee-item">GRAWE Versicherung</span>
-                <span class="logo-marquee-item">Doppelmayr</span>
-                <span class="logo-marquee-item">Alpla</span>
-                <span class="logo-marquee-item">Palfinger</span>
-                <span class="logo-marquee-item">Wiener Städtische</span>
-                <span class="logo-marquee-item">Donau Versicherung</span>
-                <span class="logo-marquee-item">Flughafen Wien</span>
-                <span class="logo-marquee-item">Austrian Airlines</span>
-                <span class="logo-marquee-item">Fresenius Kabi</span>
-                <span class="logo-marquee-item">ERGO</span>
-                <span class="logo-marquee-item">Allianz</span>
-                <span class="logo-marquee-item">Austrian Power Grid</span>
-                <span class="logo-marquee-item">Backaldrin</span>
-                <span class="logo-marquee-item">Frankstahl</span>
-                <span class="logo-marquee-item">Gewista</span>
-                <span class="logo-marquee-item">Helvetia Versicherung</span>
-                <span class="logo-marquee-item">ÖAMTC</span>
-                <span class="logo-marquee-item">Österr. Beamtenversicherung</span>
-                <span class="logo-marquee-item">Internorm</span>
-                <span class="logo-marquee-item">Bausparkasse Wüstenrot</span>
-                <span class="logo-marquee-item">Zürich Versicherung</span>
-                <span class="logo-marquee-item">UNIQA Versicherung</span>
-                <span class="logo-marquee-item">Wiener Linien</span>
-                <span class="logo-marquee-item">Pensionsversicherungsanstalt</span>
-                <span class="logo-marquee-item">BEKO</span>
-                <span class="logo-marquee-item">Leder &amp; Schuh</span>
-                <span class="logo-marquee-item">Holding Graz</span>
-                <span class="logo-marquee-item">Wiener Sozialdienste</span>
-                <span class="logo-marquee-item">Unicredit</span>
-                <span class="logo-marquee-item">Mavie Med Holding</span>
-                <span class="logo-marquee-item">Donhauser</span>
-                <span class="logo-marquee-item">Constantia Industries</span>
-                <span class="logo-marquee-item">Primetals</span>
-                <span class="logo-marquee-item">Bank für Tirol und Vorarlberg</span>
-                <span class="logo-marquee-item">Volkskreditbank</span>
-                <span class="logo-marquee-item">Berglandmilch</span>
-                <span class="logo-marquee-item">Libro Pagro (MTH)</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/raiffeisen.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Raiffeisen</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/generali.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Generali Versicherung</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/grawe.at" alt="" class="marquee-logo" onerror="this.style.display='none'">GRAWE Versicherung</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/doppelmayr.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Doppelmayr</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/alpla.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Alpla</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/palfinger.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Palfinger</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/wienerstaedtische.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Wiener Städtische</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/donauversicherung.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Donau Versicherung</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/viennaairport.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Flughafen Wien</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/austrian.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Austrian Airlines</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/fresenius-kabi.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Fresenius Kabi</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/ergo.com" alt="" class="marquee-logo" onerror="this.style.display='none'">ERGO</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/allianz.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Allianz</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/apg.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Austrian Power Grid</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/backaldrin.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Backaldrin</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/frankstahl.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Frankstahl</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/gewista.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Gewista</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/helvetia.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Helvetia Versicherung</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/oeamtc.at" alt="" class="marquee-logo" onerror="this.style.display='none'">ÖAMTC</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/oebv.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Österr. Beamtenversicherung</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/internorm.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Internorm</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/wuestenrot.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Bausparkasse Wüstenrot</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/zurich.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Zürich Versicherung</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/uniqa.at" alt="" class="marquee-logo" onerror="this.style.display='none'">UNIQA Versicherung</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/wienerlinien.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Wiener Linien</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/pv.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Pensionsversicherungsanstalt</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/beko.at" alt="" class="marquee-logo" onerror="this.style.display='none'">BEKO</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/humanic.net" alt="" class="marquee-logo" onerror="this.style.display='none'">Leder &amp; Schuh</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/holding-graz.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Holding Graz</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/wsd.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Wiener Sozialdienste</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/unicreditgroup.eu" alt="" class="marquee-logo" onerror="this.style.display='none'">Unicredit</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/mavie.care" alt="" class="marquee-logo" onerror="this.style.display='none'">Mavie Med Holding</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/donhauser.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Donhauser</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/constantia-industries.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Constantia Industries</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/primetals.com" alt="" class="marquee-logo" onerror="this.style.display='none'">Primetals</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/btv.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Bank für Tirol und Vorarlberg</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/volkskreditbank.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Volkskreditbank</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/berglandmilch.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Berglandmilch</span>
+                <span class="logo-marquee-item"><img src="https://logo.clearbit.com/libro.at" alt="" class="marquee-logo" onerror="this.style.display='none'">Libro Pagro (MTH)</span>
             </div>
         </div>
     </section>
