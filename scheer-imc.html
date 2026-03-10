@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Scheer IMC AG - Europas führender Anbieter für digitale Unternehmensbildung. Seit 1996, über 1.300 Kunden, 10 Mio. Lernende weltweit. Hauptsitz Saarbrücken.">
+    <meta name="keywords" content="Scheer IMC, imc AG, E-Learning, LMS, Learning Management System, imc Express, Content Erstellung, Saarbrücken">
+    <title>Scheer IMC | Europas führender Anbieter für digitale Unternehmensbildung</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto 0;
+            padding-left: 2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--imc-orange), var(--color-gray-200));
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative;
+            padding: 0 0 2.5rem 2rem;
+        }
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 4px;
+            width: 13px;
+            height: 13px;
+            background: var(--imc-orange);
+            border-radius: 50%;
+            border: 3px solid var(--color-white);
+            box-shadow: 0 0 0 3px var(--imc-orange);
+            transform: translateX(-2px);
+        }
+        .timeline-year {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--imc-orange);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .timeline-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-black);
+            margin: 0.25rem 0;
+        }
+        .timeline-desc {
+            font-size: 0.95rem;
+            color: var(--color-gray-600);
+            line-height: 1.6;
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .stat-card {
+            background: var(--color-white);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border: 1px solid var(--color-gray-200);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+        .stat-number {
+            font-size: 2.75rem;
+            font-weight: 800;
+            color: var(--imc-orange);
+            line-height: 1.2;
+        }
+        .stat-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-top: 0.5rem;
+        }
+        .stat-desc {
+            font-size: 0.85rem;
+            color: var(--color-gray-600);
+            margin-top: 0.25rem;
+        }
+
+        /* Location Grid */
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .location-card {
+            background: var(--color-white);
+            border-radius: 16px;
+            padding: 1.75rem;
+            border: 1px solid var(--color-gray-200);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .location-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .location-card.hq {
+            border-color: var(--imc-orange);
+            background: linear-gradient(135deg, var(--imc-orange-subtle), var(--color-white));
+        }
+        .location-flag {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        .location-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 0.25rem;
+        }
+        .location-city {
+            font-size: 0.9rem;
+            color: var(--color-gray-600);
+        }
+        .location-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--imc-orange);
+            background: var(--imc-orange-subtle);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .product-card {
+            background: var(--color-white);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--color-gray-200);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .product-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--imc-orange-subtle);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: var(--imc-orange);
+        }
+        .product-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+        .product-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 0.5rem;
+        }
+        .product-card p {
+            font-size: 0.95rem;
+            color: var(--color-gray-600);
+            line-height: 1.6;
+        }
+
+        /* Awards */
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .award-card {
+            background: var(--color-white);
+            border-radius: 16px;
+            padding: 1.75rem;
+            text-align: center;
+            border: 1px solid var(--color-gray-200);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease;
+        }
+        .award-card:hover {
+            transform: translateY(-4px);
+        }
+        .award-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .award-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 0.25rem;
+        }
+        .award-card p {
+            font-size: 0.85rem;
+            color: var(--color-gray-600);
+        }
+        .award-year {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--imc-orange);
+        }
+
+        /* Leadership */
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .leader-card {
+            background: var(--color-white);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border: 1px solid var(--color-gray-200);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        }
+        .leader-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--imc-orange-subtle), #FFE0D0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--imc-orange);
+        }
+        .leader-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 0.25rem;
+        }
+        .leader-role {
+            font-size: 0.85rem;
+            color: var(--imc-orange);
+            font-weight: 600;
+        }
+
+        /* Founder Section */
+        .founder-section {
+            background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+            padding: 5rem 0;
+        }
+        .founder-content {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 3rem;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .founder-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--imc-orange), #FF8A5C);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+        .founder-info h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: 0.25rem;
+        }
+        .founder-title {
+            font-size: 0.95rem;
+            color: var(--imc-orange);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .founder-info p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .locations-grid { grid-template-columns: repeat(2, 1fr); }
+            .products-grid { grid-template-columns: 1fr; }
+            .awards-grid { grid-template-columns: 1fr; }
+            .leadership-grid { grid-template-columns: repeat(2, 1fr); }
+            .founder-content { grid-template-columns: 1fr; text-align: center; }
+            .founder-avatar { margin: 0 auto; }
+            .stat-number { font-size: 2rem; }
+        }
+        @media (max-width: 480px) {
+            .stats-row { grid-template-columns: 1fr; }
+            .locations-grid { grid-template-columns: 1fr; }
+            .leadership-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="imc-express-logo-horizontal-main-logo.svg" alt="imc Express" class="logo-img">
+            </a>
+            <button class="nav-toggle" aria-label="Navigation umschalten">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li class="nav-dropdown">
+                    <a href="features.html" class="nav-dropdown-toggle">Produkt <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="erste-schritte.html">Erste Schritte</a></li>
+                        <li><a href="airis.html">Airis (KI)</a></li>
+                        <li><a href="kurs-vorlagen.html">Kurs Vorlagen</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="vorteile.html" class="nav-dropdown-toggle">Vorteile <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="vorteile.html">Vorteile</a></li>
+                        <li><a href="airis.html">KI (Airis)</a></li>
+                        <li><a href="tool-vergleich.html">Tool Vergleich</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="referenzen.html" class="nav-dropdown-toggle">Referenzen <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="referenzen-ueberblick.html">Überblick</a></li>
+                        <li><a href="referenzen.html">Referenzen</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="preise.html" class="nav-dropdown-toggle">Preise <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="preise.html">Preise</a></li>
+                        <li><a href="roi-kalkulator.html">ROI Kalkulator</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="#" class="nav-dropdown-toggle active">Unternehmen <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="oesterreich.html">Österreich</a></li>
+                        <li><a href="scheer-imc.html" class="active">Scheer IMC</a></li>
+                    </ul>
+                </li>
+                <li><a href="kontakt.html" class="btn btn-nav">Demo anfragen</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <span class="section-badge">Unternehmen</span>
+            <h1>Scheer IMC<span class="highlight">_</span></h1>
+            <p class="page-subtitle">Europas führender Full-Service-Anbieter für digitale Unternehmensbildung. Seit 1996 gestalten wir mit Technologie, Inhalten und Beratung die Zukunft des Lernens.</p>
+        </div>
+    </header>
+
+    <!-- Key Stats -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Scheer IMC auf einen Blick<span class="highlight">_</span></h2>
+                <p>Zahlen und Fakten, die für sich sprechen</p>
+            </div>
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-number">1996</div>
+                    <div class="stat-label">Gegründet</div>
+                    <div class="stat-desc">In Saarbrücken, Deutschland</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">400+</div>
+                    <div class="stat-label">Experten</div>
+                    <div class="stat-desc">An 12 Standorten weltweit</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1.300+</div>
+                    <div class="stat-label">Kunden</div>
+                    <div class="stat-desc">Unternehmen und Organisationen</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10 Mio.</div>
+                    <div class="stat-label">Lernende</div>
+                    <div class="stat-desc">Weltweit auf unseren Plattformen</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder Section -->
+    <section class="founder-section">
+        <div class="container">
+            <div class="founder-content">
+                <div class="founder-avatar">AWS</div>
+                <div class="founder-info">
+                    <h3>Prof. Dr. August-Wilhelm Scheer</h3>
+                    <div class="founder-title">Gründer und Vorsitzender des Aufsichtsrats</div>
+                    <p>Prof. Scheer gründete die imc AG 1996 als Spin-off an der Universität des Saarlandes. Als Erfinder des ARIS-Konzepts, ehemaliger Präsident des BITKOM und Gründer der IDS Scheer AG ist er eine der prägendsten Persönlichkeiten der deutschen IT-Branche. Die Scheer IMC AG ist Teil der Scheer Gruppe mit insgesamt rund 1.200 Mitarbeitenden.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products & Services -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Produkte &amp; Services<span class="highlight">_</span></h2>
+                <p>Ein umfassendes Portfolio für digitale Unternehmensbildung</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3>imc Learning Suite</h3>
+                    <p>Das preisgekrönte Learning Management System. Top 20 LMS weltweit (Training Industry 2024), Strategic Challenger in der Fosway 9-Grid 2025. Gamification, Kompetenzmanagement, Virtual Classroom und umfassende Analytik.</p>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                            <polyline points="2 17 12 22 22 17"/>
+                            <polyline points="2 12 12 17 22 12"/>
+                        </svg>
+                    </div>
+                    <h3>imc Express</h3>
+                    <p>Die KI-gestützte Autorensoftware für schnelle E-Learning-Erstellung. 90% Automatisierung, über 80 Sprachen, keine Spezialisten nötig. Perfekt für Fachexpertinnen und Fachexperten, die Wissen schnell digitalisieren wollen.</p>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 20h9"/>
+                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                        </svg>
+                    </div>
+                    <h3>imc Content Studio</h3>
+                    <p>Die professionelle Autorensoftware für anspruchsvolle, interaktive Lerninhalte. Screen Recordings, Webcam-Aufnahmen, benutzerdefiniertes JavaScript und CSS für maximale Gestaltungsfreiheit.</p>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                    <h3>Beratung &amp; Content-Erstellung</h3>
+                    <p>Strategische Lernberatung, professionelle Content-Produktion durch imc Studios und Standard Content zu Compliance, Datenschutz und Arbeitssicherheit. Von der Bedarfsanalyse bis zur fertigen Lösung.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Locations -->
+    <section class="section" style="background: var(--color-gray-50);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Weltweit vor Ort<span class="highlight">_</span></h2>
+                <p>12 Standorte auf 4 Kontinenten - immer in Ihrer Nähe</p>
+            </div>
+            <div class="locations-grid">
+                <div class="location-card hq">
+                    <div class="location-flag">&#127465;&#127466;</div>
+                    <h3>Deutschland</h3>
+                    <div class="location-city">Saarbrücken, München, Freiburg, Essen</div>
+                    <span class="location-badge">Hauptsitz</span>
+                </div>
+                <div class="location-card">
+                    <div class="location-flag">&#127462;&#127481;</div>
+                    <h3>Österreich</h3>
+                    <div class="location-city">Graz, Wien</div>
+                </div>
+                <div class="location-card">
+                    <div class="location-flag">&#127464;&#127469;</div>
+                    <h3>Schweiz</h3>
+                    <div class="location-city">Zürich</div>
+                </div>
+                <div class="location-card">
+                    <div class="location-flag">&#127475;&#127473;</div>
+                    <h3>Benelux</h3>
+                    <div class="location-city">Niederlande</div>
+                </div>
+                <div class="location-card">
+                    <div class="location-flag">&#127468;&#127463;</div>
+                    <h3>Vereinigtes Königreich</h3>
+                    <div class="location-city">London</div>
+                </div>
+                <div class="location-card">
+                    <div class="location-flag">&#127482;&#127480;</div>
+                    <h3>USA</h3>
+                    <div class="location-city">East Coast</div>
+                </div>
+                <div class="location-card">
+                    <div class="location-flag">&#127480;&#127468;</div>
+                    <h3>Singapur</h3>
+                    <div class="location-city">Singapur</div>
+                </div>
+                <div class="location-card">
+                    <div class="location-flag">&#127462;&#127482;</div>
+                    <h3>Australien</h3>
+                    <div class="location-city">Melbourne</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Unternehmensführung<span class="highlight">_</span></h2>
+                <p>Erfahrene Führungspersönlichkeiten an der Spitze</p>
+            </div>
+            <div class="leadership-grid">
+                <div class="leader-card">
+                    <div class="leader-avatar">CW</div>
+                    <h4>Christian Wachter</h4>
+                    <div class="leader-role">Co-CEO</div>
+                </div>
+                <div class="leader-card">
+                    <div class="leader-avatar">SB</div>
+                    <h4>Sven R. Becker</h4>
+                    <div class="leader-role">Co-CEO</div>
+                </div>
+                <div class="leader-card">
+                    <div class="leader-avatar">RM</div>
+                    <h4>Roman Muth</h4>
+                    <div class="leader-role">Vorstand Produkt &amp; Technik</div>
+                </div>
+                <div class="leader-card">
+                    <div class="leader-avatar">AWS</div>
+                    <h4>Prof. Dr. A.-W. Scheer</h4>
+                    <div class="leader-role">Aufsichtsratsvorsitzender</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards -->
+    <section class="section" style="background: var(--color-gray-50);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Auszeichnungen<span class="highlight">_</span></h2>
+                <p>International anerkannt für Exzellenz in der digitalen Bildung</p>
+            </div>
+            <div class="awards-grid">
+                <div class="award-card">
+                    <div class="award-icon">&#127942;</div>
+                    <h4>Brandon Hall Gold Award</h4>
+                    <p>Best Compliance Training</p>
+                    <span class="award-year">2025</span>
+                </div>
+                <div class="award-card">
+                    <div class="award-icon">&#127941;</div>
+                    <h4>Fosway 9-Grid</h4>
+                    <p>Strategic Challenger - Learning Systems</p>
+                    <span class="award-year">2025</span>
+                </div>
+                <div class="award-card">
+                    <div class="award-icon">&#11088;</div>
+                    <h4>Training Industry Top 20 LMS</h4>
+                    <p>imc Learning Suite</p>
+                    <span class="award-year">2024</span>
+                </div>
+                <div class="award-card">
+                    <div class="award-icon">&#129302;</div>
+                    <h4>Top AI in Training</h4>
+                    <p>Training Industry Auszeichnung</p>
+                    <span class="award-year">2024</span>
+                </div>
+                <div class="award-card">
+                    <div class="award-icon">&#127942;</div>
+                    <h4>Brandon Hall Bronze Awards</h4>
+                    <p>Excellence in Technology (2 Kategorien)</p>
+                    <span class="award-year">2024</span>
+                </div>
+                <div class="award-card">
+                    <div class="award-icon">&#127919;</div>
+                    <h4>Beste Software Deutschlands</h4>
+                    <p>3. Platz unter 600 LMS weltweit</p>
+                    <span class="award-year">2014</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company History -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Unsere Geschichte<span class="highlight">_</span></h2>
+                <p>Vom Universitäts-Spin-off zum europäischen Marktführer</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">1996</div>
+                    <div class="timeline-title">Gründung</div>
+                    <div class="timeline-desc">Prof. Dr. August-Wilhelm Scheer gründet die imc information multimedia communication AG als Spin-off an der Universität des Saarlandes in Saarbrücken.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2000er</div>
+                    <div class="timeline-title">Internationale Expansion</div>
+                    <div class="timeline-desc">Eröffnung internationaler Niederlassungen in Österreich, Schweiz, Großbritannien, Singapur und Australien. Aufbau eines globalen Kundenstamms.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2011</div>
+                    <div class="timeline-title">OpenCourseWorld</div>
+                    <div class="timeline-desc">Start der MOOC-Plattform OpenCourseWorld, aufgebaut auf der imc Learning Suite Technologie. Kostenloser Zugang zu hochwertigen Online-Kursen.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2013</div>
+                    <div class="timeline-title">Umzug in den Scheer Tower</div>
+                    <div class="timeline-desc">Bezug des neunstöckigen Scheer Tower am Uni Campus Nord Saarbrücken mit 170 Mitarbeitenden. Die markante rote Aluminium-Fassade wird zum Wahrzeichen.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2023</div>
+                    <div class="timeline-title">Konsolidierung &amp; Wachstum</div>
+                    <div class="timeline-desc">Übernahme von p-didakt und vollständige Eingliederung in die Scheer Holding. Stärkung des Portfolios und Ausbau auf über 400 Mitarbeitende an 12 Standorten.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2024-2025</div>
+                    <div class="timeline-title">KI-Innovation &amp; Auszeichnungen</div>
+                    <div class="timeline-desc">Auszeichnung als Top AI in Training Company, Gold Award bei den Brandon Hall Group Awards und Festigung der Position als Strategic Challenger in der Fosway 9-Grid.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Teil der Scheer IMC Erfolgsgeschichte werden<span class="highlight">_</span></h2>
+                <p>Erfahren Sie, wie unsere Lösungen auch Ihr Unternehmen bei der digitalen Bildung unterstützen können.</p>
+                <div class="cta-buttons">
+                    <a href="kontakt.html" class="btn btn-primary btn-large">Kostenlose Demo buchen</a>
+                    <a href="oesterreich.html" class="btn btn-secondary btn-large">Scheer IMC Österreich</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <img src="imc-express-logo-horizontal-white.svg" alt="imc Express" class="logo-img footer-logo-img">
+                    </a>
+                    <p>E-Learning automatisiert erstellen: 90% KI-Automatisierung, 100% Kontrolle. 80+ Sprachen, keine Spezialisten nötig.</p>
+                    <div class="footer-social">
+                        <a href="https://linkedin.com/company/imc-ag" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <a href="https://twitter.com/ilovimc" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                        <a href="https://youtube.com/imcag" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Produkt</h4>
+                    <ul>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="preise.html">Preise</a></li>
+                        <li><a href="#">Integrationen</a></li>
+                        <li><a href="#">Updates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Ressourcen</h4>
+                    <ul>
+                        <li><a href="#">Dokumentation</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Webinare</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Unternehmen</h4>
+                    <ul>
+                        <li><a href="oesterreich.html">Österreich</a></li>
+                        <li><a href="scheer-imc.html">Scheer IMC</a></li>
+                        <li><a href="#">Partner</a></li>
+                        <li><a href="kontakt.html">Kontakt</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 IMC AG. Alle Rechte vorbehalten.</p>
+                <div class="footer-legal">
+                    <a href="#">Impressum</a>
+                    <a href="#">Datenschutz</a>
+                    <a href="#">AGB</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
