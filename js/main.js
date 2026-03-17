@@ -193,7 +193,7 @@ function showNotification(message, type) {
         right: '20px',
         padding: '16px 24px',
         borderRadius: '8px',
-        backgroundColor: type === 'success' ? '#10B981' : '#EF4444',
+        backgroundColor: type === 'success' ? '#23a637' : '#ff4637',
         color: 'white',
         display: 'flex',
         alignItems: 'center',
