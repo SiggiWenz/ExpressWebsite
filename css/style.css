@@ -5,29 +5,29 @@
    CSS Variables & Theme
    ================================ */
 :root {
-    /* IMC Brand Colors */
-    --imc-orange: #FF6B35;
-    --imc-orange-dark: #E55A2B;
-    --imc-orange-light: #FF8A5C;
-    --imc-orange-subtle: #FFF4F0;
+    /* Scheer Brand Colors */
+    --imc-orange: #ff4637;
+    --imc-orange-dark: #d63a2e;
+    --imc-orange-light: #ff6b5e;
+    --imc-orange-subtle: #fff2f1;
 
-    /* Neutral Colors */
-    --color-black: #1A1A2E;
-    --color-gray-900: #2D2D44;
-    --color-gray-800: #3D3D5C;
-    --color-gray-700: #4A4A6A;
-    --color-gray-600: #6B6B8D;
-    --color-gray-500: #8E8EA9;
-    --color-gray-400: #B4B4C7;
-    --color-gray-300: #D1D1DE;
-    --color-gray-200: #E8E8EF;
-    --color-gray-100: #F4F4F8;
+    /* Neutral Colors (Scheer: black #282828, grey #d0d0d0, light grey #f2f2f2) */
+    --color-black: #282828;
+    --color-gray-900: #383838;
+    --color-gray-800: #484848;
+    --color-gray-700: #585858;
+    --color-gray-600: #787878;
+    --color-gray-500: #989898;
+    --color-gray-400: #b0b0b0;
+    --color-gray-300: #d0d0d0;
+    --color-gray-200: #e0e0e0;
+    --color-gray-100: #f2f2f2;
     --color-white: #FFFFFF;
 
-    /* Functional Colors */
-    --color-success: #10B981;
-    --color-warning: #F59E0B;
-    --color-error: #EF4444;
+    /* Functional Colors (Scheer: green #23a637, yellow #fcc433, red #ff4637) */
+    --color-success: #23a637;
+    --color-warning: #fcc433;
+    --color-error: #ff4637;
 
     /* Typography */
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -716,7 +716,7 @@ section {
 }
 
 .how-it-works .section-badge {
-    background: rgba(255, 107, 53, 0.2);
+    background: rgba(255, 70, 55, 0.2);
 }
 
 .how-it-works .section-header h2,
@@ -1133,7 +1133,7 @@ a.case-study-card-link:hover {
    CTA Section
    ================================ */
 .cta-section {
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.95) 0%, rgba(229, 90, 43, 0.95) 100%),
+    background: linear-gradient(135deg, rgba(255, 70, 55, 0.95) 0%, rgba(214, 58, 46, 0.95) 100%),
                 url('../main-background-imc-express.jpg');
     background-size: cover;
     background-position: center;
@@ -1966,7 +1966,7 @@ a.case-study-card-link:hover {
 }
 
 .check-no {
-    color: #ef4444;
+    color: #ff4637;
     font-size: 1.5rem;
     font-weight: 700;
 }
@@ -2101,7 +2101,7 @@ a.case-study-card-link:hover {
 }
 
 .translation-highlight .section-badge {
-    background: rgba(255, 107, 53, 0.2);
+    background: rgba(255, 70, 55, 0.2);
 }
 
 .translation-highlight h2 {
@@ -2160,7 +2160,7 @@ a.case-study-card-link:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 107, 53, 0.15);
+    background: rgba(255, 70, 55, 0.15);
     border-radius: var(--radius-md);
     color: var(--imc-orange);
 }
@@ -2996,7 +2996,7 @@ a.case-study-card-link:hover {
 
     .content-section h2 {
         font-size: 14pt;
-        border-bottom: 2px solid #FF6B35;
+        border-bottom: 2px solid #ff4637;
         margin-bottom: 0.5cm;
     }
 
@@ -3016,13 +3016,13 @@ a.case-study-card-link:hover {
         flex: 1;
         min-width: 4cm;
         border: 1px solid #ccc;
-        border-left: 4px solid #FF6B35;
+        border-left: 4px solid #ff4637;
         padding: 0.5cm;
     }
 
     .key-result-value {
         font-size: 18pt;
-        color: #FF6B35 !important;
+        color: #ff4637 !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }
@@ -3035,7 +3035,7 @@ a.case-study-card-link:hover {
     /* Quote section for print */
     .quote-section {
         border: 1px solid #ccc;
-        border-left: 4px solid #FF6B35;
+        border-left: 4px solid #ff4637;
         padding: 0.5cm !important;
         margin: 0.5cm 0 !important;
         page-break-inside: avoid;
@@ -3135,11 +3135,11 @@ a.case-study-card-link:hover {
 
 .feature-list-item--clickable:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(255, 107, 53, 0.2);
+    box-shadow: 0 4px 16px rgba(255, 70, 55, 0.2);
 }
 
 .feature-list-item--clickable:focus-visible {
-    outline: 2px solid var(--color-primary, #FF6B35);
+    outline: 2px solid var(--color-primary, #ff4637);
     outline-offset: 4px;
     border-radius: 8px;
 }
@@ -3322,7 +3322,7 @@ a.case-study-card-link:hover {
    ================================ */
 .xbib-hero {
     padding: calc(72px + var(--spacing-4xl)) 0 var(--spacing-3xl);
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1a1a2e 100%);
+    background: linear-gradient(135deg, #282828 0%, #383838 50%, #282828 100%);
     color: var(--color-white);
     text-align: center;
     position: relative;
@@ -3336,7 +3336,7 @@ a.case-study-card-link:hover {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 107, 53, 0.12) 0%, transparent 60%);
+    background: radial-gradient(circle at 50% 50%, rgba(255, 70, 55, 0.12) 0%, transparent 60%);
 }
 
 .xbib-hero .container {
@@ -3415,7 +3415,7 @@ a.case-study-card-link:hover {
     overflow: hidden;
     box-shadow: var(--shadow-xl);
     aspect-ratio: 16 / 10;
-    background: linear-gradient(135deg, #1a1a2e, #2d2d5e);
+    background: linear-gradient(135deg, #282828, #383838);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3442,7 +3442,7 @@ a.case-study-card-link:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+    box-shadow: 0 4px 20px rgba(255, 70, 55, 0.4);
     transition: transform var(--transition-fast);
 }
 
@@ -3575,7 +3575,7 @@ a.case-study-card-link:hover {
 .xbib-example-image {
     position: relative;
     aspect-ratio: 16 / 9;
-    background: #1a1a2e;
+    background: #282828;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3611,7 +3611,7 @@ a.case-study-card-link:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+    box-shadow: 0 4px 20px rgba(255, 70, 55, 0.4);
 }
 
 .xbib-example-play svg {
@@ -3895,7 +3895,7 @@ a.case-study-card-link:hover {
    ================================ */
 .airis-hero {
     padding: calc(72px + var(--spacing-4xl)) 0 var(--spacing-3xl);
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1a1a2e 100%);
+    background: linear-gradient(135deg, #282828 0%, #383838 50%, #282828 100%);
     color: var(--color-white);
     text-align: center;
     position: relative;
@@ -3909,7 +3909,7 @@ a.case-study-card-link:hover {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 107, 53, 0.12) 0%, transparent 60%);
+    background: radial-gradient(circle at 50% 50%, rgba(255, 70, 55, 0.12) 0%, transparent 60%);
 }
 
 .airis-hero .container {
@@ -4100,7 +4100,7 @@ a.case-study-card-link:hover {
     font-size: 1.5rem;
     font-weight: 800;
     border-radius: var(--radius-xl);
-    box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
+    box-shadow: 0 4px 16px rgba(255, 70, 55, 0.3);
 }
 
 .gs-step-header h2 {
@@ -4518,7 +4518,7 @@ a.case-study-card-link:hover {
     left: 0;
     overflow: hidden;
     white-space: nowrap;
-    color: #f59e0b;
+    color: #fcc433;
     letter-spacing: 2px;
 }
 
